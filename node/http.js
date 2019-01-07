@@ -9,8 +9,7 @@ http.Server(function (req, res) {
     res.writeHead(200, {
         'Content-Type': 'text/html',
     });
-
-    res.end('<meta charset="utf-8"><form method="post"><input name="asd" value="哈"><button type="submit" onclicl="javascript:void(document.forms[0].submit());">submit</button></form>');
+    res.end('<meta charset="utf-8"><form method="post"><input name="asd" value="哈"><button type="submit" onclicl="javascript:void(document.forms[0].submit());">submit1</button></form>');
 
     req.on('end', function () {
         console.log(arguments);
