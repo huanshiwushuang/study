@@ -118,3 +118,15 @@ window.eval('...')
 // forEach some every reduce reduceRight map filter find 
 // indexOf lastIndexOf 第二个参数可表示搜索的开始位置 这两个方法不能用来搜索NaN的位置，即它们无法确定数组成员是否包含NaN 这是因为这两个方法内部，使用严格相等运算符（===）进行比较，而NaN是唯一一个不等于自身的值。
 
+// 23、跨域手段  window.onhashchange事件
+// jsonp  
+// 设置主domain     协议+域名+端口 一致
+// location.hash + iframe   更改 src指向，传递hash字符串
+// window.name + iframe 更改iframe的指向（先指向其他域名，再指向本域名），然后通过name跨域传递字符串。
+// postMessage html 跨域 
+//      window.postMessage(data,origin)   origin也可以为 不限制同源策略* 或者 当前  origin /
+//      对于同一 window 的句柄，监听 message 事件，用postMessage 发送消息。可以跨域传递数据，message回调函数的参数是 event 对象，event.data是数据
+
+// 24、web workers
+// var a = new Work('123.js');  参数代表运行的子线程的文件名
+// 在 123.js 中发送消息的时候 直接调用 postMessage(data) 不需要第二个origin参数。
