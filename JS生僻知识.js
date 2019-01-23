@@ -130,3 +130,108 @@ window.eval('...')
 // 24、web workers
 // var a = new Work('123.js');  参数代表运行的子线程的文件名
 // 在 123.js 中发送消息的时候 直接调用 postMessage(data) 不需要第二个origin参数。
+
+// 25、web sockets   客户端和服务端双向通信
+// var ws = new WebSocket('ws://localhost:8080');
+// ws.onmessage = function (e) {
+//     console.log(e.data)
+// }
+// ws.onopen = function () {
+//     ws.send('socket 已打开');
+// }
+// ws.onerror = function () {
+//     ws = null;
+// }
+
+
+// 26、Server-Sent Events（SSE） 与 websockets的区别在于 前者只能服务器推送给客户端（利用了流机制类似于视频播放的持续下载http协议），后者全双工。
+// http://www.ruanyifeng.com/blog/2017/05/server-sent_events.html
+// var es = new EventSource(url, { withCredentials: true });    参数2代表是否发送 cookie
+// es.onmessage = function (e) {
+//     console.log(e.data)
+// }
+// es.onopen = function () {
+//     es.send('socket 已打开');
+// }
+// es.onerror = function (e) {
+//     if (e.readyState == EventSource.CLOSED) { 
+//     } 
+// }
+// 服务器向浏览器发送的 SSE 数据，必须是 UTF-8 编码的文本，具有如下的 HTTP 头信息。
+// Content-Type: text/event-stream
+// Cache-Control: no-cache
+// Connection: keep-alive
+
+// var http = require("http");
+// http.createServer(function (req, res) {
+//   var fileName = "." + req.url;
+
+//   if (fileName === "./stream") {
+//     res.writeHead(200, {
+//       "Content-Type":"text/event-stream",
+//       "Cache-Control":"no-cache",
+//       "Connection":"keep-alive",
+//       "Access-Control-Allow-Origin": '*',
+//     });
+//     res.write("retry: 10000\n");
+//     res.write("event: connecttime\n");
+//     res.write("data: " + (new Date()) + "\n\n");
+//     res.write("data: " + (new Date()) + "\n\n");
+
+//     interval = setInterval(function () {
+//       res.write("data: " + (new Date()) + "\n\n");
+//     }, 1000);
+
+//     req.connection.addListener("close", function () {
+//       clearInterval(interval);
+//     }, false);
+//   }
+// }).listen(8844, "127.0.0.1");
+
+// 27、服务器端像客户端发送Cookie是通过HTTP响应报文实现的，在Set-Cookie中设置需要像客户端发送的cookie，cookie格式如下：
+// Set-Cookie: “name=value;domain=.domain.com;path=/;expires=Sat, 11 Jun 2016 11:29:42 GMT;HttpOnly;secure”
+
+// 28、跨域资源共享（CORS），需要和服务器配合实现  Access-Control-Allow-Origin
+// 大致分为简单和非简单请求，非简单会又一次预请求，多一次请求。
+// http://www.ruanyifeng.com/blog/2016/04/cors.html
+// 若要带上cookie Access-Control-Allow-Origin不能设置为 * 必须制定具体origin
+
+
+// 29、
+// Number.POSITIVE_INFINITY：正的无限，指向Infinity。
+// Number.NEGATIVE_INFINITY：负的无限，指向-Infinity。
+// Number.NaN：表示非数值，指向NaN。
+// Number.MIN_VALUE：表示最小的正数（即最接近0的正数，在64位浮点数体系中为5e-324），相应的，最接近0的负数为-Number.MIN_VALUE。
+// Number.MAX_SAFE_INTEGER：表示能够精确表示的最大整数，即9007199254740991。
+// Number.MIN_SAFE_INTEGER：表示能够精确表示的最小整数，即-9007199254740991。
+
+// Number.prototype.toExponential()
+// toExponential方法用于将一个数转为科学计数法形式。
+// toExponential方法的参数是小数点后有效数字的位数，范围为0到20
+
+// Number.prototype.toPrecision() # 
+// toPrecision方法用于将一个数转为指定位数的有效数字
+// toPrecision方法的参数为有效数字的位数，范围是1到21
+// toPrecision方法用于四舍五入时不太可靠，跟浮点数不是精确储存有关。
+
+
+// 30、fromCharCode 不支持大于65535的值，如果大于65535 要拆成两半
+// 0x20BB7 拆开 ===》String.fromCharCode(0xD842, 0xDFB7)
+// js 视 字节数 大于 2的 Unicode字符为 2个字符，即大于 65535的是4个字节 2个字符。
+// 在 ES2015 的规范中  大于65535的字符可以这样表示  \u{20BB7}  这样就支持了，es2015之前是不支持的
+
+// 31、substring和slice的区别：前者负数置 0 ，按照大小交换参数位置。
+// substr和slice区别：前者第2个参数表示 截取的长度，负数置 0。
+
+// 32、indexOf和lastIndexOf：第2个参数是开始搜索的下标
+
+// 33、match和exec 在没有全局匹配时是一样的的效果。数组：包含匹配的元素，子匹配元素，index和input属性。
+// match 全局匹配。数组：所有匹配的元素。
+// exec 全局匹配。数组：包含匹配的元素，子匹配元素，index和input属性。多次重复调用方能取得所有匹配，每次调用 index 属性值不一样。匹配结束 返回 null。
+
+// 34、search 和 replace 都可以使用正则
+
+// 35、split第2个参数表示返回的数组的长度个数
+
+// 36、localeCompare
+// 'B'.localeCompare('a') // 1  【返回数字，小于0表示第一个小，等于0表示相等，大于0表示第一个大】【会考虑自然语言的顺序，比如 B > a】【可以第二个参数是语言环境，默认英语】
