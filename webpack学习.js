@@ -67,7 +67,13 @@
     // new webpack.optimize.CommonsChunkPlugin({
     //   name: 'common' // 指定公共 bundle 的名称。
     // })
-// 2-
+// 2-防止重复。4.0以前是通过CommonsChunkPlugin 插件。之后是通过 optimization.splitChunks 配置替代了
+
+// 3-动态导入。动态导入也分两种。
+    // 1 是标准的import() 
+        // import() 特性依赖于内置的 Promise。如果想在低版本浏览器使用 import()，记得使用像 es6-promise 或者 promise-polyfill 这样 polyfill 库，来预先填充(shim) Promise 环境。
+        // 注意当调用 ES6 模块的 import() 方法（引入模块）时，必须指向模块的 .default 值，因为它才是 promise 被处理后返回的实际的 module 对象。
+    // 2 是webpack独有的require.ensure()
 
 
 
@@ -97,3 +103,11 @@
 //        }
 //     }
 //    }
+
+
+// 19、
+// 以下是由社区提供的，一些对于代码分离很有帮助的插件和 loaders：
+// ExtractTextPlugin: 用于将 CSS 从主应用程序中分离。
+// bundle-loader: 用于分离代码和延迟加载生成的 bundle。
+// promise-loader: 类似于 bundle-loader ，但是使用的是 promises。
+// CommonsChunkPlugin 插件还可以通过使用显式的 vendor chunks 功能，从应用程序代码中分离 vendor 模块。
