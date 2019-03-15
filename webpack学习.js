@@ -111,3 +111,48 @@
 // bundle-loader: 用于分离代码和延迟加载生成的 bundle。
 // promise-loader: 类似于 bundle-loader ，但是使用的是 promises。
 // CommonsChunkPlugin 插件还可以通过使用显式的 vendor chunks 功能，从应用程序代码中分离 vendor 模块。
+
+// 20、css 处理
+// 以webpack4.0版本为例来演示CSS模块的处理方式，需要用到的插件及功能如下：
+
+// style-loader——将处理结束的CSS代码存储在js中，运行时嵌入&lt;style&gt;后挂载至html页面上
+// css-loader——加载器，使webpack可以识别css模块
+// postcss-loader——加载器，下一篇将详细描述（？）
+// sass-loader——加载器，使webpack可以识别scss/sass文件，默认使用node-sass进行编译
+// mini-css-extract-plugin——插件，4.0版本启用的插件，替代原extract-text-webpack-plugin插件，将处理后的CSS代码提取为独立的CSS文件
+// optimize-css-assets-webpack-plugin——插件，实现CSS代码压缩
+// autoprefixer——自动化添加跨浏览器兼容前缀
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
