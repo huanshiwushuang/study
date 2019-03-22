@@ -33,3 +33,23 @@
    1. 123
 5. https://www.cnblogs.com/autismtune/p/5210116.html 原理？清除浮动的技
 6. https://blog.csdn.net/xm1037782843/article/details/80708533
+7. linear-gradient 线性渐变 IE10+
+   > -webkit- -o- -moz-  
+   > background: linear-gradient(direction, color-stop1, color-stop2, ...);  
+   > 默认从上到下，颜色值支持 rgba  
+   > 有前缀的情况下，标准的语法（必须放在最后）
+   1. 使用关键词。会有低版本浏览器的不统一问题。方向关键词也可以写两个，见 [RUNOOB.COM](http://www.runoob.com/try/try.php?filename=trycss3_gradient-linear_diagonal)  
+      > background: -webkit-linear-gradient( **left**, red , blue); /* Safari 5.1 - 6.0 */  
+      > background: -o-linear-gradient( **right**, red, blue); /* Opera 11.1 - 12.0 */  
+      > background: -moz-linear-gradient( **right**, red, blue); /* Firefox 3.6 - 15 */  
+      > background: linear-gradient( **to right**, red , blue); /* 标准的语法 */  
+   2. 使用 deg 角度（推荐）。同样会有新旧标准的问题。
+      > background: linear-gradient(angle, color-stop1, color-stop2);  
+      > 新标准：0deg === 从下到上，顺时针。[新标准图片](http://www.runoob.com/wp-content/uploads/2014/07/7B0CC41A-86DC-4E1B-8A69-A410E6764B91.jpg)  
+      > 旧标准：0deg === 从左到右，逆时针。
+   3. repeating-linear-gradient() 重复的线性渐变
+      > background: repeating-linear-gradient(red, yellow 10%, green 20%); /* 标准的语法 */  
+      > 说明：这里的百分比的意思是指从 10% 处开始黄色，到 20% 处结束为绿色，进行过渡。  
+      > 线性渐变似乎和背景色不一样，无法被背景色覆盖。
+   5. 
+8. radial-gradient 径向渐变 IE10+

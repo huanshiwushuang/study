@@ -27,7 +27,7 @@
       | padding宽度  | 30px（每列左右15px） |
       | 嵌套         | 是                   |
       | 列排序       | 是                   |
-5. class 展示：
+5. 常用class 展示：
    1. .w-100---width: 100%!important;
    2. .row---行
    3. .col---列的开头
