@@ -16,7 +16,7 @@
        - flex-basis: auto (pixel)
        - flex: none | auto | (flex-grow)
        - align-self: auto flex-start flex-end center baseline stretch
-3. 网格布局---Flexbox用来做一维布局，Grid用来做二维布局。 [详细grid布局：推荐阅读](https://cloud.tencent.com/developer/article/1186773)
+3. 网格布局---Flexbox用来做一维布局，Grid用来做二维布局。[CSS 网格布局学习指南](https://blog.jirengu.com/?p=990)---[详细grid布局：推荐阅读](https://cloud.tencent.com/developer/article/1186773)
     > 最基础的入门 [5分钟学会 CSS Grid 布局](https://www.html.cn/archives/8506)  
     > 以下请参考 [显式网格、隐式网格](https://www.w3cplus.com/css3/difference-explicit-implicit-grids.html)  
     >> 手动定义了 grid-template-columns、grid-template-rows 的称为 显式网格   
