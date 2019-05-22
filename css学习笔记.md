@@ -16,7 +16,7 @@
        - flex-basis: auto (pixel)
        - flex: none | auto | (flex-grow)
        - align-self: auto flex-start flex-end center baseline stretch
-3. 网格布局---Flexbox用来做一维布局，Grid用来做二维布局。 [详细grid布局：推荐阅读](https://cloud.tencent.com/developer/article/1186773)
+3. 网格布局---Flexbox用来做一维布局，Grid用来做二维布局。[CSS 网格布局学习指南](https://blog.jirengu.com/?p=990)---[详细grid布局：推荐阅读](https://cloud.tencent.com/developer/article/1186773)
     > 最基础的入门 [5分钟学会 CSS Grid 布局](https://www.html.cn/archives/8506)  
     > 以下请参考 [显式网格、隐式网格](https://www.w3cplus.com/css3/difference-explicit-implicit-grids.html)  
     >> 手动定义了 grid-template-columns、grid-template-rows 的称为 显式网格   
@@ -111,5 +111,6 @@
     3.  border-image-slice: 10 20 30 40 ---上 右 下 左 裁剪的位置。没有单位，默认px
     4.  border-image-repeat: 重复方式---repeat、round、stretch（默认）。
 
-13. 
-14. 
+13. font: style variant weight size/line-height family;
+14. 滚动条样式设置[轩枫格](http://www.xuanfengge.com/css3-webkit-scrollbar.html)；[cnblogs](https://www.cnblogs.com/koleyang/p/5484922.html)；[官方](https://webkit.org/blog/363/styling-scrollbars/)
+15. position: fixed 定位偏差失效？某些祖先元素的样式会导致产生：堆叠上下文（三维的z轴）[详细解析](https://www.imooc.com/article/67784)
