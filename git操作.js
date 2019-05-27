@@ -14,3 +14,4 @@
 // git pull origin develop --allow-unrelated-histories  【允许合并不相关的历史】
 // git config --global user.email   【配置email】
 // git config --global user.name   【配置name】
+// git push origin --delete 分支名 【删除远程分支】
