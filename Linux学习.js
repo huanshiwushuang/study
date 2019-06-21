@@ -374,6 +374,9 @@
 
 // 添加硬盘设备
 
+// 后台运行
+[后台运行](https://www.cnblogs.com/zzyoucan/p/7764590.html)
+
 
 
 
