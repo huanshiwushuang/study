@@ -1,7 +1,0 @@
-{
-    "name": "file-explorer",
-    "version": "0.0.1",
-    "description": "我的文件浏览器",
-    "private": true,
-    "main": "main.js"
-}
