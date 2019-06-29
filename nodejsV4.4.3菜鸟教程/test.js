@@ -1,8 +1,4 @@
-console.log(123)
-var count = 0
 
-process.on('beforeExit', function () {
-  setTimeout(function () {
-    console.log(++count)
-  }, 500)
-})
+console.log(process.chdir('/home/guohao'))
+console.log(process.cwd())
+console.log(process.memoryUsage())
