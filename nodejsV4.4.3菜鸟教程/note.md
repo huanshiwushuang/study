@@ -93,4 +93,7 @@
    > end - 没有更多的数据可读时触发。
    > error - 在接收和写入过程中发生错误时触发。
    > finish - 所有数据已被写入到底层系统时触发。
-
+6. util
+   > inherits(constructor, superConstructor)
+   > 
+7. 
