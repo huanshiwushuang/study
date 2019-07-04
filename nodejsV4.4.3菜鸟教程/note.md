@@ -1,3 +1,4 @@
+优先学习的模块：http url querystring fs stream path events
 1. buffer
    > Buffer【Buffer 类似于数组】
    >> Buffer.from(String, encoding)
@@ -5,7 +6,8 @@
    >> Buffer.from(ArrayBuffer, offset, length)
    >> Buffer.alloc(ByteLength, fill, encoding)
    >> Buffer.allocUnsafe(ByteLength)
-   >> BufferObject.write(String, offset, length, encoding)
+   >> Buffer.byteLength(string[, encoding]);//返回字符串的实际字节长度
+   >> BufferObject.write(String, offset, length, encoding) 类似于fill
    >> BufferObject.toString(encoding, start, end)
 
    >> BufferObject.toJSON()
@@ -52,7 +54,7 @@
    方法
    > abort() 这将导致 node 触发 abort 事件。会让 node 退出并生成一个核心文件
    > chdir(directory) 改变当前工作进程的目录，如果操作失败抛出异常。
-   > cwd 返回当前进程的工作目录
+   > cwd 返回当前进程的工作目录【运行命令的路径】
    > exit([code]) 使用指定的 code 结束进程。如果忽略，将会使用 code 0
    > getuid()
     获取进程的用户标识(参见 getuid(2))。这是数字的用户id，不是用户名。
@@ -95,5 +97,36 @@
    > finish - 所有数据已被写入到底层系统时触发。
 6. util
    > inherits(constructor, superConstructor)
-   > 
-7. 
+   > inspect(Object, showHidden, depth, showColor) 类似 JSON.stringify
+   > util.isArray()
+   > util.isRegExp()
+   > util.isDate()
+   > util.isError()
+   > util.promisify(functionName) 将node常规的遵循异常优先的函数转为promise形式
+7. fs
+   > 删除文件 unlink 
+   > 重命名 rename
+   > 读取文件夹 readdir
+   > 删除文件夹 rmdir
+   > 获取文件属性 stat
+   > fs模块的大多数函数支持 file 协议的 URL 对象作为文件或文件夹之参数 
+   >> 【file://D:/123.txt】
+   >> 【file://192.168.123.2/D:/123.txt】
+   >> 以上的针对windows的
+
+   > 分配新的文件描述符 open
+   > 通过文件描述符获取文件属性 fstat
+8. path
+   > join 路径片段从右往左解析为路径，如果解析为零长度字符串，则返回 . 
+   > resolve 路径片段从右往左解析为绝对路径，解析完都不是绝对 就加上当前工作目录
+   > normalize 规范化特定平台的分隔符，例如 // 化为 /
+   > isAbsolute 是否绝对路径
+   > extname 扩展名
+   > basename(path, ext) 路径中的返回文件名，有第二个参数，则返回的文件名不包括扩展
+   > sep 特定平台的路径片段分隔符【属性】
+   > delimiter 特定平台的路径分隔符【属性】
+9. mime
+    >getType
+10. url
+    > parse
+11. http

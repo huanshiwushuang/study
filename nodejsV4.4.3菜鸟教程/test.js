@@ -1,4 +1,13 @@
+var fs = require('fs')
 
-console.log(process.chdir('/home/guohao'))
-console.log(process.cwd())
-console.log(process.memoryUsage())
+fs.open('123', 'r', function (err, fd) {
+  console.log(arguments)
+  fs.fstat(fd, function (err, stats) {
+    console.log(stats)
+
+    fs.close(fd, function () {
+      console.log('关闭')
+    })
+  })
+  
+})
