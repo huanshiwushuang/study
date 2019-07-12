@@ -107,8 +107,13 @@
    > 删除文件 unlink 
    > 重命名 rename
    > 读取文件夹 readdir
+   > 创建文件夹 mkdir
    > 删除文件夹 rmdir
    > 获取文件属性 stat
+   >> isDirectory
+   >> isFile
+   >> isSymbolicLink
+   > 监听文件、文件夹改变 watch
    > fs模块的大多数函数支持 file 协议的 URL 对象作为文件或文件夹之参数 
    >> 【file://D:/123.txt】
    >> 【file://192.168.123.2/D:/123.txt】
