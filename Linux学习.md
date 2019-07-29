@@ -97,3 +97,4 @@
     > -n 显示行号
 24. more 命令用于查看纯文本文件（内容较多的），格式为“more [选项]文件”。
 25. head命令用于查看纯文本文档的前N行，格式为“head [选项] [文件]”。
+26. [tar 解压、压缩](https://www.cnblogs.com/starof/p/4229017.html)
