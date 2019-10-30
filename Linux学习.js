@@ -1,5 +1,13 @@
+/*
+ * @Author: your name
+ * @Date: 2019-10-28 16:56:37
+ * @LastEditTime: 2019-10-30 15:51:26
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \asd231d:\code\study\Linux学习.js
+ */
 // man man PageDown PageUp Home End n N / ?  空格 q
-// echo $SHELL $PATH 
+// echo $SHELL $PATH
 // date -s '20180919 10:21:09'  +%Y%y%m%d%H%I%M%S%s%j%t%n    %H%I%  ===> %k%l === %_H%_I
 // reboot
 // poweroff
@@ -25,7 +33,7 @@
 // cd - .. / ~ ~username
 // ls -l -a -d
 // dd if= of= bs= count=
-// file 
+// file
 
 // tar -cxzvfpPtC
 
@@ -47,8 +55,6 @@
 // -prune	忽略某个目录
 // -exec …… {}\;	后面可跟用于进一步处理搜索结果的命令（下文会有演示）
 
-
-
 // >	>>	2>	2>>	 2>&1	&>
 
 // echo "linuxprobe" | passwd --stdin root
@@ -69,20 +75,18 @@
 
 // export
 
-
-// dd	
-// 5dd	
-// yy	
-// 5yy	
-// n	
-// N	
-// u	
-// p	
+// dd
+// 5dd
+// yy
+// 5yy
+// n
+// N
+// u
+// p
 
 // :s/one/two	将当前光标所在行的第一个one替换成two
 // :s/one/two/g	将当前光标所在行的所有one替换成two
 // :%s/one/two/g	将全文中的所有one替换成two
-
 
 // /etc/sysconfig/network-scripts
 // ifcfg-
@@ -108,7 +112,6 @@
 // -r	测试当前用户是否有权限读取
 // -w	测试当前用户是否有权限写入
 // -x	测试当前用户是否有权限执行
-
 
 // if [ 左右要有空格哦 ]
 
@@ -137,14 +140,10 @@
 
 // read -p '提示信息' 变量
 
-
 // for i in list
 // do
 // 内容
 // done
-
-
-
 
 // PRICE=$(expr $RANDOM % 1000)
 // TIMES=0
@@ -155,7 +154,6 @@
 // 内容
 // exit 0
 // done
-
 
 // case "$key" in
 // [a-z][A-Z])
@@ -187,15 +185,11 @@
 // 以及用除号（/）表示执行任务的间隔时间（例如“*/2”表示每隔2分钟执行一次任务）。
 // 命令一定要用绝对路径的方式来写，如果不知道绝对路径，请用whereis命令进行查询
 
-
-
 // 管理员UID为0：系统的管理员用户。
 
 // 系统用户UID为1～999： Linux系统为了避免因某个服务程序出现漏洞而被黑客提权至整台服务器，默认服务程序会有独立的系统用户负责运行，进而有效控制被破坏范围。
 
 // 普通用户UID从1000开始：是由管理员创建的用于日常工作的用户。
-
-
 
 // useradd命令
 // -d	指定用户的家目录（默认为/home/username）
@@ -233,19 +227,15 @@
 // -f	强制删除用户
 // -r	同时删除用户及用户家目录
 
-
-
 // 在复杂多变的生产环境中，单纯设置文件的rwx权限无法满足我们对安全和灵活性的需求，因此便有了SUID、SGID与SBIT的特殊权限位
 // 查看passwd命令属性时发现所有者的权限由rwx变成了rws，
 // 其中x改变成s就意味着该文件被赋予了SUID权限。
 // 另外有读者会好奇，那么如果原本的权限是rw-呢？如果原先权限位上没有x执行权限，那么被赋予特殊权限后将变成大写的S。
 
-
 // SGID主要实现如下两种功能：
 // 让执行者临时拥有属组的权限（对拥有执行权限的二进制程序进行设置）；
 // 在某个目录中创建的文件自动继承该目录的用户组（只可以对目录进行设置）。
 // chmod g+s gh  给文件夹的组变为sgid权限，然后此文件夹下新创建的文件夹自动继承对应的s
-
 
 // chmod [参数] 权限 文件或目录名称
 // chown [参数] 所有者:所属组 文件或目录名称
@@ -255,7 +245,6 @@
 // SBIT
 // 当对某个目录设置了SBIT粘滞位权限后，那么该目录中的文件就只能被其所有者执行删除操作了。
 // 与前面所讲的SUID和SGID权限显示方法不同，当目录被设置SBIT特殊权限位后，文件的其他人权限部分的x执行权限就会被替换成t或者T，原本有x执行权限则会写成t，原本没有x执行权限则会被写成T。
-
 
 // chattr命令用于设置文件的隐藏权限
 // chattr [参数] 文件  例子：chattr +a linuxprobe
@@ -275,8 +264,6 @@
 
 // lsattr命令用于显示文件的隐藏权限，格式为“lsattr [参数] 文件”
 
-
-
 // 接下来是：5.5 文件访问控制列表
 // setfacl [参数] 文件名称
 // 针对目录文件需要使用-R递归参数；针对普通文件则使用-m参数；
@@ -284,7 +271,6 @@
 // 	setfacl -Rm u:linuxprobe:rwx /root
 
 // 上面的su命令与用户名之间有一个减号（-），这意味着完全切换到新的用户，即把环境变量信息也变更为新用户的相应信息，而不是保留原始的信息。强烈建议在切换用户身份时添加这个减号（-）
-
 
 // sudo [参数] 命令名称
 // -h	列出帮助信息
@@ -309,11 +295,6 @@
 // 99 linuxprobe ALL=(ALL) ALL
 // 	无须频繁的验证密码
 //    linuxprobe ALL=NOPASSWD: /usr/sbin/poweroff
-
-
-
-
-
 
 // /boot	开机所需文件—内核、开机菜单以及所需配置文件等
 // /dev	以文件形式存放任何设备与接口
@@ -343,9 +324,6 @@
 // 	鼠标	/dev/mouse
 // 	磁带机	/dev/st0或/dev/ht0
 
-
-
-
 // mount 文件系统 挂载目录
 // -a	挂载所有在/etc/fstab中定义的文件系统
 // -t	指定文件系统的类型
@@ -360,10 +338,8 @@
 // 是否备份	若为1则开机后使用dump进行磁盘备份，为0则不备份
 // 是否自检	若为1则开机后自动进行磁盘自检，为0则不自检
 
-
 // umount [挂载点/设备文件]
 // umount /dev/sdb2
-
 
 // ln命令
 // -s	创建“符号链接”（如果不带-s参数，则默认创建硬链接）
@@ -371,26 +347,10 @@
 // -i	覆盖前先询问
 // -v	显示创建链接的过程
 
-
 // 添加硬盘设备
 
 // 后台运行
-[后台运行](https://www.cnblogs.com/zzyoucan/p/7764590.html)
+// [后台运行](https://www.cnblogs.com/zzyoucan/p/7764590.html)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// yum && rpm
+// https://www.cnblogs.com/LiuChunfu/p/8052890.html
