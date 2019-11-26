@@ -1,19 +1,17 @@
 /*
  * @Author: your name
  * @Date: 2019-10-31 13:39:30
- * @LastEditTime: 2019-10-31 13:44:14
+ * @LastEditTime: 2019-11-06 16:06:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \asd231d:\code\study\nodejs-7天学会nodejs\test.js
  */
-var fs = require('fs')
+var net = require('net')
 
-function copy(src, dst) {
-  fs.writeFileSync(dst, fs.readFileSync(src))
-}
-
-function main(argv) {
-  copy(argv[0], argv[1])
-}
-
-main(process.argv.slice(2))
+var server = net
+  .createServer(function(conn) {
+    conn.on('data', function(data) {
+      console.log(data.toString())
+    })
+  })
+  .listen('10086')
