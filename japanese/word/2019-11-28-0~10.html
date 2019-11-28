@@ -1,0 +1,136 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-11-25 23:26:56
+ * @LastEditTime: 2019-11-25 23:52:53
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \studyc:\Users\Administrator\Downloads\日语练习.html
+ -->
+ <!DOCTYPE html>
+ <html lang="zh">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>日语练习</title>
+     <!-- JQuery -->
+     <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+     <!-- Data -->
+     <script>
+         var data = [
+             '零',
+             '十',
+             '九',
+             '八',
+             '七',
+             '六',
+             '五',
+             '四',
+             '三',
+             '二',
+             '一',
+             'まる',
+             'ぜろ',
+             'れい',
+             'じゅう',
+             'く',
+             'きゅう',
+             'はち',
+             'なな',
+             'しち',
+             'ろく',
+             'ご',
+             'よ',
+             'し',
+             'よん',
+             'さん',
+             'に',
+             'いち',
+         ];
+     </script>
+     <style>
+		body {
+			margin:0;
+		}
+         #yin,
+         #zi {
+             font-size: 100px;
+         }
+ 
+         button {
+             margin-top: 20px;
+             font-size: 20px;
+         }
+         .vh {
+             visibility: hidden;
+         }
+		 #next {
+			width: 100vw;
+			position: fixed;
+			height: 30vh;
+			bottom: 0;
+		 }
+     </style>
+ </head>
+ 
+ <body>
+     <div id="box">
+         <div id="zi"></div>
+         <div>
+             <button id="next">next</button>
+         </div>
+         <div id="sy"></div>
+     </div>
+ 
+     <script>
+         var $yin = $('#yin')
+         var $zi = $('#zi')
+         var $next = $('#next')
+         var $state = $('#state')
+         var $body = $('body')
+         var $sy = $('#sy')
+         var $isShow = $('#isShow')
+         var dataArr, index
+         var isShow = false
+ 
+         load()
+         next()
+ 
+         $next.on('click', function () {
+             next()
+         })
+         $body.on('keydown', function (e) {
+             console.log(e.keyCode)
+             if (e.keyCode === 32 || e.keyCode === 39) {
+                 next()
+             } else if (e.keyCode === 40) {
+             } else if (e.keyCode === 38) {
+                 $isShow.get(0).click()
+             }
+         })
+         function load() {
+             // 产生新的内容
+             dataArr = getNew()
+         }
+         function next() {
+             if (dataArr.length === 0) {
+                 load()
+             }
+             // 默认隐藏 yin
+             index = random(0, dataArr.length - 1)
+             $zi.text(dataArr[index])
+             dataArr.splice(index, 1)
+             console.log('随机 index：' + index)
+             $sy.text('剩余：' + dataArr.length)
+         }
+         function getNew() {
+             return [...data];
+         }
+         function random(start, stop) {
+             return parseInt(Math.random() * (stop - start) + start);
+         }
+ 
+     </script>
+ </body>
+ 
+ </html>
