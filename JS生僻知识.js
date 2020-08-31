@@ -235,3 +235,10 @@ window.eval('...')
 
 // 36、localeCompare
 // 'B'.localeCompare('a') // 1  【返回数字，小于0表示第一个小，等于0表示相等，大于0表示第一个大】【会考虑自然语言的顺序，比如 B > a】【可以第二个参数是语言环境，默认英语】
+
+// 37、unicode 详解
+// http://www.ruanyifeng.com/blog/2014/12/unicode.html
+// https://blog.csdn.net/mjLlm/article/details/101559522
+
+// 38、font-face 原理
+// https://www.jianshu.com/p/0ac221c759e1

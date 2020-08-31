@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "JS奇淫巧技.js",
-  "dependencies": {},
+  "dependencies": {
+    "koa": "^2.13.0"
+  },
   "devDependencies": {
     "recast": "^0.17.3"
   },
