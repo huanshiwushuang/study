@@ -1,12 +1,4 @@
-/*
- * @Author: your name
- * @Date: 2020-08-31 18:11:05
- * @LastEditTime: 2020-08-31 18:11:07
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \frp_gui_windowsd:\code\study\pp\index.js
- */
-const pp = require('puppeteer');
+const pp = require('puppeteer-core');
 
 (async () => {
     var browser = await pp.launch({
