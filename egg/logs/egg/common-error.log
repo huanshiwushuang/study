@@ -13,3 +13,478 @@
 pid: 19552
 hostname: GH-LENOVO
 
+2020-09-04 09:28:16,211 ERROR 17328 [-/127.0.0.1/-/22ms GET /news] nodejs.Template render error: (D:\code\study\egg\app\view\news\list.html) [Line 8, Column 10]
+  parseFor: expected "in" keyword for loop
+  parseFor: expected "in" keyword for loop
+    at Object._prettifyError (D:\code\study\egg\node_modules\nunjucks\src\lib.js:36:11)
+    at Template.render (D:\code\study\egg\node_modules\nunjucks\src\environment.js:536:21)
+    at D:\code\study\egg\node_modules\nunjucks\src\environment.js:364:27
+    at createTemplate (D:\code\study\egg\node_modules\nunjucks\src\environment.js:313:9)
+    at handle (D:\code\study\egg\node_modules\nunjucks\src\environment.js:325:11)
+    at D:\code\study\egg\node_modules\nunjucks\src\environment.js:337:9
+    at next (D:\code\study\egg\node_modules\nunjucks\src\lib.js:326:7)
+    at Object.asyncIter (D:\code\study\egg\node_modules\nunjucks\src\lib.js:332:3)
+    at NunjucksEnvironment.getTemplate (D:\code\study\egg\node_modules\nunjucks\src\environment.js:319:9)
+    at NunjucksEnvironment.render (D:\code\study\egg\node_modules\nunjucks\src\environment.js:358:10)
+name: "Template render error"
+pid: 17328
+hostname: GH-LENOVO
+
+2020-09-04 09:28:43,920 ERROR 17328 [-/127.0.0.1/-/3ms GET /news] nodejs.Template render error: (D:\code\study\egg\app\view\news\list.html) [Line 8, Column 10]
+  parseFor: expected "in" keyword for loop
+  parseFor: expected "in" keyword for loop
+    at Object._prettifyError (D:\code\study\egg\node_modules\nunjucks\src\lib.js:36:11)
+    at Template.render (D:\code\study\egg\node_modules\nunjucks\src\environment.js:536:21)
+    at D:\code\study\egg\node_modules\nunjucks\src\environment.js:364:27
+    at createTemplate (D:\code\study\egg\node_modules\nunjucks\src\environment.js:313:9)
+    at handle (D:\code\study\egg\node_modules\nunjucks\src\environment.js:325:11)
+    at D:\code\study\egg\node_modules\nunjucks\src\environment.js:337:9
+    at next (D:\code\study\egg\node_modules\nunjucks\src\lib.js:326:7)
+    at Object.asyncIter (D:\code\study\egg\node_modules\nunjucks\src\lib.js:332:3)
+    at NunjucksEnvironment.getTemplate (D:\code\study\egg\node_modules\nunjucks\src\environment.js:319:9)
+    at NunjucksEnvironment.render (D:\code\study\egg\node_modules\nunjucks\src\environment.js:358:10)
+name: "Template render error"
+pid: 17328
+hostname: GH-LENOVO
+
+2020-09-04 09:50:57,996 ERROR 14076 [-/127.0.0.1/-/7ms GET /news] nodejs.TypeError: Cannot destructure property `serverUrl` of 'undefined' or 'null'.
+    at NewsService.list (D:\code\study\egg\app\service\news.js:5:53)
+    at NewsController.list (D:\code\study\egg\app\controller\news.js:8:49)
+    at Object.callFn (D:\code\study\egg\node_modules\egg-core\lib\utils\index.js:44:21)
+    at Object.classControllerMiddleware (D:\code\study\egg\node_modules\egg-core\lib\loader\mixin\controller.js:87:20)
+    at Object.callFn (D:\code\study\egg\node_modules\@eggjs\router\lib\utils.js:12:21)
+    at wrappedController (D:\code\study\egg\node_modules\@eggjs\router\lib\egg_router.js:322:18)
+    at dispatch (D:\code\study\egg\node_modules\@eggjs\router\node_modules\koa-compose\index.js:44:32)
+    at next (D:\code\study\egg\node_modules\@eggjs\router\node_modules\koa-compose\index.js:45:18)
+    at D:\code\study\egg\node_modules\@eggjs\router\lib\router.js:190:18
+    at dispatch (D:\code\study\egg\node_modules\@eggjs\router\node_modules\koa-compose\index.js:44:32)
+
+pid: 14076
+hostname: GH-LENOVO
+
+2020-09-04 09:53:01,234 ERROR 17536 [-/127.0.0.1/-/6ms GET /news] nodejs.TypeError: Cannot destructure property `serverUrl` of 'undefined' or 'null'.
+    at NewsService.list (D:\code\study\egg\app\service\news.js:5:53)
+    at NewsController.list (D:\code\study\egg\app\controller\news.js:8:49)
+    at Object.callFn (D:\code\study\egg\node_modules\egg-core\lib\utils\index.js:44:21)
+    at Object.classControllerMiddleware (D:\code\study\egg\node_modules\egg-core\lib\loader\mixin\controller.js:87:20)
+    at Object.callFn (D:\code\study\egg\node_modules\@eggjs\router\lib\utils.js:12:21)
+    at wrappedController (D:\code\study\egg\node_modules\@eggjs\router\lib\egg_router.js:322:18)
+    at dispatch (D:\code\study\egg\node_modules\@eggjs\router\node_modules\koa-compose\index.js:44:32)
+    at next (D:\code\study\egg\node_modules\@eggjs\router\node_modules\koa-compose\index.js:45:18)
+    at D:\code\study\egg\node_modules\@eggjs\router\lib\router.js:190:18
+    at dispatch (D:\code\study\egg\node_modules\@eggjs\router\node_modules\koa-compose\index.js:44:32)
+
+pid: 17536
+hostname: GH-LENOVO
+
+2020-09-04 09:53:02,849 ERROR 17536 [-/127.0.0.1/-/1ms GET /news] nodejs.TypeError: Cannot destructure property `serverUrl` of 'undefined' or 'null'.
+    at NewsService.list (D:\code\study\egg\app\service\news.js:5:53)
+    at NewsController.list (D:\code\study\egg\app\controller\news.js:8:49)
+    at Object.callFn (D:\code\study\egg\node_modules\egg-core\lib\utils\index.js:44:21)
+    at Object.classControllerMiddleware (D:\code\study\egg\node_modules\egg-core\lib\loader\mixin\controller.js:87:20)
+    at Object.callFn (D:\code\study\egg\node_modules\@eggjs\router\lib\utils.js:12:21)
+    at wrappedController (D:\code\study\egg\node_modules\@eggjs\router\lib\egg_router.js:322:18)
+    at dispatch (D:\code\study\egg\node_modules\@eggjs\router\node_modules\koa-compose\index.js:44:32)
+    at next (D:\code\study\egg\node_modules\@eggjs\router\node_modules\koa-compose\index.js:45:18)
+    at D:\code\study\egg\node_modules\@eggjs\router\lib\router.js:190:18
+    at dispatch (D:\code\study\egg\node_modules\@eggjs\router\node_modules\koa-compose\index.js:44:32)
+
+pid: 17536
+hostname: GH-LENOVO
+
+2020-09-04 09:53:43,775 ERROR 17492 [-/127.0.0.1/-/5029ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":1,"createSocketErrorCount":0,"closeSocketCount":1,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}}, socketHandledRequests: 1, socketHandledResponses: 0)
+headers: {}
+headers: {}
+    at Timeout._onTimeout (D:\code\study\egg\node_modules\urllib\lib\urllib.js:946:15)
+    at ontimeout (timers.js:424:11)
+    at tryOnTimeout (timers.js:288:5)
+    at listOnTimeout (timers.js:251:5)
+    at Timer.processTimers (timers.js:211:10)
+name: "ConnectionTimeoutError"
+requestId: 1
+data: undefined
+path: "/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22"
+status: -2
+headers: {}
+res: {"status":-2,"statusCode":-2,"statusMessage":null,"headers":{},"size":0,"aborted":false,"rt":5020,"keepAliveSocket":false,"requestUrls":["https://hacker-news.firebaseio.com/v0/topstories.json"],"timing":null,"remoteAddress":"35.201.97.85","remotePort":"","socketHandledRequests":1,"socketHandledResponses":0}
+pid: 17492
+hostname: GH-LENOVO
+
+2020-09-04 09:56:49,515 ERROR 1980 [-/127.0.0.1/-/5031ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":1,"createSocketErrorCount":0,"closeSocketCount":1,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}}, socketHandledRequests: 1, socketHandledResponses: 0)
+headers: {}
+headers: {}
+    at Timeout._onTimeout (D:\code\study\egg\node_modules\urllib\lib\urllib.js:946:15)
+    at ontimeout (timers.js:424:11)
+    at tryOnTimeout (timers.js:288:5)
+    at listOnTimeout (timers.js:251:5)
+    at Timer.processTimers (timers.js:211:10)
+name: "ConnectionTimeoutError"
+requestId: 1
+data: undefined
+path: "/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22"
+status: -2
+headers: {}
+res: {"status":-2,"statusCode":-2,"statusMessage":null,"headers":{},"size":0,"aborted":false,"rt":5022,"keepAliveSocket":false,"requestUrls":["https://hacker-news.firebaseio.com/v0/topstories.json"],"timing":null,"remoteAddress":"35.201.97.85","remotePort":"","socketHandledRequests":1,"socketHandledResponses":0}
+pid: 1980
+hostname: GH-LENOVO
+
+2020-09-04 09:59:36,853 ERROR 4136 nodejs.unhandledExceptionError: read ECONNRESET
+    at TCP.onread (net.js:660:25)
+errno: "ECONNRESET"
+code: "ECONNRESET"
+syscall: "read"
+name: "unhandledExceptionError"
+pid: 4136
+hostname: GH-LENOVO
+
+2020-09-04 10:00:33,766 ERROR 188 [-/127.0.0.1/-/5033ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":1,"createSocketErrorCount":0,"closeSocketCount":1,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}}, socketHandledRequests: 1, socketHandledResponses: 0)
+headers: {}
+headers: {}
+    at Timeout._onTimeout (D:\code\study\egg\node_modules\urllib\lib\urllib.js:946:15)
+    at ontimeout (timers.js:424:11)
+    at tryOnTimeout (timers.js:288:5)
+    at listOnTimeout (timers.js:251:5)
+    at Timer.processTimers (timers.js:211:10)
+name: "ConnectionTimeoutError"
+requestId: 1
+data: undefined
+path: "/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22"
+status: -2
+headers: {}
+res: {"status":-2,"statusCode":-2,"statusMessage":null,"headers":{},"size":0,"aborted":false,"rt":5023,"keepAliveSocket":false,"requestUrls":["https://hacker-news.firebaseio.com/v0/topstories.json"],"timing":null,"remoteAddress":"35.201.97.85","remotePort":"","socketHandledRequests":1,"socketHandledResponses":0}
+pid: 188
+hostname: GH-LENOVO
+
+2020-09-04 10:02:06,337 ERROR 4180 [-/127.0.0.1/-/5031ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":1,"createSocketErrorCount":0,"closeSocketCount":1,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}}, socketHandledRequests: 1, socketHandledResponses: 0)
+headers: {}
+headers: {}
+    at Timeout._onTimeout (D:\code\study\egg\node_modules\urllib\lib\urllib.js:946:15)
+    at ontimeout (timers.js:424:11)
+    at tryOnTimeout (timers.js:288:5)
+    at listOnTimeout (timers.js:251:5)
+    at Timer.processTimers (timers.js:211:10)
+name: "ConnectionTimeoutError"
+requestId: 1
+data: undefined
+path: "/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22"
+status: -2
+headers: {}
+res: {"status":-2,"statusCode":-2,"statusMessage":null,"headers":{},"size":0,"aborted":false,"rt":5020,"keepAliveSocket":false,"requestUrls":["https://hacker-news.firebaseio.com/v0/topstories.json"],"timing":null,"remoteAddress":"35.201.97.85","remotePort":"","socketHandledRequests":1,"socketHandledResponses":0}
+pid: 4180
+hostname: GH-LENOVO
+
+2020-09-04 10:17:36,421 ERROR 14116 [-/127.0.0.1/-/5225ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":1,"createSocketErrorCount":0,"closeSocketCount":1,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}}, socketHandledRequests: 1, socketHandledResponses: 0)
+headers: {}
+headers: {}
+    at Timeout._onTimeout (D:\code\study\egg\node_modules\urllib\lib\urllib.js:946:15)
+    at ontimeout (timers.js:424:11)
+    at tryOnTimeout (timers.js:288:5)
+    at listOnTimeout (timers.js:251:5)
+    at Timer.processTimers (timers.js:211:10)
+name: "ConnectionTimeoutError"
+requestId: 1
+data: undefined
+path: "/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22"
+status: -2
+headers: {}
+res: {"status":-2,"statusCode":-2,"statusMessage":null,"headers":{},"size":0,"aborted":false,"rt":5017,"keepAliveSocket":false,"requestUrls":["https://hacker-news.firebaseio.com/v0/topstories.json"],"timing":null,"remoteAddress":"35.201.97.85","remotePort":"","socketHandledRequests":1,"socketHandledResponses":0}
+pid: 14116
+hostname: GH-LENOVO
+
+2020-09-04 10:28:51,706 ERROR 18636 [-/127.0.0.1/-/5025ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":1,"createSocketErrorCount":0,"closeSocketCount":1,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}}, socketHandledRequests: 1, socketHandledResponses: 0)
+headers: {}
+headers: {}
+    at Timeout._onTimeout (D:\code\study\egg\node_modules\urllib\lib\urllib.js:946:15)
+    at ontimeout (timers.js:424:11)
+    at tryOnTimeout (timers.js:288:5)
+    at listOnTimeout (timers.js:251:5)
+    at Timer.processTimers (timers.js:211:10)
+name: "ConnectionTimeoutError"
+requestId: 1
+data: undefined
+path: "/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22"
+status: -2
+headers: {}
+res: {"status":-2,"statusCode":-2,"statusMessage":null,"headers":{},"size":0,"aborted":false,"rt":5016,"keepAliveSocket":false,"requestUrls":["https://hacker-news.firebaseio.com/v0/topstories.json"],"timing":null,"remoteAddress":"35.201.97.85","remotePort":"","socketHandledRequests":1,"socketHandledResponses":0}
+pid: 18636
+hostname: GH-LENOVO
+
+2020-09-04 10:29:19,744 ERROR 18636 [-/127.0.0.1/-/5021ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":2,"createSocketErrorCount":0,"closeSocketCount":2,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}}, socketHandledRequests: 1, socketHandledResponses: 0)
+headers: {}
+headers: {}
+    at Timeout._onTimeout (D:\code\study\egg\node_modules\urllib\lib\urllib.js:946:15)
+    at ontimeout (timers.js:424:11)
+    at tryOnTimeout (timers.js:288:5)
+    at listOnTimeout (timers.js:251:5)
+    at Timer.processTimers (timers.js:211:10)
+name: "ConnectionTimeoutError"
+requestId: 2
+data: undefined
+path: "/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22"
+status: -2
+headers: {}
+res: {"status":-2,"statusCode":-2,"statusMessage":null,"headers":{},"size":0,"aborted":false,"rt":5020,"keepAliveSocket":false,"requestUrls":["https://hacker-news.firebaseio.com/v0/topstories.json"],"timing":null,"remoteAddress":"35.201.97.85","remotePort":"","socketHandledRequests":1,"socketHandledResponses":0}
+pid: 18636
+hostname: GH-LENOVO
+
+2020-09-04 10:29:41,827 ERROR 18636 [-/127.0.0.1/-/5002ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":3,"createSocketErrorCount":0,"closeSocketCount":3,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}}, socketHandledRequests: 1, socketHandledResponses: 0)
+headers: {}
+headers: {}
+    at Timeout._onTimeout (D:\code\study\egg\node_modules\urllib\lib\urllib.js:946:15)
+    at ontimeout (timers.js:424:11)
+    at tryOnTimeout (timers.js:288:5)
+    at listOnTimeout (timers.js:251:5)
+    at Timer.processTimers (timers.js:211:10)
+name: "ConnectionTimeoutError"
+requestId: 3
+data: undefined
+path: "/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22"
+status: -2
+headers: {}
+res: {"status":-2,"statusCode":-2,"statusMessage":null,"headers":{},"size":0,"aborted":false,"rt":5001,"keepAliveSocket":false,"requestUrls":["https://hacker-news.firebaseio.com/v0/topstories.json"],"timing":null,"remoteAddress":"35.201.97.85","remotePort":"","socketHandledRequests":1,"socketHandledResponses":0}
+pid: 18636
+hostname: GH-LENOVO
+
+2020-09-04 10:29:57,479 ERROR 18636 [-/127.0.0.1/-/5005ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":4,"createSocketErrorCount":0,"closeSocketCount":4,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}}, socketHandledRequests: 1, socketHandledResponses: 0)
+headers: {}
+headers: {}
+    at Timeout._onTimeout (D:\code\study\egg\node_modules\urllib\lib\urllib.js:946:15)
+    at ontimeout (timers.js:424:11)
+    at tryOnTimeout (timers.js:288:5)
+    at listOnTimeout (timers.js:251:5)
+    at Timer.processTimers (timers.js:211:10)
+name: "ConnectionTimeoutError"
+requestId: 4
+data: undefined
+path: "/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22"
+status: -2
+headers: {}
+res: {"status":-2,"statusCode":-2,"statusMessage":null,"headers":{},"size":0,"aborted":false,"rt":5005,"keepAliveSocket":false,"requestUrls":["https://hacker-news.firebaseio.com/v0/topstories.json"],"timing":null,"remoteAddress":"35.201.97.85","remotePort":"","socketHandledRequests":1,"socketHandledResponses":0}
+pid: 18636
+hostname: GH-LENOVO
+
+2020-09-04 10:33:24,872 ERROR 2492 [-/127.0.0.1/-/5017ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET http://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":1,"createSocketErrorCount":0,"closeSocketCount":1,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}}, socketHandledRequests: 1, socketHandledResponses: 0)
+headers: {}
+headers: {}
+    at Timeout._onTimeout (D:\code\study\egg\node_modules\urllib\lib\urllib.js:946:15)
+    at ontimeout (timers.js:424:11)
+    at tryOnTimeout (timers.js:288:5)
+    at listOnTimeout (timers.js:251:5)
+    at Timer.processTimers (timers.js:211:10)
+name: "ConnectionTimeoutError"
+requestId: 1
+data: undefined
+path: "/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22"
+status: -2
+headers: {}
+res: {"status":-2,"statusCode":-2,"statusMessage":null,"headers":{},"size":0,"aborted":false,"rt":5007,"keepAliveSocket":false,"requestUrls":["http://hacker-news.firebaseio.com/v0/topstories.json"],"timing":null,"remoteAddress":"","remotePort":"","socketHandledRequests":1,"socketHandledResponses":0}
+pid: 2492
+hostname: GH-LENOVO
+
+2020-09-04 10:38:06,713 ERROR 19848 [-/127.0.0.1/-/5028ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":1,"createSocketErrorCount":0,"closeSocketCount":1,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}}, socketHandledRequests: 1, socketHandledResponses: 0)
+headers: {}
+headers: {}
+    at Timeout._onTimeout (D:\code\study\egg\node_modules\urllib\lib\urllib.js:946:15)
+    at ontimeout (timers.js:424:11)
+    at tryOnTimeout (timers.js:288:5)
+    at listOnTimeout (timers.js:251:5)
+    at Timer.processTimers (timers.js:211:10)
+name: "ConnectionTimeoutError"
+requestId: 1
+data: undefined
+path: "/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22"
+status: -2
+headers: {}
+res: {"status":-2,"statusCode":-2,"statusMessage":null,"headers":{},"size":0,"aborted":false,"rt":5016,"keepAliveSocket":false,"requestUrls":["https://hacker-news.firebaseio.com/v0/topstories.json"],"timing":null,"remoteAddress":"35.201.97.85","remotePort":"","socketHandledRequests":1,"socketHandledResponses":0}
+pid: 19848
+hostname: GH-LENOVO
+
+2020-09-04 10:38:36,053 ERROR 19848 [-/127.0.0.1/-/5003ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":2,"createSocketErrorCount":0,"closeSocketCount":2,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}}, socketHandledRequests: 1, socketHandledResponses: 0)
+headers: {}
+headers: {}
+    at Timeout._onTimeout (D:\code\study\egg\node_modules\urllib\lib\urllib.js:946:15)
+    at ontimeout (timers.js:424:11)
+    at tryOnTimeout (timers.js:288:5)
+    at listOnTimeout (timers.js:251:5)
+    at Timer.processTimers (timers.js:211:10)
+name: "ConnectionTimeoutError"
+requestId: 2
+data: undefined
+path: "/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22"
+status: -2
+headers: {}
+res: {"status":-2,"statusCode":-2,"statusMessage":null,"headers":{},"size":0,"aborted":false,"rt":5002,"keepAliveSocket":false,"requestUrls":["https://hacker-news.firebaseio.com/v0/topstories.json"],"timing":null,"remoteAddress":"35.201.97.85","remotePort":"","socketHandledRequests":1,"socketHandledResponses":0}
+pid: 19848
+hostname: GH-LENOVO
+
+2020-09-04 10:44:45,353 ERROR 3568 [-/127.0.0.1/-/5028ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":1,"createSocketErrorCount":0,"closeSocketCount":1,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}}, socketHandledRequests: 1, socketHandledResponses: 0)
+headers: {}
+headers: {}
+    at Timeout._onTimeout (D:\code\study\egg\node_modules\urllib\lib\urllib.js:946:15)
+    at ontimeout (timers.js:424:11)
+    at tryOnTimeout (timers.js:288:5)
+    at listOnTimeout (timers.js:251:5)
+    at Timer.processTimers (timers.js:211:10)
+name: "ConnectionTimeoutError"
+requestId: 1
+data: undefined
+path: "/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22"
+status: -2
+headers: {}
+res: {"status":-2,"statusCode":-2,"statusMessage":null,"headers":{},"size":0,"aborted":false,"rt":5013,"keepAliveSocket":false,"requestUrls":["https://hacker-news.firebaseio.com/v0/topstories.json"],"timing":null,"remoteAddress":"35.201.97.85","remotePort":"","socketHandledRequests":1,"socketHandledResponses":0}
+pid: 3568
+hostname: GH-LENOVO
+
+2020-09-04 11:02:22,727 ERROR 3568 [-/127.0.0.1/-/5059ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":2,"createSocketErrorCount":0,"closeSocketCount":2,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}}, socketHandledRequests: 1, socketHandledResponses: 0)
+headers: {}
+headers: {}
+    at Timeout._onTimeout (D:\code\study\egg\node_modules\urllib\lib\urllib.js:946:15)
+    at ontimeout (timers.js:424:11)
+    at tryOnTimeout (timers.js:288:5)
+    at listOnTimeout (timers.js:251:5)
+    at Timer.processTimers (timers.js:211:10)
+name: "ConnectionTimeoutError"
+requestId: 2
+data: undefined
+path: "/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22"
+status: -2
+headers: {}
+res: {"status":-2,"statusCode":-2,"statusMessage":null,"headers":{},"size":0,"aborted":false,"rt":5042,"keepAliveSocket":false,"requestUrls":["https://hacker-news.firebaseio.com/v0/topstories.json"],"timing":null,"remoteAddress":"35.201.97.85","remotePort":"","socketHandledRequests":1,"socketHandledResponses":0}
+pid: 3568
+hostname: GH-LENOVO
+
+2020-09-04 11:31:45,748 ERROR 19000 [-/127.0.0.1/-/8535ms GET /news] nodejs.ResponseTimeoutError: Response timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/item/24371192.json -1 (connected: true, keepalive socket: true, socketHandledRequests: 1, socketHandledResponses: 0)
+headers: {}
+headers: {}
+    at Timeout._onTimeout (D:\code\study\egg\node_modules\urllib\lib\urllib.js:960:15)
+    at ontimeout (timers.js:424:11)
+    at tryOnTimeout (timers.js:288:5)
+    at listOnTimeout (timers.js:251:5)
+    at Timer.processTimers (timers.js:211:10)
+name: "ResponseTimeoutError"
+requestId: 2
+data: undefined
+path: "/v0/item/24371192.json"
+status: -1
+headers: {}
+res: {"status":-1,"statusCode":-1,"statusMessage":null,"headers":{},"size":0,"aborted":false,"rt":5057,"keepAliveSocket":true,"requestUrls":["https://hacker-news.firebaseio.com/v0/item/24371192.json"],"timing":null,"remoteAddress":"127.0.0.1","remotePort":8888,"socketHandledRequests":1,"socketHandledResponses":0}
+pid: 19000
+hostname: GH-LENOVO
+
+2020-09-04 11:34:39,435 ERROR 20428 [-/127.0.0.1/-/5046ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":1,"createSocketErrorCount":0,"closeSocketCount":1,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}}, socketHandledRequests: 1, socketHandledResponses: 0)
+headers: {}
+headers: {}
+    at Timeout._onTimeout (D:\code\study\egg\node_modules\urllib\lib\urllib.js:946:15)
+    at ontimeout (timers.js:424:11)
+    at tryOnTimeout (timers.js:288:5)
+    at listOnTimeout (timers.js:251:5)
+    at Timer.processTimers (timers.js:211:10)
+name: "ConnectionTimeoutError"
+requestId: 1
+data: undefined
+path: "/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22"
+status: -2
+headers: {}
+res: {"status":-2,"statusCode":-2,"statusMessage":null,"headers":{},"size":0,"aborted":false,"rt":5032,"keepAliveSocket":false,"requestUrls":["https://hacker-news.firebaseio.com/v0/topstories.json"],"timing":null,"remoteAddress":"35.201.97.85","remotePort":"","socketHandledRequests":1,"socketHandledResponses":0}
+pid: 20428
+hostname: GH-LENOVO
+
+2020-09-04 11:35:45,849 ERROR 18964 [-/127.0.0.1/-/5002ms GET /news] nodejs.SocketAssignTimeoutError: Connect timeout for 5000ms, working sockets is full, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, socketHandledRequests: 0, socketHandledResponses: 0)
+headers: {}
+headers: {}
+    at Timeout._onTimeout (D:\code\study\egg\node_modules\urllib\lib\urllib.js:946:15)
+    at ontimeout (timers.js:424:11)
+    at tryOnTimeout (timers.js:288:5)
+    at listOnTimeout (timers.js:251:5)
+    at Timer.processTimers (timers.js:211:10)
+name: "SocketAssignTimeoutError"
+requestId: 7
+noSocket: true
+data: undefined
+path: "/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22"
+status: -2
+headers: {}
+res: {"status":-2,"statusCode":-2,"statusMessage":null,"headers":{},"size":0,"aborted":false,"rt":5000,"keepAliveSocket":false,"requestUrls":["https://hacker-news.firebaseio.com/v0/topstories.json"],"timing":null,"remoteAddress":"","remotePort":"","socketHandledRequests":0,"socketHandledResponses":0}
+pid: 18964
+hostname: GH-LENOVO
+
+2020-09-04 11:36:16,208 ERROR 18964 [-/127.0.0.1/-/5000ms GET /news] nodejs.SocketAssignTimeoutError: Connect timeout for 5000ms, working sockets is full, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, socketHandledRequests: 0, socketHandledResponses: 0)
+headers: {}
+headers: {}
+    at Timeout._onTimeout (D:\code\study\egg\node_modules\urllib\lib\urllib.js:946:15)
+    at ontimeout (timers.js:424:11)
+    at tryOnTimeout (timers.js:288:5)
+    at listOnTimeout (timers.js:251:5)
+    at Timer.processTimers (timers.js:211:10)
+name: "SocketAssignTimeoutError"
+requestId: 8
+noSocket: true
+data: undefined
+path: "/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22"
+status: -2
+headers: {}
+res: {"status":-2,"statusCode":-2,"statusMessage":null,"headers":{},"size":0,"aborted":false,"rt":5000,"keepAliveSocket":false,"requestUrls":["https://hacker-news.firebaseio.com/v0/topstories.json"],"timing":null,"remoteAddress":"","remotePort":"","socketHandledRequests":0,"socketHandledResponses":0}
+pid: 18964
+hostname: GH-LENOVO
+
+2020-09-04 11:36:34,636 ERROR 18964 [-/127.0.0.1/-/6604ms GET /news] nodejs.ResponseTimeoutError: Response timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/item/24370966.json -1 (connected: true, keepalive socket: true, socketHandledRequests: 1, socketHandledResponses: 0)
+headers: {}
+headers: {}
+    at Timeout._onTimeout (D:\code\study\egg\node_modules\urllib\lib\urllib.js:960:15)
+    at ontimeout (timers.js:424:11)
+    at tryOnTimeout (timers.js:288:5)
+    at listOnTimeout (timers.js:251:5)
+    at Timer.processTimers (timers.js:211:10)
+name: "ResponseTimeoutError"
+requestId: 13
+data: undefined
+path: "/v0/item/24370966.json"
+status: -1
+headers: {}
+res: {"status":-1,"statusCode":-1,"statusMessage":null,"headers":{},"size":0,"aborted":false,"rt":5072,"keepAliveSocket":true,"requestUrls":["https://hacker-news.firebaseio.com/v0/item/24370966.json"],"timing":null,"remoteAddress":"127.0.0.1","remotePort":8888,"socketHandledRequests":1,"socketHandledResponses":0}
+pid: 18964
+hostname: GH-LENOVO
+
+2020-09-04 11:36:41,044 ERROR 18964 [-/127.0.0.1/-/1311ms GET /news] nodejs.ResponseError: read ECONNRESET, GET https://hacker-news.firebaseio.com/v0/item/24358850.json -1 (connected: true, keepalive socket: true, socketHandledRequests: 1, socketHandledResponses: 0)
+headers: {}
+    at TLSWrap.onread (net.js:660:25)
+errno: "ECONNRESET"
+code: "ECONNRESET"
+syscall: "read"
+name: "ResponseError"
+data: undefined
+path: "/v0/item/24358850.json"
+status: -1
+headers: {}
+res: {"status":-1,"statusCode":-1,"statusMessage":null,"headers":{},"size":0,"aborted":false,"rt":604,"keepAliveSocket":true,"requestUrls":["https://hacker-news.firebaseio.com/v0/item/24358850.json"],"timing":null,"remoteAddress":"127.0.0.1","remotePort":8888,"socketHandledRequests":1,"socketHandledResponses":0}
+pid: 18964
+hostname: GH-LENOVO
+
+2020-09-04 11:42:43,176 ERROR 20484 [-/127.0.0.1/-/6320ms GET /news] nodejs.SocketAssignTimeoutError: Connect timeout for 5000ms, working sockets is full, GET https://hacker-news.firebaseio.com/v0/item/24371192.json -2 (connected: false, keepalive socket: false, socketHandledRequests: 0, socketHandledResponses: 0)
+headers: {}
+headers: {}
+    at Timeout._onTimeout (D:\code\study\egg\node_modules\urllib\lib\urllib.js:946:15)
+    at ontimeout (timers.js:424:11)
+    at tryOnTimeout (timers.js:288:5)
+    at listOnTimeout (timers.js:251:5)
+    at Timer.processTimers (timers.js:211:10)
+name: "SocketAssignTimeoutError"
+requestId: 2
+noSocket: true
+data: undefined
+path: "/v0/item/24371192.json"
+status: -2
+headers: {}
+res: {"status":-2,"statusCode":-2,"statusMessage":null,"headers":{},"size":0,"aborted":false,"rt":5002,"keepAliveSocket":false,"requestUrls":["https://hacker-news.firebaseio.com/v0/item/24371192.json"],"timing":null,"remoteAddress":"","remotePort":"","socketHandledRequests":0,"socketHandledResponses":0}
+pid: 20484
+hostname: GH-LENOVO
+
+2020-09-04 13:55:50,024 ERROR 6196 nodejs.unhandledExceptionError: read ECONNRESET
+    at TCP.onread (net.js:660:25)
+errno: "ECONNRESET"
+code: "ECONNRESET"
+syscall: "read"
+name: "unhandledExceptionError"
+pid: 6196
+hostname: GH-LENOVO
+

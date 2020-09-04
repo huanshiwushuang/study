@@ -206,11 +206,13 @@
       "main": "index.js",
       "license": "MIT",
       "scripts": {
-        "dev": "egg-bin dev"
+        "dev": "egg-bin dev",
+        "dev-proxy": "set http_proxy=http://127.0.0.1:8888 && egg-bin dev"
       },
       "dependencies": {
         "egg": "^2.27.0",
-        "egg-view-nunjucks": "^2.2.0"
+        "egg-view-nunjucks": "^2.2.0",
+        "moment": "^2.27.0"
       },
       "devDependencies": {
         "egg-bin": "^4.15.0"
@@ -273,7 +275,10 @@
       "dnsCacheLookupInterval": 10000,
       "dnsCacheMaxLength": 1000,
       "request": {
-        "timeout": 5000
+        "timeout": 5000,
+        "enableProxy": true,
+        "rejectUnauthorized": false,
+        "proxy": "http://127.0.0.1:8888 "
       },
       "httpAgent": {
         "keepAlive": true,
@@ -318,9 +323,21 @@
       "responseTimeout": 60000
     },
     "onClientError": null,
+    "middleware": [
+      "robot"
+    ],
+    "news": {
+      "pageSize": 5,
+      "serverUrl": "https://hacker-news.firebaseio.com/v0"
+    },
+    "robot": {
+      "ua": [
+        {}
+      ]
+    },
     "coreMiddlewares": "~config~coreMiddleware",
-    "appMiddlewares": [],
-    "appMiddleware": "~config~appMiddlewares",
+    "appMiddlewares": "~config~middleware",
+    "appMiddleware": "~config~middleware",
     "multipartParseOptions": {
       "autoFields": false,
       "defCharset": "utf8",

@@ -174,7 +174,8 @@
       "main": "index.js",
       "license": "MIT",
       "scripts": {
-        "dev": "egg-bin dev"
+        "dev": "egg-bin dev",
+        "dev-proxy": "set http_proxy=http://127.0.0.1:8888 && egg-bin dev"
       },
       "dependencies": {
         "egg": "^2.27.0",
@@ -241,7 +242,10 @@
       "dnsCacheLookupInterval": 10000,
       "dnsCacheMaxLength": 1000,
       "request": {
-        "timeout": 5000
+        "timeout": 5000,
+        "enableProxy": true,
+        "rejectUnauthorized": false,
+        "proxy": "http://127.0.0.1:8888 "
       },
       "httpAgent": {
         "keepAlive": true,
@@ -281,6 +285,10 @@
       "responseTimeout": 60000
     },
     "onClientError": null,
+    "news": {
+      "pageSize": 5,
+      "serverUrl": "https://hacker-news.firebaseio.com/v0"
+    },
     "coreMiddlewares": "~config~coreMiddleware",
     "appMiddlewares": [],
     "appMiddleware": "~config~appMiddlewares"

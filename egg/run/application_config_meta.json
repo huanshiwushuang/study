@@ -9,6 +9,37 @@
     "cache": "D:\\code\\study\\egg\\node_modules\\egg-view\\config\\config.local.js",
     "defaultExtension": "D:\\code\\study\\egg\\node_modules\\egg-view\\config\\config.default.js"
   },
+  "middleware": "D:\\code\\study\\egg\\config\\config.default.js",
+  "news": {
+    "pageSize": "D:\\code\\study\\egg\\config\\config.default.js",
+    "serverUrl": "D:\\code\\study\\egg\\config\\config.default.js"
+  },
+  "robot": {
+    "ua": "D:\\code\\study\\egg\\config\\config.default.js"
+  },
+  "httpclient": {
+    "request": {
+      "enableProxy": "D:\\code\\study\\egg\\config\\config.local.js",
+      "rejectUnauthorized": "D:\\code\\study\\egg\\config\\config.local.js",
+      "proxy": "D:\\code\\study\\egg\\config\\config.local.js",
+      "timeout": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
+    },
+    "enableDNSCache": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+    "dnsCacheLookupInterval": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+    "dnsCacheMaxLength": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+    "httpAgent": {
+      "keepAlive": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+      "freeSocketTimeout": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+      "maxSockets": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+      "maxFreeSockets": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
+    },
+    "httpsAgent": {
+      "keepAlive": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+      "freeSocketTimeout": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+      "maxSockets": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+      "maxFreeSockets": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
+    }
+  },
   "session": {
     "maxAge": "D:\\code\\study\\egg\\node_modules\\egg-session\\config\\config.default.js",
     "key": "D:\\code\\study\\egg\\node_modules\\egg-session\\config\\config.default.js",
@@ -169,11 +200,13 @@
     "main": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
     "license": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
     "scripts": {
-      "dev": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
+      "dev": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+      "dev-proxy": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
     },
     "dependencies": {
       "egg": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
-      "egg-view-nunjucks": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
+      "egg-view-nunjucks": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+      "moment": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
     },
     "devDependencies": {
       "egg-bin": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
@@ -229,26 +262,6 @@
       "consoleLevel": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.local.js"
     },
     "allowDebugAtProd": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
-  },
-  "httpclient": {
-    "enableDNSCache": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
-    "dnsCacheLookupInterval": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
-    "dnsCacheMaxLength": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
-    "request": {
-      "timeout": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
-    },
-    "httpAgent": {
-      "keepAlive": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
-      "freeSocketTimeout": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
-      "maxSockets": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
-      "maxFreeSockets": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
-    },
-    "httpsAgent": {
-      "keepAlive": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
-      "freeSocketTimeout": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
-      "maxSockets": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
-      "maxFreeSockets": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
-    }
   },
   "meta": {
     "enable": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
