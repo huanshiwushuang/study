@@ -24,8 +24,15 @@ const fs = require('fs');
         getList () {
             var $table = jq('table#db-list-table');
             var ths = $table.find('th');
-            var tds = $table.find('td').slice(ths.length);
-            
+            var tds = $table.find('td');
+            var arr = [];
+            tds.each((index, item) => {
+                var obj = {};
+                // 第一列，a 标签
+                if (index === 0) {
+
+                }
+            })
         }
     }
 
