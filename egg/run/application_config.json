@@ -106,6 +106,7 @@
         "D:\\code\\study\\egg\\node_modules\\egg-static\\config\\locales",
         "D:\\code\\study\\egg\\node_modules\\egg-view\\config\\locales",
         "D:\\code\\study\\egg\\node_modules\\egg-view-nunjucks\\config\\locales",
+        "D:\\code\\study\\egg\\lib\\plugin\\egg-ua\\config\\locales",
         "D:\\code\\study\\egg\\node_modules\\egg\\config\\locales",
         "D:\\code\\study\\egg\\config\\locales"
       ],
@@ -207,7 +208,9 @@
       "license": "MIT",
       "scripts": {
         "dev": "egg-bin dev",
-        "dev-proxy": "set http_proxy=http://127.0.0.1:8888 && egg-bin dev"
+        "dev-proxy": "set http_proxy=http://127.0.0.1:8888 && egg-bin dev",
+        "test": "egg-bin test",
+        "cov": "egg-bin cov"
       },
       "dependencies": {
         "egg": "^2.27.0",
@@ -215,7 +218,8 @@
         "moment": "^2.27.0"
       },
       "devDependencies": {
-        "egg-bin": "^4.15.0"
+        "egg-bin": "^4.15.0",
+        "egg-mock": "^4.0.1"
       }
     },
     "baseDir": "D:\\code\\study\\egg",
@@ -275,10 +279,7 @@
       "dnsCacheLookupInterval": 10000,
       "dnsCacheMaxLength": 1000,
       "request": {
-        "timeout": 5000,
-        "enableProxy": true,
-        "rejectUnauthorized": false,
-        "proxy": "http://127.0.0.1:8888 "
+        "timeout": 5000
       },
       "httpAgent": {
         "keepAlive": true,
@@ -511,6 +512,15 @@
       "from": "D:\\code\\study\\egg\\config\\plugin.js",
       "path": "D:\\code\\study\\egg\\node_modules\\egg-view-nunjucks",
       "version": "2.2.0"
+    },
+    "ua": {
+      "enable": true,
+      "path": "D:\\code\\study\\egg\\lib\\plugin\\egg-ua",
+      "name": "ua",
+      "dependencies": [],
+      "optionalDependencies": [],
+      "env": [],
+      "from": "D:\\code\\study\\egg\\config\\plugin.js"
     }
   }
 }
