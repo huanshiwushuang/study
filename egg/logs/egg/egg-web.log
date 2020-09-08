@@ -379,3 +379,18 @@ hostname: GH-LENOVO
 2020-09-03 18:19:04,374 INFO 23640 [egg:core] dump config after load, 5ms
 2020-09-03 18:19:04,384 INFO 23640 [egg-watcher:application] watcher start success
 2020-09-03 18:19:04,392 INFO 23640 [egg:core] dump config after ready, 6ms
+2020-09-03 23:48:19,200 INFO 6272 [egg:logger] init all loggers with options: {"dir":"C:\\code\\study\\egg\\logs\\egg","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"egg-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2020-09-03 23:48:19,234 INFO 6272 [egg-multipart] stream mode enable
+2020-09-03 23:48:19,298 INFO 6272 [egg-static] starting static serve /public/ -> C:\code\study\egg\app\public
+2020-09-03 23:48:19,301 INFO 6272 [egg-security] use csrf middleware
+2020-09-03 23:48:19,301 INFO 6272 [egg-security] use methodnoallow middleware
+2020-09-03 23:48:19,302 INFO 6272 [egg-security] use noopen middleware
+2020-09-03 23:48:19,303 INFO 6272 [egg-security] use nosniff middleware
+2020-09-03 23:48:19,303 INFO 6272 [egg-security] use xssProtection middleware
+2020-09-03 23:48:19,304 INFO 6272 [egg-security] use xframe middleware
+2020-09-03 23:48:19,304 INFO 6272 [egg-security] use dta middleware
+2020-09-03 23:48:19,304 INFO 6272 [egg-security] compose 7 middlewares into one security middleware
+2020-09-03 23:48:19,316 INFO 6272 [egg:core] dump config after load, 7ms
+2020-09-03 23:48:19,330 INFO 6272 [egg-watcher:application] watcher start success
+2020-09-03 23:48:19,339 INFO 6272 [egg:core] dump config after ready, 6ms
+2020-09-03 23:48:29,680 INFO 6272 [egg-view-nunjucks] loading templates from ["C:\\code\\study\\egg\\app\\view"]
