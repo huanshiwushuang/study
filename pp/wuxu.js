@@ -1,79 +1,91 @@
-const pp = require('puppeteer-core');
+const PP = require('puppeteer-core');
 const fs = require('fs');
+const {
+    PageLogin,
+    PageDbList,
+    PageDbDetailZhuce
+} = require('./wuxu-class');
 
 (async () => {
-    var browser = await pp.launch({
+    var browser = await PP.launch({
         executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
         headless: false,
         defaultViewport: null,
         ignoreDefaultArgs: ['--enable-automation'],
-        // slowMo: 200,
+        slowMo: 200,
         args: [
             // '--remote-debugging-port=9222',
             // '--start-fullscreen',
             '-no-sandbox',
         ]
     });
-    // class 定义-数据结构
-    class dbList {
-        constructor ({ page, url } = { page: -1, url: '', list: [] }) {
-            this.page = page;
-            this.url = url;
-            this.list = list;
-        }
-        getList () {
-            var $table = jq('table#db-list-table');
-            var ths = $table.find('th');
-            var tds = $table.find('td');
-            var arr = [];
-            tds.each((index, item) => {
-                var obj = {};
-                // 第一列，a 标签
-                if (index === 0) {
 
-                }
-            })
-        }
-    }
-
-    class dbDetailZhuce {
-        constructor ({
-            title,
-            yplx,
-            sqlx,
-            zcfl,
-            pzwh,
-            sbqy,
-            cbrq,
-        } = {
-            title: '',
-            yplx: '',
-            sqlx: '',
-            zcfl: '',
-            pzwh: '',
-            sbqy: '',
-            cbrq: '',
-        }) {
-            this.title = title;
-            this.yplx = yplx;
-            this.sqlx = sqlx;
-            this.zcfl = zcfl;
-            this.pzwh = pzwh;
-            this.sbqy = sbqy;
-            this.cbrq = cbrq;
-        }
-    }
+    
     // class 定义-中转逻辑
     var page = await browser.newPage();
-    await page.goto('https://www.wuxuwang.com/yaopinzc');
+    // pageDbList = new PageDbList({
+    //     pageHandle: page,
+    //     url: 'https://www.wuxuwang.com/yaopinzc'
+    // });
+    // const datas = [];
+
+    // 登录
+    var pageLogin = new PageLogin({
+        pageHandle: page,
+        url: 'https://www.wuxuwang.com/login'
+    });
+    await pageLogin.init();
+
+    // 药品注册
+    var pageDbList;
+    // 药品注册详情
+    var pageDbDetailZhuce;
+    const datas = [];
+
+    await exec('https://www.wuxuwang.com/yaopinzc');
+    async function exec(url) {
+        pageDbList = new PageDbList({
+            pageHandle: page,
+            url
+        })
+        pageDbList.log(`开始 list url：${pageDbList.url}`);
+        await pageDbList.init();
+        // pageDbList.list = pageDbList.list.slice(-1);
 
 
+        for (let item of pageDbList.list) {
+            pageDbDetailZhuce = new PageDbDetailZhuce({
+                pageHandle: page,
+                url: item.detailUrl
+            });
+            pageDbDetailZhuce.log(`开始 detail url：${pageDbDetailZhuce.url}`);
+            await pageDbDetailZhuce.init();
+            Object.assign(item, {
+                title: pageDbDetailZhuce.title,
+                basicInfo: pageDbDetailZhuce.basicInfo,
+            })
+            pageDbDetailZhuce.log(`结束 detail url：${pageDbDetailZhuce.url}`);
+        }
+        pageDbList.log(`结束 list url：${pageDbList.url}`);
+
+        datas.push(pageDbList.list);
+        // 下一页
+        if (pageDbList.nextUrl) {
+            exec(pageDbList.nextUrl);
+        } else {
+            pageDbList.log('没有更多了')
+        }
+    }
+    // 药品注册详情
+
+    fs.writeFileSync('123.json', JSON.stringify(datas), {
+        flag: 'a'
+    });
 
 
-
-
-
-
+    
+    
+    // dbListArray.push()
 
 
     return;
