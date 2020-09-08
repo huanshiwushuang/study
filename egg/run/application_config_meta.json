@@ -9,6 +9,14 @@
     "cache": "C:\\code\\study\\egg\\node_modules\\egg-view\\config\\config.local.js",
     "defaultExtension": "C:\\code\\study\\egg\\node_modules\\egg-view\\config\\config.default.js"
   },
+  "middleware": "D:\\code\\study\\egg\\config\\config.default.js",
+  "news": {
+    "pageSize": "D:\\code\\study\\egg\\config\\config.default.js",
+    "serverUrl": "D:\\code\\study\\egg\\config\\config.default.js"
+  },
+  "robot": {
+    "ua": "D:\\code\\study\\egg\\config\\config.default.js"
+  },
   "session": {
     "maxAge": "C:\\code\\study\\egg\\node_modules\\egg-session\\config\\config.default.js",
     "key": "C:\\code\\study\\egg\\node_modules\\egg-session\\config\\config.default.js",
@@ -169,6 +177,7 @@
     "main": "C:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
     "license": "C:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
     "scripts": {
+<<<<<<< HEAD
       "dev": "C:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
     },
     "dependencies": {
@@ -177,6 +186,21 @@
     },
     "devDependencies": {
       "egg-bin": "C:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
+=======
+      "dev": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+      "dev-proxy": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+      "test": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+      "cov": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
+    },
+    "dependencies": {
+      "egg": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+      "egg-view-nunjucks": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+      "moment": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
+    },
+    "devDependencies": {
+      "egg-bin": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+      "egg-mock": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
+>>>>>>> ecbd0a541f93ca2631ba535cc9d4c923c0d01077
     }
   },
   "baseDir": "C:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",

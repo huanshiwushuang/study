@@ -117,14 +117,6 @@
         "cron": "0 30 4 * * *"
       }
     },
-    "development": {
-      "watchDirs": [],
-      "ignoreDirs": [],
-      "fastReady": false,
-      "reloadOnDebug": true,
-      "overrideDefault": false,
-      "overrideIgnore": false
-    },
     "logrotator": {
       "filesRotateByHour": null,
       "hourDelimiter": "-",
@@ -143,8 +135,13 @@
       "maxFiles": 1000
     },
     "view": {
+<<<<<<< HEAD
       "root": "C:\\code\\study\\egg\\app\\view",
       "cache": false,
+=======
+      "root": "D:\\code\\study\\egg\\app\\view",
+      "cache": true,
+>>>>>>> ecbd0a541f93ca2631ba535cc9d4c923c0d01077
       "defaultExtension": ".html",
       "defaultViewEngine": "nunjucks",
       "mapping": {
@@ -156,9 +153,9 @@
       "throwOnUndefined": false,
       "trimBlocks": false,
       "lstripBlocks": false,
-      "cache": false
+      "cache": true
     },
-    "env": "local",
+    "env": "unittest",
     "name": "egg",
     "keys": "<String len: 13>",
     "cookies": {},
@@ -174,14 +171,19 @@
       "main": "index.js",
       "license": "MIT",
       "scripts": {
-        "dev": "egg-bin dev"
+        "dev": "egg-bin dev",
+        "dev-proxy": "set http_proxy=http://127.0.0.1:8888 && egg-bin dev",
+        "test": "egg-bin test",
+        "cov": "egg-bin cov"
       },
       "dependencies": {
         "egg": "^2.27.0",
-        "egg-view-nunjucks": "^2.2.0"
+        "egg-view-nunjucks": "^2.2.0",
+        "moment": "^2.27.0"
       },
       "devDependencies": {
-        "egg-bin": "^4.15.0"
+        "egg-bin": "^4.15.0",
+        "egg-mock": "^4.0.1"
       }
     },
     "baseDir": "C:\\code\\study\\egg",
@@ -220,19 +222,17 @@
     "logger": {
       "dir": "C:\\code\\study\\egg\\logs\\egg",
       "encoding": "utf8",
-      "env": "local",
+      "env": "unittest",
       "level": "INFO",
-      "consoleLevel": "INFO",
+      "consoleLevel": "WARN",
       "disableConsoleAfterReady": false,
       "outputJSON": false,
-      "buffer": true,
+      "buffer": false,
       "appLogName": "egg-web.log",
       "coreLogName": "egg-web.log",
       "agentLogName": "egg-agent.log",
       "errorLogName": "common-error.log",
-      "coreLogger": {
-        "consoleLevel": "WARN"
-      },
+      "coreLogger": {},
       "allowDebugAtProd": false,
       "type": "agent"
     },
@@ -281,9 +281,21 @@
       "responseTimeout": 60000
     },
     "onClientError": null,
+    "middleware": [
+      "robot"
+    ],
+    "news": {
+      "pageSize": 5,
+      "serverUrl": "https://hacker-news.firebaseio.com/v0"
+    },
+    "robot": {
+      "ua": [
+        {}
+      ]
+    },
     "coreMiddlewares": "~config~coreMiddleware",
-    "appMiddlewares": [],
-    "appMiddleware": "~config~appMiddlewares"
+    "appMiddlewares": "~config~middleware",
+    "appMiddleware": "~config~middleware"
   },
   "plugins": {
     "session": {
@@ -382,6 +394,7 @@
       "path": "C:\\code\\study\\egg\\node_modules\\egg-multipart",
       "version": "2.10.3"
     },
+<<<<<<< HEAD
     "development": {
       "enable": true,
       "package": "egg-development",
@@ -397,6 +410,8 @@
       "path": "C:\\code\\study\\egg\\node_modules\\egg-development",
       "version": "2.7.0"
     },
+=======
+>>>>>>> ecbd0a541f93ca2631ba535cc9d4c923c0d01077
     "logrotator": {
       "enable": true,
       "package": "egg-logrotator",
@@ -445,6 +460,15 @@
       "from": "C:\\code\\study\\egg\\config\\plugin.js",
       "path": "C:\\code\\study\\egg\\node_modules\\egg-view-nunjucks",
       "version": "2.2.0"
+    },
+    "egg-mock": {
+      "enable": true,
+      "path": "D:\\code\\study\\egg\\node_modules\\egg-mock",
+      "name": "egg-mock",
+      "dependencies": [],
+      "optionalDependencies": [],
+      "env": [],
+      "version": "4.0.1"
     }
   }
 }

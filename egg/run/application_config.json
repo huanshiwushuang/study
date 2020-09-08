@@ -93,6 +93,7 @@
     "i18n": {
       "defaultLocale": "en_US",
       "dirs": [
+<<<<<<< HEAD
         "C:\\code\\study\\egg\\node_modules\\egg-session\\config\\locales",
         "C:\\code\\study\\egg\\node_modules\\egg-security\\config\\locales",
         "C:\\code\\study\\egg\\node_modules\\egg-jsonp\\config\\locales",
@@ -108,6 +109,24 @@
         "C:\\code\\study\\egg\\node_modules\\egg-view-nunjucks\\config\\locales",
         "C:\\code\\study\\egg\\node_modules\\egg\\config\\locales",
         "C:\\code\\study\\egg\\config\\locales"
+=======
+        "D:\\code\\study\\egg\\node_modules\\egg-session\\config\\locales",
+        "D:\\code\\study\\egg\\node_modules\\egg-security\\config\\locales",
+        "D:\\code\\study\\egg\\node_modules\\egg-jsonp\\config\\locales",
+        "D:\\code\\study\\egg\\node_modules\\egg-onerror\\config\\locales",
+        "D:\\code\\study\\egg\\node_modules\\egg-i18n\\config\\locales",
+        "D:\\code\\study\\egg\\node_modules\\egg-watcher\\config\\locales",
+        "D:\\code\\study\\egg\\node_modules\\egg-schedule\\config\\locales",
+        "D:\\code\\study\\egg\\node_modules\\egg-multipart\\config\\locales",
+        "D:\\code\\study\\egg\\node_modules\\egg-development\\config\\locales",
+        "D:\\code\\study\\egg\\node_modules\\egg-logrotator\\config\\locales",
+        "D:\\code\\study\\egg\\node_modules\\egg-static\\config\\locales",
+        "D:\\code\\study\\egg\\node_modules\\egg-view\\config\\locales",
+        "D:\\code\\study\\egg\\node_modules\\egg-view-nunjucks\\config\\locales",
+        "D:\\code\\study\\egg\\lib\\plugin\\egg-ua\\config\\locales",
+        "D:\\code\\study\\egg\\node_modules\\egg\\config\\locales",
+        "D:\\code\\study\\egg\\config\\locales"
+>>>>>>> ecbd0a541f93ca2631ba535cc9d4c923c0d01077
       ],
       "queryField": "locale",
       "cookieField": "locale",
@@ -206,14 +225,19 @@
       "main": "index.js",
       "license": "MIT",
       "scripts": {
-        "dev": "egg-bin dev"
+        "dev": "egg-bin dev",
+        "dev-proxy": "set http_proxy=http://127.0.0.1:8888 && egg-bin dev",
+        "test": "egg-bin test",
+        "cov": "egg-bin cov"
       },
       "dependencies": {
         "egg": "^2.27.0",
-        "egg-view-nunjucks": "^2.2.0"
+        "egg-view-nunjucks": "^2.2.0",
+        "moment": "^2.27.0"
       },
       "devDependencies": {
-        "egg-bin": "^4.15.0"
+        "egg-bin": "^4.15.0",
+        "egg-mock": "^4.0.1"
       }
     },
     "baseDir": "C:\\code\\study\\egg",
@@ -318,9 +342,21 @@
       "responseTimeout": 60000
     },
     "onClientError": null,
+    "middleware": [
+      "robot"
+    ],
+    "news": {
+      "pageSize": 5,
+      "serverUrl": "https://hacker-news.firebaseio.com/v0"
+    },
+    "robot": {
+      "ua": [
+        {}
+      ]
+    },
     "coreMiddlewares": "~config~coreMiddleware",
-    "appMiddlewares": [],
-    "appMiddleware": "~config~appMiddlewares",
+    "appMiddlewares": "~config~middleware",
+    "appMiddleware": "~config~middleware",
     "multipartParseOptions": {
       "autoFields": false,
       "defCharset": "utf8",
@@ -494,6 +530,15 @@
       "from": "C:\\code\\study\\egg\\config\\plugin.js",
       "path": "C:\\code\\study\\egg\\node_modules\\egg-view-nunjucks",
       "version": "2.2.0"
+    },
+    "ua": {
+      "enable": true,
+      "path": "D:\\code\\study\\egg\\lib\\plugin\\egg-ua",
+      "name": "ua",
+      "dependencies": [],
+      "optionalDependencies": [],
+      "env": [],
+      "from": "D:\\code\\study\\egg\\config\\plugin.js"
     }
   }
 }

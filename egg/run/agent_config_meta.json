@@ -5,9 +5,23 @@
     "mapping": {
       ".html": "C:\\code\\study\\egg\\config\\config.default.js"
     },
+<<<<<<< HEAD
     "root": "C:\\code\\study\\egg\\node_modules\\egg-view\\config\\config.default.js",
     "cache": "C:\\code\\study\\egg\\node_modules\\egg-view\\config\\config.local.js",
     "defaultExtension": "C:\\code\\study\\egg\\node_modules\\egg-view\\config\\config.default.js"
+=======
+    "root": "D:\\code\\study\\egg\\node_modules\\egg-view\\config\\config.default.js",
+    "cache": "D:\\code\\study\\egg\\node_modules\\egg-view\\config\\config.default.js",
+    "defaultExtension": "D:\\code\\study\\egg\\node_modules\\egg-view\\config\\config.default.js"
+>>>>>>> ecbd0a541f93ca2631ba535cc9d4c923c0d01077
+  },
+  "middleware": "D:\\code\\study\\egg\\config\\config.default.js",
+  "news": {
+    "pageSize": "D:\\code\\study\\egg\\config\\config.default.js",
+    "serverUrl": "D:\\code\\study\\egg\\config\\config.default.js"
+  },
+  "robot": {
+    "ua": "D:\\code\\study\\egg\\config\\config.default.js"
   },
   "session": {
     "maxAge": "C:\\code\\study\\egg\\node_modules\\egg-session\\config\\config.default.js",
@@ -36,9 +50,15 @@
       "value": "C:\\code\\study\\egg\\node_modules\\egg-security\\config\\config.default.js"
     },
     "hsts": {
+<<<<<<< HEAD
       "enable": "C:\\code\\study\\egg\\node_modules\\egg-security\\config\\config.local.js",
       "maxAge": "C:\\code\\study\\egg\\node_modules\\egg-security\\config\\config.default.js",
       "includeSubdomains": "C:\\code\\study\\egg\\node_modules\\egg-security\\config\\config.default.js"
+=======
+      "enable": "D:\\code\\study\\egg\\node_modules\\egg-security\\config\\config.default.js",
+      "maxAge": "D:\\code\\study\\egg\\node_modules\\egg-security\\config\\config.default.js",
+      "includeSubdomains": "D:\\code\\study\\egg\\node_modules\\egg-security\\config\\config.default.js"
+>>>>>>> ecbd0a541f93ca2631ba535cc9d4c923c0d01077
     },
     "dta": {
       "enable": "C:\\code\\study\\egg\\node_modules\\egg-security\\config\\config.default.js"
@@ -91,7 +111,11 @@
     "cookieMaxAge": "C:\\code\\study\\egg\\node_modules\\egg-i18n\\config\\config.default.js"
   },
   "watcher": {
+<<<<<<< HEAD
     "type": "C:\\code\\study\\egg\\node_modules\\egg-watcher\\config\\config.local.js",
+=======
+    "type": "D:\\code\\study\\egg\\node_modules\\egg-watcher\\config\\config.unittest.js",
+>>>>>>> ecbd0a541f93ca2631ba535cc9d4c923c0d01077
     "eventSources": {
       "default": "C:\\code\\study\\egg\\node_modules\\egg-watcher\\config\\config.default.js",
       "development": "C:\\code\\study\\egg\\node_modules\\egg-watcher\\config\\config.default.js"
@@ -122,6 +146,7 @@
       "cron": "C:\\code\\study\\egg\\node_modules\\egg-multipart\\config\\config.default.js"
     }
   },
+<<<<<<< HEAD
   "development": {
     "watchDirs": "C:\\code\\study\\egg\\node_modules\\egg-development\\config\\config.default.js",
     "ignoreDirs": "C:\\code\\study\\egg\\node_modules\\egg-development\\config\\config.default.js",
@@ -130,6 +155,8 @@
     "overrideDefault": "C:\\code\\study\\egg\\node_modules\\egg-development\\config\\config.default.js",
     "overrideIgnore": "C:\\code\\study\\egg\\node_modules\\egg-development\\config\\config.default.js"
   },
+=======
+>>>>>>> ecbd0a541f93ca2631ba535cc9d4c923c0d01077
   "logrotator": {
     "filesRotateByHour": "C:\\code\\study\\egg\\node_modules\\egg-logrotator\\config\\config.default.js",
     "hourDelimiter": "C:\\code\\study\\egg\\node_modules\\egg-logrotator\\config\\config.default.js",
@@ -148,11 +175,19 @@
     "maxFiles": "C:\\code\\study\\egg\\node_modules\\egg-static\\config\\config.default.js"
   },
   "nunjucks": {
+<<<<<<< HEAD
     "autoescape": "C:\\code\\study\\egg\\node_modules\\egg-view-nunjucks\\config\\config.default.js",
     "throwOnUndefined": "C:\\code\\study\\egg\\node_modules\\egg-view-nunjucks\\config\\config.default.js",
     "trimBlocks": "C:\\code\\study\\egg\\node_modules\\egg-view-nunjucks\\config\\config.default.js",
     "lstripBlocks": "C:\\code\\study\\egg\\node_modules\\egg-view-nunjucks\\config\\config.default.js",
     "cache": "C:\\code\\study\\egg\\node_modules\\egg-view-nunjucks\\config\\config.local.js"
+=======
+    "autoescape": "D:\\code\\study\\egg\\node_modules\\egg-view-nunjucks\\config\\config.default.js",
+    "throwOnUndefined": "D:\\code\\study\\egg\\node_modules\\egg-view-nunjucks\\config\\config.default.js",
+    "trimBlocks": "D:\\code\\study\\egg\\node_modules\\egg-view-nunjucks\\config\\config.default.js",
+    "lstripBlocks": "D:\\code\\study\\egg\\node_modules\\egg-view-nunjucks\\config\\config.default.js",
+    "cache": "D:\\code\\study\\egg\\node_modules\\egg-view-nunjucks\\config\\config.default.js"
+>>>>>>> ecbd0a541f93ca2631ba535cc9d4c923c0d01077
   },
   "env": "C:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
   "name": "C:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
@@ -169,6 +204,7 @@
     "main": "C:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
     "license": "C:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
     "scripts": {
+<<<<<<< HEAD
       "dev": "C:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
     },
     "dependencies": {
@@ -177,6 +213,21 @@
     },
     "devDependencies": {
       "egg-bin": "C:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
+=======
+      "dev": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+      "dev-proxy": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+      "test": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+      "cov": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
+    },
+    "dependencies": {
+      "egg": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+      "egg-view-nunjucks": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+      "moment": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
+    },
+    "devDependencies": {
+      "egg-bin": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+      "egg-mock": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
+>>>>>>> ecbd0a541f93ca2631ba535cc9d4c923c0d01077
     }
   },
   "baseDir": "C:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
@@ -213,6 +264,7 @@
     "onerror": "C:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
   },
   "logger": {
+<<<<<<< HEAD
     "dir": "C:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
     "encoding": "C:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
     "env": "C:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
@@ -229,6 +281,22 @@
       "consoleLevel": "C:\\code\\study\\egg\\node_modules\\egg\\config\\config.local.js"
     },
     "allowDebugAtProd": "C:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
+=======
+    "dir": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+    "encoding": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+    "env": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+    "level": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+    "consoleLevel": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.unittest.js",
+    "disableConsoleAfterReady": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+    "outputJSON": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+    "buffer": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.unittest.js",
+    "appLogName": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+    "coreLogName": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+    "agentLogName": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+    "errorLogName": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+    "coreLogger": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
+    "allowDebugAtProd": "D:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js"
+>>>>>>> ecbd0a541f93ca2631ba535cc9d4c923c0d01077
   },
   "httpclient": {
     "enableDNSCache": "C:\\code\\study\\egg\\node_modules\\egg\\config\\config.default.js",
