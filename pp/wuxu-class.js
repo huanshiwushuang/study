@@ -1,13 +1,19 @@
 const moment = require('moment');
 
 class PageUtil {
-    constructor ({ pageHandle, url }) {
-        this.pageHandle = pageHandle;
+    constructor ({ url, pageHandle, browser } = {  }) {
+        this.log('constructor start');
+
         this.url = url;
-        this.log('准备执行-构造函数');
+        this.pageHandle = pageHandle;
+        this.browser = browser;
+    }
+    init () {
+        this.log('init start');
     }
     async addJq () {
-        this.log('准备执行-addJq');
+        this.log('addJq start');
+
         await this.pageHandle.addScriptTag({
             url: 'https://cdn.bootcdn.net/ajax/libs/jquery/2.2.4/jquery.min.js'
         })
@@ -20,39 +26,68 @@ class PageUtil {
     }
 }
 class PageDbList extends PageUtil {
-    constructor ({ pageHandle, url }) {
-        super({ pageHandle, url });
+    constructor ({ url = '', pageHandle = null, browser }) {
+        super({ url, pageHandle, browser });
 
-        this.pageHandle = pageHandle;
         this.page = -1;
         this.list = [];
-        this.nextUrl = '';
+        this.nextElHandle = null;
     }
     async init () {
-        await this.pageHandle.goto(this.url);
-        await this.pageHandle.waitForSelector('header');
+        super.init();
+
+        if (this.nextElHandle) {
+            await this.nextElHandle.click();
+        } else if (this.url) {
+            this.pageHandle = await this.browser.newPage();
+            await this.pageHandle.goto(this.url);
+            // 点击引导
+            await page.click('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
+            await page.click('body > div.guide.list > div.content.step3 > div > div.dib.right > div.btns > button')
+        } else {
+            return this.log('没有下一页了~');
+        }
+        // 等待表格渲染完成
+        await this.pageHandle.waitForSelector('#app > div.main-content > div.layui-tab.layui-tab-brief.tabs > div > div > div > div.layui-table-box > div.layui-table-header');
+
+        // 添加 jq
         await this.addJq();
+
+        // 获取当前页码
         this.page = await this.pageHandle.evaluate(() => {
             return Promise.resolve(
                 jq('.layui-laypage-curr').text().trim()
             )
         });
+        // 获取当前 url
         this.url = await this.pageHandle.evaluate(() => {
             return Promise.resolve(
                 location.href
             )
         });
-        this.nextUrl = await this.getNextUrl();
+        // 获取表格数据
         this.list = await this.getListArray();
+        await this.initDetailElHandle();
+        // 获取下一页的 句柄
+        this.nextElHandle = await this.getNextElHandle();
+        // 
+    }
+    // 每一条数据，找到详情页的 elHandle
+    async initDetailElHandle () {
+        for (let item of this.list) {
+            item.detailElHandle = await this.pageHandle.$(`#app > div.main-content > div.layui-tab.layui-tab-brief.tabs > div > div > div > div.layui-table-box > div.layui-table-fixed.layui-table-fixed-l > div.layui-table-body > table [href="${item.detailHref}"]`);
+        }
     }
     // 获取表格数据
     async getListArray () {
         return await this.pageHandle.evaluate(() => {
-            var $table = jq('table#db-list-table');
-            var fieldName = [...$table.find('th')].map(item => {
+            var $headerTables = jq('.layui-table-header');
+            var $bodyTables = jq('.layui-table-body');
+
+            var fieldName = [...$headerTables.eq(0).find('th')].map(item => {
                 return $(item).text().trim();
             });
-            var $tds = $table.find('td');
+            var $tds = $bodyTables.eq(0).find('td');
             var arr = [];
             // 转换 td 为二维数组
             for (let i = 0, j = Math.ceil($tds.length / fieldName.length); i < j; i++) {
@@ -64,7 +99,7 @@ class PageDbList extends PageUtil {
                 item.forEach((ite, inde) => {
                     // 第一个字段，有 url
                     if (inde === 0) {
-                        obj.detailUrl = $(ite).find('a').prop('href');
+                        obj.detailHref = $(ite).find('a').attr('href');
                     }
                     obj[ fieldName[inde] ] = $(ite).text().trim();
                 })
@@ -72,31 +107,47 @@ class PageDbList extends PageUtil {
             }, []);
         })
     }
-    async getNextUrl () {
-        return await this.pageHandle.evaluate((page) => {
+    // 获取下一页的 elHandle
+    async getNextElHandle () {
+        return await this.pageHandle.evaluateHandle((page) => {
             var next = jq('.layui-laypage-limits').prev();
-            if (next.hasClass('layui-disabled') || page == 10) {
+            if (next.hasClass('layui-disabled')) {
                 return;
             }
-            return next.prop('href');
+            return next.get(0);
         }, this.page);
     }
 }
 class PageDbDetailZhuce extends PageUtil {
-    constructor ({ pageHandle, url }) {
-        super({ pageHandle, url })
+    constructor ({ pageHandle = null, url = '', browser, elHandle }) {
+        super({ pageHandle, url, browser })
 
+        this.elHandle = elHandle;
         this.title = '';
         this.basicInfo = {};
     }
     async init () {
-        await this.pageHandle.goto(this.url);
+        super.init();
+        await this.elHandle.click();
+        this.pageHandle = await new Promise((resolve) => {
+            this.browser.once('targetcreated', (target) => {
+                resolve(target.page());
+            })
+        })
         await this.pageHandle.waitForSelector('header');
         await this.addJq();
         this.title = await this.pageHandle.evaluate(() => {
             return Promise.resolve(jq('h1').text().replace(/\s/g, ''));
         });
         this.basicInfo = await this.getTableObject();
+        // 获取当前 url
+        this.url = await this.pageHandle.evaluate(() => {
+            return Promise.resolve(
+                location.href
+            )
+        });
+
+        await this.pageHandle.close();
     }
     async getTableObject () {
         return await this.pageHandle.evaluate(() => {

@@ -31,12 +31,27 @@ const {
     await pageLogin.init();
 
     // 
+    // var page = await browser.newPage();
+    await page.goto('https://www.wuxuwang.com/yaopinzc');
+    await page.waitForSelector('#app > div.main-content > div.layui-tab.layui-tab-brief.tabs > div > div > div > div.layui-table-box > div.layui-table-header')
+    await page.click('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
+    await page.click('body > div.guide.list > div.content.step3 > div > div.dib.right > div.btns > button')
+
+
+    var el = await page.$('#app > div.main-content > div.layui-tab.layui-tab-brief.tabs > div > div > div > div.layui-table-box > div.layui-table-fixed.layui-table-fixed-l > div.layui-table-body > table > tbody > tr:nth-child(10) > td:nth-child(1) > div > a');
+    console.log(el);
     pageDbDetailZhuce = new PageDbDetailZhuce({
-        pageHandle: page,
-        url: 'https://www.wuxuwang.com/yaopinzc/42682f29-a186-11ea-82b4-00163e0eafb3'
+        browser,
+        url: 'https://www.wuxuwang.com/yaopinzc',
+        elHandle: el
     });
+    // pageDbList = new PageDbList({
+    //     browser,
+    //     url: 'https://www.wuxuwang.com/yaopinzc'
+    // });
 
     await pageDbDetailZhuce.init();
 
-    console.log(pageDbDetailZhuce.basicInfo);
+    console.log(pageDbDetailZhuce);
+    
 })();
