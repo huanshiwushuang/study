@@ -1,7 +1,9 @@
+
 const moment = require('moment');
 
+
 class PageUtil {
-    constructor ({ url, pageHandle, browser } = {  }) {
+    constructor ({ url = '', pageHandle = null, browser }) {
         this.log('constructor start');
 
         this.url = url;
@@ -26,12 +28,12 @@ class PageUtil {
     }
 }
 class PageDbList extends PageUtil {
-    constructor ({ url = '', pageHandle = null, browser }) {
+    constructor ({ url = '', nextElHandle = null, pageHandle = null, browser }) {
         super({ url, pageHandle, browser });
 
         this.page = -1;
         this.list = [];
-        this.nextElHandle = null;
+        this.nextElHandle = nextElHandle;
     }
     async init () {
         super.init();
@@ -39,11 +41,16 @@ class PageDbList extends PageUtil {
         if (this.nextElHandle) {
             await this.nextElHandle.click();
         } else if (this.url) {
-            this.pageHandle = await this.browser.newPage();
+            // 如果没有 pageHandle
+            if (!this.pageHandle) {
+                this.pageHandle = await this.browser.newPage();
+            }
             await this.pageHandle.goto(this.url);
             // 点击引导
-            await page.click('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
-            await page.click('body > div.guide.list > div.content.step3 > div > div.dib.right > div.btns > button')
+            await this.pageHandle.waitForSelector('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
+            await this.pageHandle.click('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
+            await this.pageHandle.waitForSelector('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
+            await this.pageHandle.click('body > div.guide.list > div.content.step3 > div > div.dib.right > div.btns > button')
         } else {
             return this.log('没有下一页了~');
         }
@@ -119,8 +126,8 @@ class PageDbList extends PageUtil {
     }
 }
 class PageDbDetailZhuce extends PageUtil {
-    constructor ({ pageHandle = null, url = '', browser, elHandle }) {
-        super({ pageHandle, url, browser })
+    constructor ({ elHandle, browser }) {
+        super({ browser })
 
         this.elHandle = elHandle;
         this.title = '';
@@ -165,10 +172,11 @@ class PageDbDetailZhuce extends PageUtil {
     }
 }
 class PageLogin extends PageUtil {
-    constructor ({ pageHandle, url }) {
-        super({ pageHandle, url })
+    constructor ({ url, browser }) {
+        super({ url, browser })
     }
     async init () {
+        this.pageHandle = await this.browser.newPage();
         await this.pageHandle.goto(this.url);
         await this.pageHandle.waitForSelector('#app > div.main-content.pr > div.center-box.pa > div.left.fl.h');
         await this.addJq();

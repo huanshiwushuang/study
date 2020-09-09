@@ -11,52 +11,52 @@ const {
         executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
         headless: false,
         defaultViewport: null,
-        ignoreDefaultArgs: ['--enable-automation'],
-        slowMo: 200,
+        // ignoreDefaultArgs: ['--enable-automation'],
+        slowMo: 100,
         args: [
             // '--remote-debugging-port=9222',
-            // '--start-fullscreen',
+            '--start-maximized',
             '-no-sandbox',
         ]
     });
 
     
-    // class 定义-中转逻辑
-    var page = await browser.newPage();
-    // pageDbList = new PageDbList({
-    //     pageHandle: page,
-    //     url: 'https://www.wuxuwang.com/yaopinzc'
-    // });
-    // const datas = [];
-
     // 登录
     var pageLogin = new PageLogin({
-        pageHandle: page,
-        url: 'https://www.wuxuwang.com/login'
+        browser,
+        url: 'https://wuxuwang.com/login'
     });
     await pageLogin.init();
+    
 
     // 药品注册
     var pageDbList;
     // 药品注册详情
     var pageDbDetailZhuce;
+    // 数据存储
     const datas = [];
 
-    await exec('https://www.wuxuwang.com/yaopinzc');
-    async function exec(url) {
+    await exec({
+        url: 'https://wuxuwang.com/yaopinzc?page=48',
+        pageHandle: pageLogin.pageHandle,
+    });
+    async function exec({ url = '', nextElHandle, pageHandle }) {
         pageDbList = new PageDbList({
-            pageHandle: page,
-            url
+            url,
+            nextElHandle,
+            pageHandle,
+            browser,
         })
         pageDbList.log(`开始 list url：${pageDbList.url}`);
+
         await pageDbList.init();
         // pageDbList.list = pageDbList.list.slice(-1);
 
 
         for (let item of pageDbList.list) {
             pageDbDetailZhuce = new PageDbDetailZhuce({
-                pageHandle: page,
-                url: item.detailUrl
+                elHandle: item.detailElHandle,
+                browser,
             });
             pageDbDetailZhuce.log(`开始 detail url：${pageDbDetailZhuce.url}`);
             await pageDbDetailZhuce.init();
@@ -70,8 +70,12 @@ const {
 
         datas.push(pageDbList.list);
         // 下一页
-        if (pageDbList.nextUrl) {
-            exec(pageDbList.nextUrl);
+        if (pageDbList.nextElHandle) {
+            exec({
+                nextElHandle: pageDbList.nextElHandle,
+                pageHandle,
+                browser,
+            });
         } else {
             pageDbList.log('没有更多了')
         }
