@@ -1,5 +1,11 @@
-const PP = require('puppeteer-core');
+const pp = require('puppeteer-extra');
+const PuppeteerExtraPlugin = require('puppeteer-extra-plugin');
+const ppPluginStealth = require('puppeteer-extra-plugin-stealth')
 const moment = require('moment');
+
+
+// add stealth plugin and use defaults (all evasion techniques)
+pp.use(ppPluginStealth());
 
 class Util {
     log (log) {
@@ -116,7 +122,7 @@ class Page extends Util {
 
 module.exports = {
     launch: async options => {
-        let browser = await PP.launch(options);
+        let browser = await pp.launch(options);
         return new Browser({
             browser,
             options,
