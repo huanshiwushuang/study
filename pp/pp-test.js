@@ -1,12 +1,13 @@
 const PuppeteerExtra = require('puppeteer-extra');
 const PuppeteerExtraPluginGhCustom = require('./puppeteer-extra-plugin-gh-custom');
+const Axios = require('axios');
 
 PuppeteerExtra.use(PuppeteerExtraPluginGhCustom())
 
 PuppeteerExtra.launch({
     executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
     defaultViewport: null,
-    devtools: true,
+    // devtools: true,
     headless: false,
     args: [
         '--start-maximized',
@@ -16,10 +17,6 @@ PuppeteerExtra.launch({
     const page = await browser.newPage()
     await page.goto('https://www.wuxuwang.com')
 
-
-    process.on('SIGINT', function () {
-        browser.disconnect();
-        process.exit();
-    });
+    
 })
 
