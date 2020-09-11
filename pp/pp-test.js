@@ -1,42 +1,25 @@
-const PP = require('./gh-puppeteer-core');
+const PuppeteerExtra = require('puppeteer-extra');
+const PuppeteerExtraPluginGhCustom = require('./puppeteer-extra-plugin-gh-custom');
 
-(async () => {
-    const browser = await PP.launch({
-        executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
-        headless: false,
-        defaultViewport: null,
-        // ignoreDefaultArgs: ['--enable-automation'],
-        slowMo: 100,
-        args: [
-            // '--remote-debugging-port=9222',
-            '--start-maximized',
-            '-no-sandbox',
-        ]
-    })
+PuppeteerExtra.use(PuppeteerExtraPluginGhCustom())
 
-    // browser.evaluateOnNewDocument(() => {
-    //     delete Object.getPrototypeOf(navigator).webdriver;
-    // });
-    // browser.addScriptTag({
-    //     content: `
-    //         var _$ = $;
-    //     `
-    // })
-    // browser.addScriptTag({
-    //     url: 'https://cdn.bootcdn.net/ajax/libs/jquery/2.2.4/jquery.min.js'
-    // })
-    // browser.addScriptTag({
-    //     content: `
-    //         var jq = jQuery.noConflict();;
-    //         $ = _$;
-    //     `
-    // })
-    // browser.setBypassCSP(true);
-    // browser.setRequestInterception(true);
-    // browser.setDefaultRequestInterception(true);
+PuppeteerExtra.launch({
+    executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+    defaultViewport: null,
+    devtools: true,
+    headless: false,
+    args: [
+        '--start-maximized',
+        '--remote-debugging-port=9222'
+    ]
+}).then(async browser => {
+    const page = await browser.newPage()
+    await page.goto('https://www.wuxuwang.com')
 
-    var page = await browser.newPage();
 
-    await page.goto('https://www.baidu.com');
-})()
+    process.on('SIGINT', function () {
+        browser.disconnect();
+        process.exit();
+    });
+})
 

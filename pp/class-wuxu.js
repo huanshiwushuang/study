@@ -1,20 +1,23 @@
+const PuppeteerExtra = require('puppeteer-extra');
+const PuppeteerExtraPluginGhCustom = require('./puppeteer-extra-plugin-gh-custom');
 
 const moment = require('moment');
 
+// use plugin
+PuppeteerExtra.use(PuppeteerExtraPluginGhCustom());
 
-class PageUtil {
-    constructor ({ url = '', pageHandle = null, browser }) {
-        this.log('constructor start');
 
+class PageCommon {
+    constructor ({ browser }) {
         this.url = url;
         this.pageHandle = pageHandle;
         this.browser = browser;
     }
     init () {
-        this.log('init start');
+        this.debug('init start');
     }
     async addJq () {
-        this.log('addJq start');
+        this.debug('addJq start');
 
         await this.pageHandle.addScriptTag({
             url: 'https://cdn.bootcdn.net/ajax/libs/jquery/2.2.4/jquery.min.js'
@@ -23,11 +26,8 @@ class PageUtil {
             content: 'var jq = jQuery.noConflict();'
         })
     }
-    log (log) {
-        console.log(`${moment().format('YYYY-MM-DD HH:mm:ss')}-${this.constructor.name}-${log}`)
-    }
 }
-class PageDbList extends PageUtil {
+class PageDbList extends PageCommon {
     constructor ({ url = '', nextElHandle = null, pageHandle = null, browser }) {
         super({ url, pageHandle, browser });
 
@@ -52,7 +52,7 @@ class PageDbList extends PageUtil {
             await this.pageHandle.waitForSelector('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
             await this.pageHandle.click('body > div.guide.list > div.content.step3 > div > div.dib.right > div.btns > button')
         } else {
-            return this.log('没有下一页了~');
+            return this.debug('没有下一页了~');
         }
         // 等待表格渲染完成
         await this.pageHandle.waitForSelector('#app > div.main-content > div.layui-tab.layui-tab-brief.tabs > div > div > div > div.layui-table-box > div.layui-table-header');
@@ -125,7 +125,7 @@ class PageDbList extends PageUtil {
         }, this.page);
     }
 }
-class PageDbDetailZhuce extends PageUtil {
+class PageDbDetailZhuce extends PageCommon {
     constructor ({ elHandle, browser }) {
         super({ browser })
 
@@ -171,7 +171,7 @@ class PageDbDetailZhuce extends PageUtil {
         
     }
 }
-class PageLogin extends PageUtil {
+class Pagedebugin extends PageCommon {
     constructor ({ url, browser }) {
         super({ url, browser })
     }
@@ -193,12 +193,12 @@ class PageLogin extends PageUtil {
             this.pageHandle.click('#form-pwd > ul > li:nth-child(4) > div > button'),
             this.pageHandle.waitForSelector('header')
         ]);
-        this.log('登录成功');
+        this.debug('登录成功');
     }
 }
 
 module.exports = {
-    PageLogin,
+    Pagedebugin,
     PageDbList,
     PageDbDetailZhuce
 }

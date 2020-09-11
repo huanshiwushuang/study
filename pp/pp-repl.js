@@ -1,14 +1,16 @@
 // https://github.com/berstend/puppeteer-extra/tree/0dddb2e927d0222a7b1b96b0c683897bfb743e76/packages/puppeteer-extra-plugin-repl
-const pp = require('puppeteer-extra');
-const ppPluginRepl = require('puppeteer-extra-plugin-repl');
+const PuppeteerExtra = require('puppeteer-extra');
+const PuppeteerExtraPluginRepl = require('puppeteer-extra-plugin-repl');
+const PuppeteerExtraPluginGhCustom = require('./puppeteer-extra-plugin-gh-custom');
 
-pp.use(ppPluginRepl())
+PuppeteerExtra.use(PuppeteerExtraPluginRepl())
+PuppeteerExtra.use(PuppeteerExtraPluginGhCustom())
 
-pp.launch({
+PuppeteerExtra.launch({
     executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
     defaultViewport: null,
-    devtools: true,
-    headless: true,
+    // devtools: true,
+    headless: false,
     args: [
         '--start-maximized'
     ]
