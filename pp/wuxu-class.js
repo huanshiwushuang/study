@@ -1,30 +1,70 @@
-const PuppeteerExtra = require('puppeteer-extra');
-const PuppeteerExtraPluginGhCustom = require('./puppeteer-extra-plugin-gh-custom');
+// const PuppeteerExtra = require('puppeteer-extra');
+// const PuppeteerExtraPluginGhCustom = require('./puppeteer-extra-plugin-gh-custom');
 
 const moment = require('moment');
 
-// use plugin
-PuppeteerExtra.use(PuppeteerExtraPluginGhCustom());
-
 
 class PageCommon {
-    constructor ({ browser }) {
-        this.url = url;
-        this.pageHandle = pageHandle;
+    constructor ({ browser = null, pageHandle = null, url = '', data = {} }) {
         this.browser = browser;
+        this.pageHandle = pageHandle;
+        this.url = url;
+        this.data = data;
     }
-    init () {
-        this.debug('init start');
+    log (log) {
+        console.log(`${moment().format('YYYY-MM-DD HH:mm:ss')}-${this.constructor.name}-${log.toString()}`)
     }
-    async addJq () {
-        this.debug('addJq start');
+}
+class PageLogin extends PageCommon {
+    constructor ({ browser, pageHandle = null }) {
+        super({
+            browser,
+            pageHandle,
+            url: 'https://www.wuxuwang.com/login',
+        })
+    }
+    async create() {
+        this.pageHandle = this.pageHandle || (await this.browser.newPage());
 
-        await this.pageHandle.addScriptTag({
-            url: 'https://cdn.bootcdn.net/ajax/libs/jquery/2.2.4/jquery.min.js'
-        })
-        await this.pageHandle.addScriptTag({
-            content: 'var jq = jQuery.noConflict();'
-        })
+        await this.pageHandle.goto(this.url);
+        // 等待切换账号的按钮
+        await this.pageHandle.waitForSelector('#app > div.main-content.pr > div.center-box.pa > div.right.fl.h.tc > button');
+    }
+    async run () {
+        // 尝试登陆次数 3
+        let tryCount = 0;
+
+        while (tryCount < 3) {
+            await this.create();
+            await this.startLogin();
+            let isSuccess = await this.isLoginSuccess();
+            if (isSuccess) {
+                this.log('登陆成功');
+                break;
+            } else {
+                this.log(`登陆失败，第 ${tryCount+1} 次`);
+            }
+            tryCount++;
+        }
+    }
+    async startLogin() {
+        // 切换到账号密码登陆
+        await this.pageHandle.click('#app > div.main-content.pr > div.center-box.pa > div.right.fl.h.tc > button');
+        // 等待切换效果完成
+        await this.pageHandle.waitFor(1500);
+        // 输入账号
+        await this.pageHandle.type('#form-pwd > ul > li:nth-child(1) > div.input-box.phone > input[type=text]', '13709045820');
+        // 输入密码
+        await this.pageHandle.type('#form-pwd > ul > li:nth-child(2) > div > input[type=password]', '123123123');
+        // 点击登陆
+        await this.pageHandle.click('#form-pwd > ul > li:nth-child(4) > div > button')
+    }
+    async isLoginSuccess() {
+        await this.pageHandle.waitForNavigation();
+        await this.pageHandle.goto('https://www.wuxuwang.com');
+        let elHandle = await this.pageHandle.$('#app > header > div.fr > div.outer-ne > div > div.vip-icon');
+
+        return !!elHandle;
     }
 }
 class PageDbList extends PageCommon {
@@ -52,7 +92,7 @@ class PageDbList extends PageCommon {
             await this.pageHandle.waitForSelector('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
             await this.pageHandle.click('body > div.guide.list > div.content.step3 > div > div.dib.right > div.btns > button')
         } else {
-            return this.debug('没有下一页了~');
+            return this.log('没有下一页了~');
         }
         // 等待表格渲染完成
         await this.pageHandle.waitForSelector('#app > div.main-content > div.layui-tab.layui-tab-brief.tabs > div > div > div > div.layui-table-box > div.layui-table-header');
@@ -171,34 +211,10 @@ class PageDbDetailZhuce extends PageCommon {
         
     }
 }
-class Pagedebugin extends PageCommon {
-    constructor ({ url, browser }) {
-        super({ url, browser })
-    }
-    async init () {
-        this.pageHandle = await this.browser.newPage();
-        await this.pageHandle.goto(this.url);
-        await this.pageHandle.waitForSelector('#app > div.main-content.pr > div.center-box.pa > div.left.fl.h');
-        await this.addJq();
-        // 切换到输入账号密码
-        await (
-            await this.pageHandle.$('#app > div.main-content.pr > div.center-box.pa > div.right.fl.h.tc > button')
-        ).click();
-        await this.pageHandle.waitFor(1000);
 
-        // 输入账号密码登录
-        await this.pageHandle.type('#form-pwd > ul > li:nth-child(1) > div.input-box.phone > input[type=text]', '13709045820');
-        await this.pageHandle.type('#form-pwd > ul > li:nth-child(2) > div > input[type=password]', '123123123');
-        await Promise.all([
-            this.pageHandle.click('#form-pwd > ul > li:nth-child(4) > div > button'),
-            this.pageHandle.waitForSelector('header')
-        ]);
-        this.debug('登录成功');
-    }
-}
 
 module.exports = {
-    Pagedebugin,
+    PageLogin,
     PageDbList,
     PageDbDetailZhuce
 }

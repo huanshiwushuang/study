@@ -6,9 +6,6 @@ const { PuppeteerExtraPlugin } = require('puppeteer-extra-plugin');
 // 插件-防检测
 // https://www.npmjs.com/package/puppeteer-extra-plugin-stealth
 const PuppeteerExtraPluginStealth = require('puppeteer-extra-plugin-stealth');
-// 插件-资源拦截
-// https://www.npmjs.com/package/puppeteer-extra-plugin-block-resources
-const PuppeteerExtraPluginBlockResources = require('puppeteer-extra-plugin-block-resources');
 
 // 请求响应拦截 && 修改
 // https://www.npmjs.com/package/puppeteer-interceptor
@@ -34,9 +31,6 @@ const PuppeteerExtraPluginBlockResources = require('puppeteer-extra-plugin-block
 const { intercept, patterns, ERROR_REASON } = require('puppeteer-interceptor');
 
 PuppeteerExtra.use(PuppeteerExtraPluginStealth())
-PuppeteerExtra.use(PuppeteerExtraPluginBlockResources({
-    blockedTypes: new Set(['image', 'media', 'font', 'texttrack'])
-}))
 
 class PuppeteerExtraPluginGhCustom extends PuppeteerExtraPlugin {
     constructor (opts = {}) {
