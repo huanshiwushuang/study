@@ -1,3 +1,4 @@
+const Axios = require('axios');
 const PuppeteerExtra = require('puppeteer-extra');
 
 // 构造插件所需的父类
@@ -44,26 +45,31 @@ class PuppeteerExtraPluginGhCustom extends PuppeteerExtraPlugin {
         }
     }
     async onPageCreated(page) {
-        // 拦截所有 Document
-        intercept(page, patterns.Document('*'), {
+        await page.exposeFunction('setHasJq', (hasJq) => {
+            page.hasJq = hasJq;
+        })
+        await page.evaluateOnNewDocument(() => {
+            window.setHasJq(false);
+        })
+
+        // 拦截所有 Script，之所以不拦截 Document 是因为 click 打开的窗口 在 CDP 协议的 Fetch.requestPasued 事件中有 bug
+        intercept(page, patterns.Script('*'), {
             onInterception: ({ request, resourceType, responseStatusCode, responseHeaders }, { abort, fulfill }) => {
             },
-            onResponseReceived: ({ error = null, request, response }) => {
+            onResponseReceived: async ({ error = null, request, response }) => {
                 if (error) {
+                    this.debug(error)
                     return;
                 }
-                let contentType = response.headers.find(item => {
-                    return /content-type/i.test(item.name);
-                });
-                // 如果 Document 是 html
-                if (/text\/html/.test(contentType.value)) {
+                // jQuery 注入
+                if (!page.hasJq) {
+                    const res = await Axios.get('https://cdn.bootcdn.net/ajax/libs/jquery/2.2.4/jquery.min.js');
                     response.body = `
-                        <script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-                        <script>
-                            var jq = jQuery.noConflict();
-                        </script>
+                        ${res.data}
+                        var jq = jQuery.noConflict();
                         ${response.body}
                     `;
+                    page.hasJq = true;
                 }
                 return response;
             }
