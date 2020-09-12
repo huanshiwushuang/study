@@ -11,9 +11,9 @@ const {
     PageDbDetailZhuce
 } = require('./wuxu-class');
 
-PuppeteerExtra.use(PuppeteerExtraPluginBlockResources({
-    blockedTypes: new Set(['image', 'media', 'font'])
-}))
+// PuppeteerExtra.use(PuppeteerExtraPluginBlockResources({
+//     blockedTypes: new Set(['image', 'media', 'font'])
+// }))
 PuppeteerExtra.use(PuppeteerExtraPluginGhCustom());
 
 PuppeteerExtra.launch({
@@ -22,24 +22,26 @@ PuppeteerExtra.launch({
     defaultViewport: null,
     // ignoreDefaultArgs: ['--enable-automation'],
     // slowMo: 200,
-    devtools: true,
+    // devtools: true,
     args: [
         // '--remote-debugging-port=9222',
         // '-no-sandbox',
         '--start-maximized',
     ]
 }).then(async browser => {
-    let page = await browser.newPage();
-    await page.goto('https://www.baidu.com/');
-    // 点击-引导
-    // await page.waitForSelector('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
-    // await page.click('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
-    // await page.waitForSelector('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
-    // await page.click('body > div.guide.list > div.content.step3 > div > div.dib.right > div.btns > button')
+    // let page = await browser.newPage();
+    // await page.goto('https://www.baidu.com/');
+    // // 点击-引导
+    // // await page.waitForSelector('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
+    // // await page.click('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
+    // // await page.waitForSelector('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
+    // // await page.click('body > div.guide.list > div.content.step3 > div > div.dib.right > div.btns > button')
 
-    await page.click('#s-top-left > a:nth-child(5)');
-    await page.goto('http://www.qq.com');
-    return;
+    // await page.click('#s-top-left > a:nth-child(5)');
+    // await page.goto('http://www.wuxuwang.com');
+    // return;
+
+
     // 读取 cookie
     var store = fs.readFileSync('./wuxu-store.json');
     store = JSON.parse(store.toString() || '{}');
