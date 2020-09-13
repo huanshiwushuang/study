@@ -44,19 +44,70 @@ class PuppeteerExtraPluginGhCustom extends PuppeteerExtraPlugin {
         return {
         }
     }
+    get requirements() {
+        // 最后加载，等待 page load，然后注入 jq
+        return new Set(['runLast']);
+    }
     async onPageCreated(page) {
-        await page.exposeFunction('setHasJq', (hasJq) => {
-            page.hasJq = hasJq;
-        })
+        // await page.exposeFunction('setHasJq', (hasJq) => {
+        //     page.hasJq = hasJq;
+        // })
         await page.evaluateOnNewDocument(() => {
-            window.setHasJq(false);
+            alert(Object.keys(window));
         })
-        page.on('response', res => {
-            let contentType = res.headers()['content-type'];
-            if (contentType) {
 
+        page.on('domcontentloaded', async () => {
+            // 判断当前页面是否已有 requirejs
+            let hasRequirejs = await page.evaluate(() => {
+                return !!window.require;
+            })
+            // 
+            if (!hasRequirejs) {
+                try {
+                    await page.addScriptTag({
+                        url: 'https://cdn.bootcdn.net/ajax/libs/require.js/2.3.6/require.min.js'
+                    })
+                    await page.addScriptTag({
+                        content: `
+                            require.config({
+                                paths: {
+                                    jquery: ['https://cdn.bootcdn.net/ajax/libs/jquery/2.2.4/jquery.min.js']
+                                }
+                            })
+                        `,
+                    })
+                    await new Promise(() => {
+                        require(['jquery'], (jquery) => {
+                            window.jq = jquery;
+                        })
+                    })
+                    for (let execItem of window.execItem) {
+                        await execItem();
+                    }
+                } catch (e) {
+                    console.log(e);
+                }
             }
+            
         })
+
+        
+        // page.browser().on('targetchanged', target => {
+            
+        //     page.hasJq = false;
+        // })
+
+        // await Promise.all([
+        //     page.waitForNavigation(),
+        //     page.waitForSelector('body'),
+        // ])
+        
+
+        // page.on('response', res => {
+        //     if (!page.hasJq && /javascript/i.test(res.headers()['content-type'])) {
+                
+        //     }
+        // })
 
         // // 拦截所有 Script，之所以不拦截 Document 是因为 click 打开的窗口 在 CDP 协议的 Fetch.requestPasued 事件中有 bug
         // intercept(page, patterns.Script('*'), {

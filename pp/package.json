@@ -13,6 +13,7 @@
     "puppeteer-extra-plugin-block-resources": "^2.2.7",
     "puppeteer-extra-plugin-repl": "^2.2.8",
     "puppeteer-extra-plugin-stealth": "^2.6.1",
-    "puppeteer-interceptor": "^2.2.0"
+    "puppeteer-interceptor": "^2.2.0",
+    "puppeteer-proxy": "^2.1.1"
   }
 }

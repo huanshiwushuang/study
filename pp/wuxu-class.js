@@ -137,6 +137,7 @@ class PageLogin extends PageCommon {
     }
     async isLoginSuccess() {
         await this.pageHandle.goto('https://www.wuxuwang.com');
+        await this.pageHandle.waitForSelector('header');
         let elHandle = await this.pageHandle.$('#app > header > div.fr > div.outer-ne > div > div.vip-icon');
 
         return !!elHandle;
@@ -198,30 +199,36 @@ class PageDbList extends PageCommon {
     // 获取-表格数据
     async getListArray () {
         this.data.list = await this.pageHandle.evaluate(() => {
-            var $headerTables = jq('.layui-table-header');
-            var $bodyTables = jq('.layui-table-body');
+            return new Promise((resolve) => {
+                window.execQueue.push(() => {
+                    var $headerTables = jq('.layui-table-header');
+                    var $bodyTables = jq('.layui-table-body');
 
-            var fieldName = [...$headerTables.eq(0).find('th')].map(item => {
-                return $(item).text().trim();
-            });
-            var $tds = $bodyTables.eq(0).find('td');
-            var arr = [];
-            // 转换 td 为二维数组
-            for (let i = 0, j = Math.ceil($tds.length / fieldName.length); i < j; i++) {
-                arr.push([...$tds.slice(fieldName.length * i, fieldName.length * i + fieldName.length)]);
-            }
-            // 获取 td 值
-            return arr.reduce((sum, item) => {
-                let obj = {};
-                item.forEach((ite, inde) => {
-                    // 第一个字段，有 url
-                    if (inde === 0) {
-                        obj.detailHref = $(ite).find('a').attr('href');
+                    var fieldName = [...$headerTables.eq(0).find('th')].map(item => {
+                        return $(item).text().trim();
+                    });
+                    var $tds = $bodyTables.eq(0).find('td');
+                    var arr = [];
+                    // 转换 td 为二维数组
+                    for (let i = 0, j = Math.ceil($tds.length / fieldName.length); i < j; i++) {
+                        arr.push([...$tds.slice(fieldName.length * i, fieldName.length * i + fieldName.length)]);
                     }
-                    obj[ fieldName[inde] ] = $(ite).text().trim();
+                    // 获取 td 值
+                    let data = arr.reduce((sum, item) => {
+                        let obj = {};
+                        item.forEach((ite, inde) => {
+                            // 第一个字段，有 url
+                            if (inde === 0) {
+                                obj.detailHref = $(ite).find('a').attr('href');
+                            }
+                            obj[ fieldName[inde] ] = $(ite).text().trim();
+                        })
+                        return sum.push(obj) && sum;
+                    }, []);
+                    // 通知 nodejs 数据获取到了
+                    resolve(data);
                 })
-                return sum.push(obj) && sum;
-            }, []);
+            })
         })
     }
     // 获取-详情页的 elHandle
@@ -233,11 +240,16 @@ class PageDbList extends PageCommon {
     // 获取-下一页的 elHandle
     async getNextElHandle () {
         this.data.nextElHandle = await this.pageHandle.evaluateHandle(() => {
-            var next = jq('.layui-laypage-limits').prev();
-            if (next.hasClass('layui-disabled')) {
-                return;
-            }
-            return next.get(0);
+            return new Promise(resolve => {
+                window.execQueue.push(() => {
+                    var next = jq('.layui-laypage-limits').prev();
+                    if (next.hasClass('layui-disabled')) {
+                        return;
+                    }
+                    resolve(next.get(0));
+                })
+            })
+            
         });
     }
 }
@@ -276,22 +288,32 @@ class PageDbDetailZhuce extends PageCommon {
         await super.action(async () => {
             // 获取数据
             this.data.title = await this.pageHandle.evaluate(() => {
-                return Promise.resolve(jq('h1').text().replace(/\s/g, ''));
+                return new Promise(resolve => {
+                    window.execQueue.push(() => {
+                        resolve(
+                            jq('h1').text().replace(/\s/g, '')
+                        );
+                    })
+                })
             });
             await this.getTableObject();
         })
     }
     async getTableObject () {
         this.data.basicInfo = await this.pageHandle.evaluate(() => {
-            var $tds = jq('table td');
-            var arr = [];
-            for (let i = 0, j = $tds.length / 2; i < j; i += 2) {
-                arr.push([
-                    $tds.eq(i).text().trim(),
-                    $tds.eq(i+1).text().trim()
-                ])
-            }
-            return arr;
+            return new Promise((resolve) => {
+                window.execQueue.push(() => {
+                    var $tds = jq('table td');
+                    var arr = [];
+                    for (let i = 0, j = $tds.length / 2; i < j; i += 2) {
+                        arr.push([
+                            $tds.eq(i).text().trim(),
+                            $tds.eq(i+1).text().trim()
+                        ])
+                    }
+                    resolve(arr);
+                })
+            })
         })
         
     }
