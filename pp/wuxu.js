@@ -6,6 +6,7 @@ const PuppeteerExtraPluginBlockResources = require('puppeteer-extra-plugin-block
 // 插件-自定义
 const PuppeteerExtraPluginGhCustom = require('./puppeteer-extra-plugin-gh-custom');
 const {
+    PageCommon,
     PageLogin,
     PageDbList,
     PageDbDetailZhuce
@@ -14,32 +15,48 @@ const {
 // PuppeteerExtra.use(PuppeteerExtraPluginBlockResources({
 //     blockedTypes: new Set(['image', 'media', 'font'])
 // }))
-PuppeteerExtra.use(PuppeteerExtraPluginGhCustom());
+// PuppeteerExtra.use(PuppeteerExtraPluginGhCustom());
 
 PuppeteerExtra.launch({
     executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
     headless: false,
     defaultViewport: null,
     // ignoreDefaultArgs: ['--enable-automation'],
-    // slowMo: 200,
-    devtools: true,
+    slowMo: 200,
+    // devtools: true,
     args: [
         // '--remote-debugging-port=9222',
         // '-no-sandbox',
         '--start-maximized',
+        // '--proxy-server=http://127.0.0.1:8000'
     ]
 }).then(async browser => {
-    let page = await browser.newPage();
-    await page.goto('https://www.baidu.com/');
-    // 点击-引导
-    // await page.waitForSelector('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
-    // await page.click('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
-    // await page.waitForSelector('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
-    // await page.click('body > div.guide.list > div.content.step3 > div > div.dib.right > div.btns > button')
+    // let page = await browser.newPage();
+    // await page.goto('https://www.baidu.com/');
+    // // 点击-引导
+    // // await page.waitForSelector('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
+    // // await page.click('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
+    // // await page.waitForSelector('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
+    // // await page.click('body > div.guide.list > div.content.step3 > div > div.dib.right > div.btns > button')
 
-    await page.click('#s-top-left > a:nth-child(5)');
-    await page.goto('http://www.qq.com');
-    return;
+    // await page.click('#s-top-left > a:nth-child(5)');
+    // await page.goto('http://www.qq.com');
+
+    // let pageCommon = new PageCommon({
+    //     browser,
+    //     url: 'http://huaban.com/'
+    // })
+    // await pageCommon.create(async function () {
+    //     this.pageHandle = await this.browser.newPage();
+    //     await this.pageHandle.goto(this.url);
+    // })
+    // await pageCommon.action(async function () {
+    //     await this.pageHandle.click('#header > div > div > div.right-part > div:nth-child(2) > a');
+    //     // await page.goto('http://www.qq.com');
+    // })
+
+
+    // return;
 
 
     // 读取 cookie
@@ -61,33 +78,43 @@ PuppeteerExtra.launch({
             cookies: pageLogin.data.cookies
         })));
     }
+    const dataset = [];
     // 注册列表页
     exec({
         browser,
         pageHandle: pageLogin.pageHandle,
-        url: 'http://www.wuxuwang.com/yaopinzc',
+        url: 'http://www.wuxuwang.com/yaopinzc?page=3',
     })
-    async function exec(...options) {
-        let pageDbList = new PageDbList(...options);
+    async function exec({ browser, pageHandle, url, nextElHandle }) {
+        let pageDbList = new PageDbList({ browser, pageHandle, url, nextElHandle });
         await pageDbList.run();
+
         for (let item of pageDbList.data.list) {
             let pageDbDetailZhuce = new PageDbDetailZhuce({
+                openerPageHandle: pageDbList.pageHandle,
+                openerElSelector: item.detailElHandleSelector,
                 browser,
-                openerElHandle: item.detailElHandle,
             })
             await pageDbDetailZhuce.run();
             await pageDbDetailZhuce.pageHandle.close();
             
             item.detail = pageDbDetailZhuce.data;
         }
+        
+        dataset.push(pageDbList.data.list);
 
-        fs.writeFileSync('123.json', JSON.stringify(pageDbList.data.list), {
-            flag: 'a+'
-        })
-
-        console.log('写入完毕');
-
+        if (pageDbList.nextElHandle) {
+            exec({
+                browser,
+                pageHandle,
+                nextElHandle: pageDbList.nextElHandle
+            })
+        }
     }
+
+    fs.writeFileSync('123.json', JSON.stringify(dataset))
+
+    console.log('写入完毕');
 
     
     console.log(pageLogin.data);

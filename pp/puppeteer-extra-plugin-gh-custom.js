@@ -1,5 +1,9 @@
-const Axios = require('axios');
+// const Axios = require('axios');
+const httpProxy = require('http-proxy');
 const PuppeteerExtra = require('puppeteer-extra');
+const http = require('http');
+// const Koa = require('koa');
+// const app = new Koa();
 
 // 构造插件所需的父类
 // https://www.npmjs.com/package/puppeteer-extra-plugin
@@ -31,6 +35,9 @@ const PuppeteerExtraPluginStealth = require('puppeteer-extra-plugin-stealth');
 // }
 // const { intercept, patterns, ERROR_REASON } = require('puppeteer-interceptor');
 
+
+
+
 PuppeteerExtra.use(PuppeteerExtraPluginStealth())
 
 class PuppeteerExtraPluginGhCustom extends PuppeteerExtraPlugin {
@@ -42,54 +49,87 @@ class PuppeteerExtraPluginGhCustom extends PuppeteerExtraPlugin {
     }
     get defaults() {
         return {
+            proxyPort: 8000
         }
     }
-    get requirements() {
-        // 最后加载，等待 page load，然后注入 jq
-        return new Set(['runLast']);
+    // get requirements() {
+    //     // 最后加载，等待 page load，然后注入 jq
+    //     return new Set(['runLast']);
+    // }
+    // 插件注册之后，启动代理
+    onPluginRegistered () {
+        // 创建 http 代理
+        let proxy = httpProxy.createProxyServer({
+                target: 'http://localhost:9000',
+                selfHandleResponse: true
+                // selfHandleResponse: true,
+            });
+            proxy.on('proxyRes', function(proxyRes, req, res) {
+                var body = [];
+                proxyRes.on('data', function (chunk) {
+                    body.push(chunk);
+                });
+                proxyRes.on('end', function () {
+                    body = Buffer.concat(body).toString();
+                    console.log("res from proxied server:", body);
+                    res.end("my response to cli");
+                });
+            });
+            proxy.listen(this.opts.proxyPort);
+
+            http.createServer(function (req, res) {
+                res.writeHead(200, { 'Content-Type': 'text/plain' });
+                res.write('request successfully proxied!' + '\n' + JSON.stringify(req.headers, true, 2));
+                res.end();
+            }).listen(9000);
+
+            console.info(`已启动 http 代理服务器，监听本地端口：${this.opts.proxyPort}，请主动设置浏览器代理地址~`);
     }
     async onPageCreated(page) {
+        page.on('request', () => {
+            
+        })
         // await page.exposeFunction('setHasJq', (hasJq) => {
         //     page.hasJq = hasJq;
         // })
-        await page.evaluateOnNewDocument(() => {
-            alert(Object.keys(window));
-        })
+        // await page.evaluateOnNewDocument(() => {
+        //     alert(Object.keys(window));
+        // })
 
-        page.on('domcontentloaded', async () => {
-            // 判断当前页面是否已有 requirejs
-            let hasRequirejs = await page.evaluate(() => {
-                return !!window.require;
-            })
-            // 
-            if (!hasRequirejs) {
-                try {
-                    await page.addScriptTag({
-                        url: 'https://cdn.bootcdn.net/ajax/libs/require.js/2.3.6/require.min.js'
-                    })
-                    await page.addScriptTag({
-                        content: `
-                            require.config({
-                                paths: {
-                                    jquery: ['https://cdn.bootcdn.net/ajax/libs/jquery/2.2.4/jquery.min.js']
-                                }
-                            })
-                        `,
-                    })
-                    await new Promise(() => {
-                        require(['jquery'], (jquery) => {
-                            window.jq = jquery;
-                        })
-                    })
-                    for (let execItem of window.execItem) {
-                        await execItem();
-                    }
-                } catch (e) {
-                    console.log(e);
-                }
-            }
+        // page.on('domcontentloaded', async () => {
+        //     // 判断当前页面是否已有 requirejs
+        //     let hasRequirejs = await page.evaluate(() => {
+        //         return !!window.require;
+        //     })
+        //     // 
+        //     if (!hasRequirejs) {
+        //         try {
+        //             await page.addScriptTag({
+        //                 url: 'https://cdn.bootcdn.net/ajax/libs/require.js/2.3.6/require.min.js'
+        //             })
+        //             await page.addScriptTag({
+        //                 content: `
+        //                     require.config({
+        //                         paths: {
+        //                             jquery: ['https://cdn.bootcdn.net/ajax/libs/jquery/2.2.4/jquery.min']
+        //                         }
+        //                     })
+        //                 `,
+        //             })
+        //             await new Promise(() => {
+        //                 require(['jquery'], (jquery) => {
+        //                     window.jq = jquery;
+        //                 })
+        //             })
+        //             for (let execItem of window.execItem) {
+        //                 await execItem();
+        //             }
+        //         } catch (e) {
+        //             console.log(e);
+        //         }
+        //     }
             
-        })
+        // })
 
         
         // page.browser().on('targetchanged', target => {

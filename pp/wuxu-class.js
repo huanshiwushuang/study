@@ -24,7 +24,7 @@ class PageCommon {
     }
     async run(func) {
         await this.beforeRun();
-        await func();
+        await func.bind(this)();
         await this.afterRun();
     }
     async afterRun() {
@@ -36,7 +36,7 @@ class PageCommon {
     }
     async create(func) {
         await this.beforeCreate();
-        await func();
+        await func.bind(this)();
         await this.afterCreate();
     }
     async afterCreate () {
@@ -44,10 +44,24 @@ class PageCommon {
 
         // 获取当前 url
         this.relUrl = await this.pageHandle.evaluate(() => {
-            return Promise.resolve(
-                location.href
-            )
+            return location.href
         });
+        // 注入 require
+        // await this.pageHandle.addScriptTag({
+        //     url: 'https://cdn.bootcdn.net/ajax/libs/require.js/2.3.6/require.min.js'
+        // });
+        // 注入 jquery
+        let hasJq = await this.pageHandle.evaluate(() => {
+            if (window.jQuery) {
+                window.jq = jQuery
+                return true;
+            }
+        });
+        if (!hasJq) {
+            await this.pageHandle.addScriptTag({
+                url: 'https://cdn.bootcdn.net/ajax/libs/jquery/2.2.4/jquery.min.js'
+            })
+        }
     }
 
     async beforeAction() {
@@ -55,15 +69,15 @@ class PageCommon {
     }
     async action(func) {
         await this.beforeAction();
-        await func();
+        await func.bind(this)()
         await this.afterAction();
     }
     async afterAction() {
         this.log('afterAction');
     }
-    
+    // ---end---在 page 中待执行的方法
     log (log) {
-        console.log(`${moment().format('YYYY-MM-DD HH:mm:ss')}-${this.constructor.name}-${log.toString()}`)
+        console.log(`${moment().format('YYYY-MM-DD HH:mm:ss')}-${this.constructor.name}-${log.toString()}-${this.relUrl}`)
     }
 }
 class PageLogin extends PageCommon {
@@ -179,15 +193,20 @@ class PageDbList extends PageCommon {
             }
             await this.pageHandle.$('#app > div.main-content > div.layui-tab.layui-tab-brief.tabs > div > div > div > div.layui-table-box > div.layui-table-header')
         })
-
     }
     async action() {
         await super.action(async () => {
             // 点击-引导
-            await this.pageHandle.waitForSelector('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
-            await this.pageHandle.click('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
-            await this.pageHandle.waitForSelector('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
-            await this.pageHandle.click('body > div.guide.list > div.content.step3 > div > div.dib.right > div.btns > button')
+            try {
+                await this.pageHandle.waitForSelector('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button', {
+                    timeout: 2000
+                })
+                await this.pageHandle.click('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
+                await this.pageHandle.waitForSelector('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
+                await this.pageHandle.click('body > div.guide.list > div.content.step3 > div > div.dib.right > div.btns > button')
+            } catch (e) {
+                console.log(e);
+            }
             // 获取-表格数据
             await this.getListArray();
             // 获取-详情页 elHandle
@@ -199,62 +218,51 @@ class PageDbList extends PageCommon {
     // 获取-表格数据
     async getListArray () {
         this.data.list = await this.pageHandle.evaluate(() => {
-            return new Promise((resolve) => {
-                window.execQueue.push(() => {
-                    var $headerTables = jq('.layui-table-header');
-                    var $bodyTables = jq('.layui-table-body');
+            var $headerTables = jq('.layui-table-header');
+            var $bodyTables = jq('.layui-table-body');
 
-                    var fieldName = [...$headerTables.eq(0).find('th')].map(item => {
-                        return $(item).text().trim();
-                    });
-                    var $tds = $bodyTables.eq(0).find('td');
-                    var arr = [];
-                    // 转换 td 为二维数组
-                    for (let i = 0, j = Math.ceil($tds.length / fieldName.length); i < j; i++) {
-                        arr.push([...$tds.slice(fieldName.length * i, fieldName.length * i + fieldName.length)]);
+            var fieldName = [...$headerTables.eq(0).find('th')].map(item => {
+                return $(item).text().trim();
+            });
+            var $tds = $bodyTables.eq(0).find('td');
+            var arr = [];
+            // 转换 td 为二维数组
+            for (let i = 0, j = Math.ceil($tds.length / fieldName.length); i < j; i++) {
+                arr.push([...$tds.slice(fieldName.length * i, fieldName.length * i + fieldName.length)]);
+            }
+            // 获取 td 值
+            return arr.reduce((sum, item) => {
+                let obj = {};
+                item.forEach((ite, inde) => {
+                    // 第一个字段，有 url
+                    if (inde === 0) {
+                        obj.detailHref = $(ite).find('a').attr('href');
                     }
-                    // 获取 td 值
-                    let data = arr.reduce((sum, item) => {
-                        let obj = {};
-                        item.forEach((ite, inde) => {
-                            // 第一个字段，有 url
-                            if (inde === 0) {
-                                obj.detailHref = $(ite).find('a').attr('href');
-                            }
-                            obj[ fieldName[inde] ] = $(ite).text().trim();
-                        })
-                        return sum.push(obj) && sum;
-                    }, []);
-                    // 通知 nodejs 数据获取到了
-                    resolve(data);
+                    obj[ fieldName[inde] ] = $(ite).text().trim();
                 })
-            })
+                return sum.push(obj) && sum;
+            }, []);
         })
     }
     // 获取-详情页的 elHandle
     async getDetailElHandle () {
         for (let item of this.data.list) {
-            item.detailElHandle = await this.pageHandle.$(`#app > div.main-content > div.layui-tab.layui-tab-brief.tabs > div > div > div > div.layui-table-box > div.layui-table-fixed.layui-table-fixed-l > div.layui-table-body > table [href="${item.detailHref}"]`);
+            item.detailElHandleSelector = `#app > div.main-content > div.layui-tab.layui-tab-brief.tabs > div > div > div > div.layui-table-box > div.layui-table-fixed.layui-table-fixed-l > div.layui-table-body > table [href="${item.detailHref}"]`;
         }
     }
     // 获取-下一页的 elHandle
     async getNextElHandle () {
-        this.data.nextElHandle = await this.pageHandle.evaluateHandle(() => {
-            return new Promise(resolve => {
-                window.execQueue.push(() => {
-                    var next = jq('.layui-laypage-limits').prev();
-                    if (next.hasClass('layui-disabled')) {
-                        return;
-                    }
-                    resolve(next.get(0));
-                })
-            })
-            
+        this.nextElHandle = await this.pageHandle.evaluateHandle(() => {
+            var next = jq('.layui-laypage-limits').prev();
+            if (next.hasClass('layui-disabled') || $('.layui-laypage-curr').text() >= 10) {
+                return;
+            }
+            return next.get(0);
         });
     }
 }
 class PageDbDetailZhuce extends PageCommon {
-    constructor ({ browser, openerElHandle }) {
+    constructor ({ browser, openerElSelector, openerPageHandle }) {
         super({
             data: {
                 title: '',
@@ -262,7 +270,8 @@ class PageDbDetailZhuce extends PageCommon {
             },
             browser
         })
-        this.openerElHandle = openerElHandle;
+        this.openerElSelector = openerElSelector;
+        this.openerPageHandle = openerPageHandle;
     }
     async run() {
         await super.run(async () => {
@@ -273,7 +282,7 @@ class PageDbDetailZhuce extends PageCommon {
     async create() {
         await super.create(async () => {
             // 点击打开窗口
-            await this.openerElHandle.click();
+            await this.openerPageHandle.click(this.openerElSelector);
             // 获取 page
             this.pageHandle = await new Promise((resolve) => {
                 this.browser.once('targetcreated', (target) => {
@@ -288,38 +297,29 @@ class PageDbDetailZhuce extends PageCommon {
         await super.action(async () => {
             // 获取数据
             this.data.title = await this.pageHandle.evaluate(() => {
-                return new Promise(resolve => {
-                    window.execQueue.push(() => {
-                        resolve(
-                            jq('h1').text().replace(/\s/g, '')
-                        );
-                    })
-                })
+                return jq('h1').text().replace(/\s/g, '')
             });
             await this.getTableObject();
         })
     }
     async getTableObject () {
         this.data.basicInfo = await this.pageHandle.evaluate(() => {
-            return new Promise((resolve) => {
-                window.execQueue.push(() => {
-                    var $tds = jq('table td');
-                    var arr = [];
-                    for (let i = 0, j = $tds.length / 2; i < j; i += 2) {
-                        arr.push([
-                            $tds.eq(i).text().trim(),
-                            $tds.eq(i+1).text().trim()
-                        ])
-                    }
-                    resolve(arr);
-                })
-            })
+            var $tds = jq('table td');
+            var arr = [];
+            for (let i = 0, j = $tds.length / 2; i < j; i += 2) {
+                arr.push([
+                    $tds.eq(i).text().trim(),
+                    $tds.eq(i+1).text().trim()
+                ])
+            }
+            return arr;
         })
         
     }
 }
 
 module.exports = {
+    PageCommon,
     PageLogin,
     PageDbList,
     PageDbDetailZhuce
