@@ -28,7 +28,7 @@ PuppeteerExtra.launch({
         // '--remote-debugging-port=9222',
         // '-no-sandbox',
         '--start-maximized',
-        // '--proxy-server=http://127.0.0.1:8000'
+        '--proxy-server=http://60.216.101.46:32868'
     ]
 }).then(async browser => {
     // let page = await browser.newPage();
@@ -56,8 +56,7 @@ PuppeteerExtra.launch({
     // })
 
 
-    // return;
-
+    return;
 
     // 读取 cookie
     var store = fs.readFileSync('./wuxu-store.json');
