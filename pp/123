@@ -1,1 +1,67 @@
-{ abort: [Function: abort], fulfill: [Function: fulfill] }
+http://www.baidu.com/
+{ request:
+   { method: 'GET',
+     url: 'http://www.baidu.com/',
+     header:
+      { host: 'www.baidu.com',
+        'proxy-connection': 'keep-alive',
+        'upgrade-insecure-requests': '1',
+        'user-agent':
+         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36',
+        'accept-language': 'en-US,en;q=0.9',
+        accept:
+         'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+        'accept-encoding': 'gzip, deflate' } },
+  response: { status: 404, message: 'Not Found', header: {} },
+  app: { subdomainOffset: 2, proxy: false, env: 'development' },
+  originalUrl: 'http://www.baidu.com/',
+  req: '<original node req>',
+  res: '<original node res>',
+  socket: '<original node socket>' }
+++++
+[Function: bound dispatch]
+{ request:
+   { method: 'GET',
+     url: 'http://www.baidu.com/favicon.ico',
+     header:
+      { host: 'www.baidu.com',
+        'proxy-connection': 'keep-alive',
+        'accept-language': 'en-US,en;q=0.9',
+        'user-agent':
+         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36',
+        accept: 'image/avif,image/webp,image/apng,image/*,*/*;q=0.8',
+        referer: 'http://www.baidu.com/',
+        'accept-encoding': 'gzip, deflate' } },
+  response: { status: 404, message: 'Not Found', header: {} },
+  app: { subdomainOffset: 2, proxy: false, env: 'development' },
+  originalUrl: 'http://www.baidu.com/favicon.ico',
+  req: '<original node req>',
+  res: '<original node res>',
+  socket: '<original node socket>' }
+++++
+[Function: bound dispatch]
+{ request:
+   { method: 'POST',
+     url:
+      'http://update.googleapis.com/service/update2/json?cup2key=10:1152370301&cup2hreq=50bab020a15b0cdbab3d110933b5f51fb906ea7b21e1757cbe2cf41aee71c052',
+     header:
+      { host: 'update.googleapis.com',
+        'proxy-connection': 'keep-alive',
+        'content-length': '2642',
+        'x-goog-update-appid':
+         'ihnlcenocehgdaegdmhbidjhnhdchfmm,mimojjlkmoijpicakmndhoigimigcmbb,oimompecagnajdejgnnjijobebaeigek,llkgjffcdpffmhiakmfcdcblohccpfmo,giekcmmlnklenlaomppkphknjmnnpneh,khaoiebndkojlmppeemjhbpbandiljpe,jflookgnkcckhobaglndicnbbgbonegd,aemomkdncapdnfajjbbcbdebjljbpmpj,cmahhnpholdijhjokonmfdjbfmklppij,gcmjkmgdlgnkkcocmoeiminaijmmjnii,hfnkpimlhhgieaddgfemjhofmfblmnib,ggkkehgbnfjpeggfpleeakpidbkibbmn,hnimpnehoodheedghdeeijklkeaacbdc,gkmgaooipdjhmangpemjhigmamcehddo,ehgidpndbllacpjalkiimkbadgjfnnmc,bklopemakmnopmghhmccadeonafabnal',
+        'x-goog-update-interactivity': 'bg',
+        'x-goog-update-updater': 'chrome-85.0.4183.102',
+        'content-type': 'application/json',
+        'user-agent':
+         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36',
+        'accept-encoding': 'gzip, deflate' } },
+  response: { status: 404, message: 'Not Found', header: {} },
+  app: { subdomainOffset: 2, proxy: false, env: 'development' },
+  originalUrl:
+   'http://update.googleapis.com/service/update2/json?cup2key=10:1152370301&cup2hreq=50bab020a15b0cdbab3d110933b5f51fb906ea7b21e1757cbe2cf41aee71c052',
+  req: '<original node req>',
+  res: '<original node res>',
+  socket: '<original node socket>' }
+++++
+[Function: bound dispatch]

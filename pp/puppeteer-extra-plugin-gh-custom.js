@@ -1,9 +1,10 @@
 // const Axios = require('axios');
 const httpProxy = require('http-proxy');
 const PuppeteerExtra = require('puppeteer-extra');
+// const { proxyRequest } = require('puppeteer-proxy');
 const http = require('http');
-// const Koa = require('koa');
-// const app = new Koa();
+const Koa = require('koa');
+const app = new Koa();
 
 // 构造插件所需的父类
 // https://www.npmjs.com/package/puppeteer-extra-plugin
@@ -49,7 +50,7 @@ class PuppeteerExtraPluginGhCustom extends PuppeteerExtraPlugin {
     }
     get defaults() {
         return {
-            proxyPort: 8000
+            proxyPort: 9000
         }
     }
     // get requirements() {
@@ -59,36 +60,62 @@ class PuppeteerExtraPluginGhCustom extends PuppeteerExtraPlugin {
     // 插件注册之后，启动代理
     onPluginRegistered () {
         // 创建 http 代理
-        let proxy = httpProxy.createProxyServer({
-                target: 'http://localhost:9000',
-                selfHandleResponse: true
-                // selfHandleResponse: true,
-            });
-            proxy.on('proxyRes', function(proxyRes, req, res) {
-                var body = [];
-                proxyRes.on('data', function (chunk) {
-                    body.push(chunk);
-                });
-                proxyRes.on('end', function () {
-                    body = Buffer.concat(body).toString();
-                    console.log("res from proxied server:", body);
-                    res.end("my response to cli");
-                });
-            });
-            proxy.listen(this.opts.proxyPort);
+        // return;
+        // let proxy = httpProxy.createProxyServer({
+        //         target: 'http://127.0.0.1:9000',
+        //         selfHandleResponse: true
+        //     });
+        //     proxy.on('proxyRes', function(proxyRes, req, res) {
+        //         var body = [];
+        //         proxyRes.on('data', function (chunk) {
+        //             body.push(chunk);
+        //         });
+        //         proxyRes.on('end', function () {
+        //             body = Buffer.concat(body).toString();
+        //             console.log("res from proxied server:", body);
+        //             res.end("my response to cli");
+        //         });
+        //     });
+        //     proxy.listen(this.opts.proxyPort);
 
-            http.createServer(function (req, res) {
-                res.writeHead(200, { 'Content-Type': 'text/plain' });
-                res.write('request successfully proxied!' + '\n' + JSON.stringify(req.headers, true, 2));
-                res.end();
-            }).listen(9000);
 
-            console.info(`已启动 http 代理服务器，监听本地端口：${this.opts.proxyPort}，请主动设置浏览器代理地址~`);
+            app.use(async (ctx, next) => {
+                console.log(ctx);
+                console.log('++++');
+                console.log(next);
+                ctx.body = 'Hello World';
+            });
+            app.listen(this.opts.proxyPort);
+
+            
+
+            // http.createServer(function (req, res) {
+
+            //     console.log(req);
+            //     res.writeHead(200, { 'Content-Type': 'text/plain' });
+            //     res.end('123');
+            //     // req.respond = function () {
+            //     //     console.log(arguments);
+
+            //     // }
+
+            //     // proxyRequest({
+            //     //     page,
+            //     //     proxyUrl: 'http://127.0.0.1:8888',
+            //     //     request: req,
+            //     // });
+
+            //     // res.writeHead(200, { 'Content-Type': 'text/plain' });
+            //     // res.write('request successfully proxied!' + '\n' + JSON.stringify(req.headers, true, 2));
+                
+            // }).listen(9000);
+
+            // console.info(`已启动 http 代理服务器，监听本地端口：${this.opts.proxyPort}，请主动设置浏览器代理地址~`);
     }
     async onPageCreated(page) {
-        page.on('request', () => {
-            
-        })
+        // page.on('request', (request) => {
+        //     console.log(request.constructor);
+        // })
         // await page.exposeFunction('setHasJq', (hasJq) => {
         //     page.hasJq = hasJq;
         // })
@@ -149,27 +176,22 @@ class PuppeteerExtraPluginGhCustom extends PuppeteerExtraPlugin {
         //     }
         // })
 
-        // // 拦截所有 Script，之所以不拦截 Document 是因为 click 打开的窗口 在 CDP 协议的 Fetch.requestPasued 事件中有 bug
-        // intercept(page, patterns.Script('*'), {
-        //     onInterception: ({ request, resourceType, responseStatusCode, responseHeaders }, { abort, fulfill }) => {
-        //     },
-        //     onResponseReceived: async ({ error = null, request, response }) => {
-        //         if (error) {
-        //             this.debug(error)
-        //             return;
-        //         }
-        //         // jQuery 注入
-        //         if (!page.hasJq) {
-        //             const res = await Axios.get('https://cdn.bootcdn.net/ajax/libs/jquery/2.2.4/jquery.min.js');
-        //             response.body = `
-        //                 ${res.data}
-        //                 var jq = jQuery.noConflict();
-        //                 ${response.body}
-        //             `;
-        //             page.hasJq = true;
-        //         }
-        //         return response;
-        //     }
+        // // 拦截所有 Scriptx
+        //     //         this.debug(error)
+        //     //         return;
+        //     //     }
+        //     //     // jQuery 注入
+        //     //     if (!page.hasJq) {
+        //     //         const res = await Axios.get('https://cdn.bootcdn.net/ajax/libs/jquery/2.2.4/jquery.min.js');
+        //     //         response.body = `
+        //     //             ${res.data}
+        //     //             var jq = jQuery.noConflict();
+        //     //             ${response.body}
+        //     //         `;
+        //     //         page.hasJq = true;
+        //     //     }
+        //     //     return response;
+        //     // }
         // });
     }
 }

@@ -28,19 +28,28 @@ PuppeteerExtra.launch({
         // '--remote-debugging-port=9222',
         // '-no-sandbox',
         '--start-maximized',
-        '--proxy-server=http://60.216.101.46:32868'
+        // '--proxy-server=http://60.216.101.46:32868'
     ]
 }).then(async browser => {
-    // let page = await browser.newPage();
-    // await page.goto('https://www.baidu.com/');
+    let page = await browser.newPage();
+    let target = page.target();
+    let cdp = await target.createCDPSession();
+    await cdp.send('Page.enable');
+    await cdp.on('Page.windowOpen', (a) => {
+        console.log(a, b, c, d);
+    })
+    await cdp.on('Page.frameRequestedNavigation', (a, b, c, d) => {
+        console.log(a, b, c, d);
+    })
+    await page.goto('https://www.baidu.com/');
     // // 点击-引导
     // // await page.waitForSelector('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
     // // await page.click('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
     // // await page.waitForSelector('body > div.guide.list > div.content.step2 > div > div.dib.right > div.btns > button')
     // // await page.click('body > div.guide.list > div.content.step3 > div > div.dib.right > div.btns > button')
 
-    // await page.click('#s-top-left > a:nth-child(5)');
-    // await page.goto('http://www.qq.com');
+    await page.click('#s-top-left > a:nth-child(5)');
+    await page.goto('http://www.qq.com');
 
     // let pageCommon = new PageCommon({
     //     browser,
