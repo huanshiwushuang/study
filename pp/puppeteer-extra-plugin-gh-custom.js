@@ -1,9 +1,13 @@
 // const Axios = require('axios');
-const httpProxy = require('http-proxy');
+// const httpProxy = require('http-proxy');
+const httpProxyMiddleware = require('http-proxy-middleware');
 const PuppeteerExtra = require('puppeteer-extra');
 // const { proxyRequest } = require('puppeteer-proxy');
 const http = require('http');
+
+// const proxy = require('koa-server-http-proxy')
 const Koa = require('koa');
+const Koa2Connect = require('koa2-connect')
 const app = new Koa();
 
 // 构造插件所需的父类
@@ -62,7 +66,7 @@ class PuppeteerExtraPluginGhCustom extends PuppeteerExtraPlugin {
         // 创建 http 代理
         // return;
         // let proxy = httpProxy.createProxyServer({
-        //         target: 'http://127.0.0.1:9000',
+        //         // target: 'http://127.0.0.1:9000',
         //         selfHandleResponse: true
         //     });
         //     proxy.on('proxyRes', function(proxyRes, req, res) {
@@ -72,19 +76,15 @@ class PuppeteerExtraPluginGhCustom extends PuppeteerExtraPlugin {
         //         });
         //         proxyRes.on('end', function () {
         //             body = Buffer.concat(body).toString();
-        //             console.log("res from proxied server:", body);
-        //             res.end("my response to cli");
+        //             res.end(body);
         //         });
         //     });
-        //     proxy.listen(this.opts.proxyPort);
 
-
-            app.use(async (ctx, next) => {
-                console.log(ctx);
-                console.log('++++');
-                console.log(next);
-                ctx.body = 'Hello World';
-            });
+            app.use(
+                Koa2Connect(
+                    httpProxyMiddleware
+                )
+            );
             app.listen(this.opts.proxyPort);
 
             

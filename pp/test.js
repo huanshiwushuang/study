@@ -191,7 +191,7 @@ PuppeteerExtra.launch({
     // // })
     
 
-    await page.goto('http://www.baidu.com/');
+    await page.goto('http://www.baidu.com/a/b/c/d?e=1&e=2&f=2#gg');
     // // await page.waitForSelector('#s-top-left > a:nth-child(5)');
     // // await page.click('#s-top-left > a:nth-child(5)');
     
