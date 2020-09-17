@@ -1,83 +1,178 @@
-{
-  host: 'www.baidu.com',
-  'proxy-connection': 'keep-alive',
+[HPM] Proxy created: /  -> http://127.0.0.1:8000
+/a/b/c/d?e=1&e=2&f=2
+http://127.0.0.1:8000
+/a/b/c/d?e=1&e=2&f=2
+{ 'accept-encoding': 'gzip, deflate',
+  accept:
+   'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  'accept-language': 'en-US,en;q=0.9',
+  'user-agent':
+   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36',
   'upgrade-insecure-requests': '1',
-  'user-agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36',
-  'accept-language': 'en-US,en;q=0.9',
-  accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-  'accept-encoding': 'gzip, deflate'
-}
-GET
-http://www.baidu.com/a/b/c/d?e=1&e=2&f=2
-http://www.baidu.com/a/b/c/d?e=1&e=2&f=2
-http://www.baidu.com
-http://www.baidu.com/a/b/c/d?e=1&e=2&f=2
+  'proxy-connection': 'keep-alive',
+  host: '127.0.0.1:8000',
+  connection: 'close' }
+127.0.0.1:8000
 /a/b/c/d
-[Object: null prototype] { e: [ '1', '2' ], f: '2' }
 e=1&e=2&f=2
-www.baidu.com
-www.baidu.com
-false
-true
-http
-false
-::ffff:127.0.0.1
-[]
-[ 'www' ]
-{
-  host: 'www.baidu.com',
-  'proxy-connection': 'keep-alive',
-  'accept-language': 'en-US,en;q=0.9',
-  'user-agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36',
-  accept: 'image/avif,image/webp,image/apng,image/*,*/*;q=0.8',
-  referer: 'http://www.baidu.com/a/b/c/d?e=1&e=2&f=2',
-  'accept-encoding': 'gzip, deflate'
-}
 GET
-http://www.baidu.com/favicon.ico
-http://www.baidu.com/favicon.ico
-http://www.baidu.com
-http://www.baidu.com/favicon.ico
-/favicon.ico
-[Object: null prototype] {}
+http
 
-www.baidu.com
-www.baidu.com
-false
-true
-http
-false
-::ffff:127.0.0.1
-[]
-[ 'www' ]
-{
-  host: 'update.googleapis.com',
+[HPM] Proxy created: /  -> http://127.0.0.1:8000
+/favicon.ico
+http://127.0.0.1:8000
+/favicon.ico
+{ 'accept-encoding': 'gzip, deflate',
+  referer: 'http://www.baidu.com/a/b/c/d?e=1&e=2&f=2',
+  accept: 'image/avif,image/webp,image/apng,image/*,*/*;q=0.8',
+  'user-agent':
+   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36',
+  'accept-language': 'en-US,en;q=0.9',
   'proxy-connection': 'keep-alive',
-  'content-length': '2659',
-  'x-goog-update-appid': 'ihnlcenocehgdaegdmhbidjhnhdchfmm,mimojjlkmoijpicakmndhoigimigcmbb,oimompecagnajdejgnnjijobebaeigek,hnimpnehoodheedghdeeijklkeaacbdc,cmahhnpholdijhjokonmfdjbfmklppij,hfnkpimlhhgieaddgfemjhofmfblmnib,gcmjkmgdlgnkkcocmoeiminaijmmjnii,khaoiebndkojlmppeemjhbpbandiljpe,giekcmmlnklenlaomppkphknjmnnpneh,aemomkdncapdnfajjbbcbdebjljbpmpj,ehgidpndbllacpjalkiimkbadgjfnnmc,gkmgaooipdjhmangpemjhigmamcehddo,jflookgnkcckhobaglndicnbbgbonegd,llkgjffcdpffmhiakmfcdcblohccpfmo,ggkkehgbnfjpeggfpleeakpidbkibbmn,bklopemakmnopmghhmccadeonafabnal',
-  'x-goog-update-interactivity': 'bg',
-  'x-goog-update-updater': 'chrome-85.0.4183.102',
-  'content-type': 'application/json',
-  'user-agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36',
-  'accept-encoding': 'gzip, deflate'
-}
-POST
-http://update.googleapis.com/service/update2/json?cup2key=10:433629205&cup2hreq=2e926058aba76cdbc29a03940ffabc3069a32a51a27d690636548c426507cabf
-http://update.googleapis.com/service/update2/json?cup2key=10:433629205&cup2hreq=2e926058aba76cdbc29a03940ffabc3069a32a51a27d690636548c426507cabf
-http://update.googleapis.com
-http://update.googleapis.com/service/update2/json?cup2key=10:433629205&cup2hreq=2e926058aba76cdbc29a03940ffabc3069a32a51a27d690636548c426507cabf
-/service/update2/json
-[Object: null prototype] {
-  cup2key: '10:433629205',
-  cup2hreq: '2e926058aba76cdbc29a03940ffabc3069a32a51a27d690636548c426507cabf'
-}
-cup2key=10:433629205&cup2hreq=2e926058aba76cdbc29a03940ffabc3069a32a51a27d690636548c426507cabf
-update.googleapis.com
-update.googleapis.com
-false
-true
+  host: '127.0.0.1:8000',
+  connection: 'close' }
+127.0.0.1:8000
+/favicon.ico
+GET
 http
-false
-::ffff:127.0.0.1
-[]
-[ 'update' ]
+
+/
+http://127.0.0.1:8000
+/
+{ host: '127.0.0.1:8000',
+  connection: 'keep-alive',
+  'cache-control': 'max-age=0',
+  'upgrade-insecure-requests': '1',
+  'user-agent':
+   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36',
+  accept:
+   'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  'sec-fetch-site': 'none',
+  'sec-fetch-mode': 'navigate',
+  'sec-fetch-user': '?1',
+  'sec-fetch-dest': 'document',
+  'accept-encoding': 'gzip, deflate, br',
+  'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,ja;q=0.6' }
+127.0.0.1:8000
+/
+GET
+http
+
+/favicon.ico
+http://127.0.0.1:8000
+/favicon.ico
+{ host: '127.0.0.1:8000',
+  connection: 'keep-alive',
+  pragma: 'no-cache',
+  'cache-control': 'no-cache',
+  'user-agent':
+   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36',
+  accept: 'image/avif,image/webp,image/apng,image/*,*/*;q=0.8',
+  'sec-fetch-site': 'same-origin',
+  'sec-fetch-mode': 'no-cors',
+  'sec-fetch-dest': 'image',
+  referer: 'http://127.0.0.1:8000/',
+  'accept-encoding': 'gzip, deflate, br',
+  'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,ja;q=0.6' }
+127.0.0.1:8000
+/favicon.ico
+GET
+http
+
+[HPM] Proxy created: /  -> http://127.0.0.1:8000
+/service/update2/json?cup2key=10:1097893186&cup2hreq=8219a3db00ce4cae16a48014d4f6c7f726382322352580fd1d4abc3d758d9e31
+http://127.0.0.1:8000
+/service/update2/json?cup2key=10:1097893186&cup2hreq=8219a3db00ce4cae16a48014d4f6c7f726382322352580fd1d4abc3d758d9e31
+{ 'accept-encoding': 'gzip, deflate',
+  'user-agent':
+   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36',
+  'content-type': 'application/json',
+  'x-goog-update-updater': 'chrome-85.0.4183.102',
+  'x-goog-update-interactivity': 'bg',
+  'x-goog-update-appid':
+   'ihnlcenocehgdaegdmhbidjhnhdchfmm,oimompecagnajdejgnnjijobebaeigek,hnimpnehoodheedghdeeijklkeaacbdc,mimojjlkmoijpicakmndhoigimigcmbb,gcmjkmgdlgnkkcocmoeiminaijmmjnii,cmahhnpholdijhjokonmfdjbfmklppij,hfnkpimlhhgieaddgfemjhofmfblmnib,khaoiebndkojlmppeemjhbpbandiljpe,llkgjffcdpffmhiakmfcdcblohccpfmo,giekcmmlnklenlaomppkphknjmnnpneh,jflookgnkcckhobaglndicnbbgbonegd,gkmgaooipdjhmangpemjhigmamcehddo,bklopemakmnopmghhmccadeonafabnal,ehgidpndbllacpjalkiimkbadgjfnnmc,aemomkdncapdnfajjbbcbdebjljbpmpj,ggkkehgbnfjpeggfpleeakpidbkibbmn',
+  'content-length': '2642',
+  'proxy-connection': 'keep-alive',
+  host: '127.0.0.1:8000',
+  connection: 'close' }
+127.0.0.1:8000
+/service/update2/json
+cup2key=10:1097893186&cup2hreq=8219a3db00ce4cae16a48014d4f6c7f726382322352580fd1d4abc3d758d9e31
+POST
+http
+
+/
+http://dev.wuxuwang.com:8000
+/
+{ host: 'dev.wuxuwang.com:8000',
+  connection: 'keep-alive',
+  'upgrade-insecure-requests': '1',
+  'user-agent':
+   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36',
+  accept:
+   'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  'accept-encoding': 'gzip, deflate',
+  'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,ja;q=0.6',
+  cookie:
+   'Hm_lvt_fda42de91a339550aa41d671659f23ec=1599873353,1600046137,1600131040,1600216833; tps=2; PHPSESSID=s8kf84lu3k7vb63dfod8juu98q; ukw=1; uid=31; isvip=1' }
+dev.wuxuwang.com:8000
+/
+GET
+http
+
+/favicon.ico
+http://dev.wuxuwang.com:8000
+/favicon.ico
+{ host: 'dev.wuxuwang.com:8000',
+  connection: 'keep-alive',
+  'user-agent':
+   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36',
+  accept: 'image/avif,image/webp,image/apng,image/*,*/*;q=0.8',
+  referer: 'http://dev.wuxuwang.com:8000/',
+  'accept-encoding': 'gzip, deflate',
+  'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,ja;q=0.6',
+  cookie:
+   'Hm_lvt_fda42de91a339550aa41d671659f23ec=1599873353,1600046137,1600131040,1600216833; tps=2; PHPSESSID=s8kf84lu3k7vb63dfod8juu98q; ukw=1; uid=31; isvip=1' }
+dev.wuxuwang.com:8000
+/favicon.ico
+GET
+http
+
+/a/b/c/?a=1&=2&b=3
+http://dev.wuxuwang.com:8000
+/a/b/c/?a=1&=2&b=3
+{ host: 'dev.wuxuwang.com:8000',
+  connection: 'keep-alive',
+  'upgrade-insecure-requests': '1',
+  'user-agent':
+   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36',
+  accept:
+   'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  'accept-encoding': 'gzip, deflate',
+  'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,ja;q=0.6',
+  cookie:
+   'Hm_lvt_fda42de91a339550aa41d671659f23ec=1599873353,1600046137,1600131040,1600216833; tps=2; PHPSESSID=s8kf84lu3k7vb63dfod8juu98q; ukw=1; uid=31; isvip=1' }
+dev.wuxuwang.com:8000
+/a/b/c/
+a=1&=2&b=3
+GET
+http
+
+/favicon.ico
+http://dev.wuxuwang.com:8000
+/favicon.ico
+{ host: 'dev.wuxuwang.com:8000',
+  connection: 'keep-alive',
+  'user-agent':
+   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36',
+  accept: 'image/avif,image/webp,image/apng,image/*,*/*;q=0.8',
+  referer: 'http://dev.wuxuwang.com:8000/a/b/c/?a=1&=2&b=3',
+  'accept-encoding': 'gzip, deflate',
+  'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,ja;q=0.6',
+  cookie:
+   'Hm_lvt_fda42de91a339550aa41d671659f23ec=1599873353,1600046137,1600131040,1600216833; tps=2; PHPSESSID=s8kf84lu3k7vb63dfod8juu98q; ukw=1; uid=31; isvip=1' }
+dev.wuxuwang.com:8000
+/favicon.ico
+GET
+http
+
