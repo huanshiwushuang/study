@@ -1,13 +1,16 @@
 // const Axios = require('axios');
 // const httpProxy = require('http-proxy');
-const httpProxyMiddleware = require('http-proxy-middleware');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 const PuppeteerExtra = require('puppeteer-extra');
 // const { proxyRequest } = require('puppeteer-proxy');
-const http = require('http');
+// const http = require('http');
+const { HttpProxyAgent } = require('http-proxy-agent');
+const { SocksProxyAgent } = require('socks-proxy-agent');
+
 
 // const proxy = require('koa-server-http-proxy')
 const Koa = require('koa');
-const Koa2Connect = require('koa2-connect')
+const KoaConnect = require('koa-connect')
 const app = new Koa();
 
 // 构造插件所需的父类
@@ -63,54 +66,51 @@ class PuppeteerExtraPluginGhCustom extends PuppeteerExtraPlugin {
     // }
     // 插件注册之后，启动代理
     onPluginRegistered () {
-        // 创建 http 代理
-        // return;
-        // let proxy = httpProxy.createProxyServer({
-        //         // target: 'http://127.0.0.1:9000',
-        //         selfHandleResponse: true
-        //     });
-        //     proxy.on('proxyRes', function(proxyRes, req, res) {
-        //         var body = [];
-        //         proxyRes.on('data', function (chunk) {
-        //             body.push(chunk);
-        //         });
-        //         proxyRes.on('end', function () {
-        //             body = Buffer.concat(body).toString();
-        //             res.end(body);
-        //         });
-        //     });
+        // proxy server
+        app.use(async (ctx, next) => {
+            console.log(ctx.origin);
 
-            app.use(
-                Koa2Connect(
-                    httpProxyMiddleware
-                )
-            );
-            app.listen(this.opts.proxyPort);
+            await KoaConnect(
+                createProxyMiddleware({
+                    target: ctx.origin,
+                    ws: true,
+                    // changeOrigin: true,
+                    // agent: new SocksProxyAgent('socks://127.0.0.1:1080'),
+                    agent: new HttpProxyAgent('http://127.0.0.1:8888'),
+                    // toProxy: true,
+                    // ignorePath: true,
+                    xfwd: false,
+                    // autoRewrite: true,
 
-            
+                    followRedirects: true,
+                })
+            )(ctx, next)
+        });
 
-            // http.createServer(function (req, res) {
+        // app.use(() => {
+        //     HttpProxyAgent
+        // })
+        app.listen(this.opts.proxyPort);
+        // target server
+        // const app2 = new Koa();
 
-            //     console.log(req);
-            //     res.writeHead(200, { 'Content-Type': 'text/plain' });
-            //     res.end('123');
-            //     // req.respond = function () {
-            //     //     console.log(arguments);
+        // app2.use(async (ctx, next) => {
+        //     console.log(ctx.url)
+        //     console.log(ctx.origin)
+        //     console.log(ctx.originalUrl)
+        //     console.log(ctx.headers)
+        //     console.log(ctx.host)
+        //     console.log(ctx.path)
+        //     ctx.querystring && console.log(ctx.querystring)
+        //     console.log(ctx.method)
+        //     console.log(ctx.protocol)
+        //     console.log()
 
-            //     // }
+        //     ctx.body = `I'm target server~`;
+        // });
+        // app2.listen(8000)
 
-            //     // proxyRequest({
-            //     //     page,
-            //     //     proxyUrl: 'http://127.0.0.1:8888',
-            //     //     request: req,
-            //     // });
-
-            //     // res.writeHead(200, { 'Content-Type': 'text/plain' });
-            //     // res.write('request successfully proxied!' + '\n' + JSON.stringify(req.headers, true, 2));
-                
-            // }).listen(9000);
-
-            // console.info(`已启动 http 代理服务器，监听本地端口：${this.opts.proxyPort}，请主动设置浏览器代理地址~`);
+        // console.info(`已启动 http 代理服务器，监听本地端口：${this.opts.proxyPort}，请主动设置浏览器代理地址~`);
     }
     async onPageCreated(page) {
         // page.on('request', (request) => {
