@@ -114,3 +114,21 @@
 13. font: style variant weight size/line-height family;
 14. 滚动条样式设置[轩枫格](http://www.xuanfengge.com/css3-webkit-scrollbar.html)；[cnblogs](https://www.cnblogs.com/koleyang/p/5484922.html)；[官方](https://webkit.org/blog/363/styling-scrollbars/)
 15. position: fixed 定位偏差失效？某些祖先元素的样式会导致产生：堆叠上下文（三维的z轴）[详细解析](https://www.imooc.com/article/67784)
+16. background属性
+    
+    可设置属性如下:
+    background-image: 设置背景图像, 可以是真实的图片路径, 也可以是创建的渐变背景;
+    background-position: 设置背景图像的位置;
+    background-size: 设置背景图像的大小;
+    background-repeat: 指定背景图像的铺排方式;
+    background-attachment: 指定背景图像是滚动还是固定;
+    background-origin: 设置背景图像显示的原点[background-position相对定位的原点];
+    background-clip: 设置背景图像向外剪裁的区域;
+    background-color: 指定背景颜色。
+    简写的顺序如下: bg-color || bg-image || bg-position [ / bg-size]? || bg-repeat || bg-attachment || bg-origin || bg-clip
+
+    顺序并非固定, 但是要注意:
+
+    background-position 和 background-size 属性, 之间需使用/分隔, 且position值在前, size值在后。
+    如果同时使用 background-origin 和 background-clip 属性, origin属性值需在clip属性值之前, 如果origin与clip属性值相同, 则可只设置一个值。
+17. 

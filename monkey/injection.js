@@ -7,15 +7,15 @@
 // @match        *://*/*
 // @grant        none
 // @run-at       document-start
+// @require      https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js
 // @require      https://unpkg.com/ajax-hook@2.0.2/dist/ajaxhook.min.js
 // @require      https://cdn.bootcss.com/jquery/3.5.0/jquery.min.js
-// @require      https://cdn.bootcss.com/localforage/1.7.3/localforage.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.2/FileSaver.min.js
 // ==/UserScript==
 
 window.jq = jQuery;
-// window._open = window.open;
 
-jq.extend(!0, {
+jq.extend(true, {
     util: {
         urlParse: function(e) {
             var t, i = this, n = (e = e.toString()).match(/([a-zA-Z]+):\/\/([^\/:]+)(:\d+)?(\/[^?]*)?(\?[^#]*)?(#.*)?/);
@@ -153,6 +153,7 @@ var ahConfig = {
     //请求发起前进入
     onRequest (config, handler) {
         debugger
+        handler.id = Date.now();
         handler.next(config);
     },
     //请求发生错误时进入，比如超时；注意，不包括http状态码错误，如404仍然会认为请求成功
@@ -162,7 +163,112 @@ var ahConfig = {
     //请求成功后进入
     onResponse (response, handler) {
         handler.next(response)
+        if (enableCapture) {
+            if (/\/ebus\/fuwu\/api\/nthl\/api\/fixed\/queryRtalPhacBInfo/.test(response.config.url)) {
+                setTimeout(() => {
+                    main();
+                }, (parseInt(Math.random()*10) % 2 + 2) * 1000)
+            }
+        }
     }
 };
 ah.proxy(ahConfig);
 
+function saveJSON({ json, name = 'download'}) {
+    var blob = new Blob([JSON.stringify(json, null, '\t')], {
+        type: "text/json;charset=utf-8"
+    });
+    var d = new Date();
+    var iso = new Date(Date.now() - d.getTimezoneOffset()*60*1000).toISOString();
+    saveAs(blob, `${iso}-${name}.json`);
+}
+
+// 业务逻辑
+var enableCapture = false;
+window.startCapture = function () {
+    enableCapture = true;
+};
+setTimeout(() => {
+    $('.el-pagination__sizes input').get(0).click();
+    $('.el-scrollbar__view.el-select-dropdown__list li').eq(-1).click();
+}, 3000)
+
+class Page {
+    constructor() {
+        this.pageNumber = this.getPageNumber();
+        this.dataArray = this.getDataArray();
+        this.prevPageDOM = this.getPrevPageDOM();
+        this.nextPageDOM = this.getNextPageDOM();
+    }
+    getPageNumber() {
+        return jq('.el-pager .number.active').text().trim();
+    }
+    getDataArray() {
+        var data = [];
+        var $header = jq('.el-table table').eq(0);
+        var $body = jq('.el-table table').eq(1);
+
+        var headerKey = [];
+        $header.find('th').slice(1,-1).each((index, item) => {
+            headerKey.push($(item).text().trim());
+        })
+        $body.find('tr').each((index, item) => {
+            var line = [...$(item).find('td').slice(1)].map(item => {
+                return $(item).text().trim();
+            });
+            var obj = {};
+            headerKey.forEach((item, index) => {
+                obj[item] = line[index];
+            })
+            data.push(obj);
+        })
+        return data;
+    }
+    getPrevPageDOM() {
+        return $('.el-pager .number.active').prev().get(0);
+    }
+    getNextPageDOM() {
+        return $('.el-pager .number.active').next().get(0);
+    }
+}
+
+
+var data = [];
+function main() {
+
+    // return;
+    var page = $('.el-pager .number.active').text().trim();
+    var $header = jq('.el-table table').eq(0);
+    var $body = jq('.el-table table').eq(1);
+
+    var headerKey = [];
+    $header.find('th').slice(1,-1).each((index, item) => {
+        headerKey.push($(item).text().trim());
+    })
+    $body.find('tr').each((index, item) => {
+        var line = [...$(item).find('td').slice(1)].map(item => {
+            return $(item).text().trim();
+        });
+        var obj = {
+            page
+        };
+        headerKey.forEach((item, index) => {
+            obj[item] = line[index];
+        })
+        data.push(obj);
+    })
+    // 是否有下一页
+    var next = $('.el-pager .number.active').next();
+    if (next.length && (page % 100 != 0)) {
+        next.click();
+    } else {
+        saveJSON({
+            json: data,
+            name: 'bobo'
+        })
+        if (next) {
+            next.click();
+            data = [];
+        }
+    }
+}

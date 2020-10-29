@@ -1,0 +1,203 @@
+﻿{
+  "ntype": "app",
+  "process": null,
+  "controls": [
+    {
+      "ntype": "uia",
+      "nname": "Window",
+      "description": null,
+      "identifyProperties": {
+        "type": "Window",
+        "className": "WeChatMainWndForPC"
+      },
+      "cachedProperties": {
+        "type": "Window",
+        "className": "WeChatMainWndForPC",
+        "title": "微信",
+        "boundingRectangle": "271,377,1086,733"
+      },
+      "children": [
+        {
+          "ntype": "uia",
+          "nname": "Pane",
+          "description": null,
+          "identifyProperties": {
+            "type": "Pane",
+            "className": "popupshadow"
+          },
+          "cachedProperties": {
+            "type": "Pane",
+            "className": "popupshadow",
+            "boundingRectangle": "251,357,1126,773"
+          },
+          "image": {
+            "imgPath": "Pane.png",
+            "rect": "10,10,1126,773"
+          },
+          "children": [
+            {
+              "ntype": "virtual",
+              "nname": "头像",
+              "description": null,
+              "identifyProperties": {
+                "boundingRectangle": "27,34,47,45",
+                "align": "TopLeft"
+              },
+              "cachedProperties": {}
+            },
+            {
+              "ntype": "virtual",
+              "nname": "会话",
+              "description": null,
+              "identifyProperties": {
+                "boundingRectangle": "32,90,42,40",
+                "align": "TopLeft"
+              }
+            },
+            {
+              "ntype": "virtual",
+              "nname": "通讯录",
+              "description": null,
+              "identifyProperties": {
+                "boundingRectangle": "34,143,38,40",
+                "align": "TopLeft"
+              },
+              "cachedProperties": {}
+            },
+            {
+              "ntype": "virtual",
+              "nname": "收藏",
+              "description": null,
+              "identifyProperties": {
+                "boundingRectangle": "30,193,40,38",
+                "align": "TopLeft"
+              }
+            },
+            {
+              "ntype": "virtual",
+              "nname": "微信文件",
+              "description": null,
+              "identifyProperties": {
+                "boundingRectangle": "30,244,43,36",
+                "align": "TopLeft"
+              }
+            },
+            {
+              "ntype": "virtual",
+              "nname": "看一看",
+              "description": null,
+              "identifyProperties": {
+                "boundingRectangle": "34,291,32,39",
+                "align": "TopLeft"
+              }
+            },
+            {
+              "ntype": "virtual",
+              "nname": "更多",
+              "description": null,
+              "identifyProperties": {
+                "boundingRectangle": "29,719,44,25",
+                "align": "BottomLeft"
+              }
+            },
+            {
+              "ntype": "virtual",
+              "nname": "手机",
+              "description": null,
+              "identifyProperties": {
+                "boundingRectangle": "28,666,45,43",
+                "align": "TopLeft"
+              }
+            },
+            {
+              "ntype": "virtual",
+              "nname": "小程序面板",
+              "description": null,
+              "identifyProperties": {
+                "boundingRectangle": "30,622,43,41",
+                "align": "TopLeft"
+              },
+              "cachedProperties": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ntype": "uia",
+      "nname": "任务栏",
+      "description": null,
+      "identifyProperties": {
+        "type": "Pane",
+        "className": "Shell_TrayWnd",
+        "name": "任务栏"
+      },
+      "cachedProperties": {
+        "type": "Pane",
+        "className": "Shell_TrayWnd",
+        "name": "任务栏",
+        "boundingRectangle": "0,1400,2560,40"
+      },
+      "image": {
+        "imgPath": "任务栏.png",
+        "rect": "0,10,2560,40"
+      },
+      "children": [
+        {
+          "ntype": "uia",
+          "nname": "Pane1",
+          "description": null,
+          "identifyProperties": {
+            "type": "Pane",
+            "automationId": "303"
+          },
+          "cachedProperties": {
+            "automationId": "303",
+            "type": "Pane",
+            "className": "TrayNotifyWnd",
+            "boundingRectangle": "1992,1400,568,40"
+          },
+          "children": [
+            {
+              "ntype": "uia",
+              "nname": "ToolBar",
+              "description": null,
+              "identifyProperties": {
+                "type": "ToolBar",
+                "automationId": "1504"
+              },
+              "cachedProperties": {
+                "automationId": "1504",
+                "type": "ToolBar",
+                "className": "ToolbarWindow32",
+                "name": "用户提示通知区域",
+                "boundingRectangle": "1992,1400,384,40"
+              },
+              "children": [
+                {
+                  "ntype": "uia",
+                  "nname": "Button",
+                  "description": null,
+                  "identifyProperties": {
+                    "type": "Button",
+                    "automationId": "{206C3BBB-4473-BF6C-E1B3-093D444CCA63}"
+                  },
+                  "cachedProperties": {
+                    "automationId": "{206C3BBB-4473-BF6C-E1B3-093D444CCA63}",
+                    "type": "Button",
+                    "name": "微信",
+                    "boundingRectangle": "2256,1400,24,40"
+                  },
+                  "image": {
+                    "imgPath": "微信.png",
+                    "rect": "10,10,24,40"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
