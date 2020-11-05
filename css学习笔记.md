@@ -131,4 +131,10 @@
 
     background-position 和 background-size 属性, 之间需使用/分隔, 且position值在前, size值在后。
     如果同时使用 background-origin 和 background-clip 属性, origin属性值需在clip属性值之前, 如果origin与clip属性值相同, 则可只设置一个值。
-17. 
+17. CSS 属性选择器：https://www.cnblogs.com/chri330dj/p/12450638.html
+    [attribute~=value] 属性中包含独立的单词为 value
+    [attribute*=value] 属性中做字符串拆分，只要能拆出来 value 这个词就行
+    [attribute|=value] 属性中必须是完整且唯一的单词，或者以 - 分隔开
+    [attribute^=value] 属性的前几个字母是 value 就可以
+    [attribute$=value] 属性的后几个字母是 value 就可以
+18. 

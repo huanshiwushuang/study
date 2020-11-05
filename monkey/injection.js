@@ -14,141 +14,181 @@
 // ==/UserScript==
 
 window.jq = jQuery;
-
-jq.extend(true, {
-    util: {
-        urlParse: function(e) {
-            var t, i = this, n = (e = e.toString()).match(/([a-zA-Z]+):\/\/([^\/:]+)(:\d+)?(\/[^?]*)?(\?[^#]*)?(#.*)?/);
+// 工具函数
+window.u = {
+    url: {
+        // url字符串 转 url对象
+        parse(url) {
+            var reg = /([a-zA-Z]+):\/\/([^\/:]+)(:\d+)?(\/[^?]*)?(\?[^#]*)?(#.*)?/;
+            url = url.toString();
+            var arr = url.match(reg);
             return {
-                source: e,
-                protocol: n[1],
-                host: n[2],
-                port: n[3] ? n[3].slice(1) : "",
-                path: n[4] ? n[4] : "",
-                segments: n[4] ? n[4].replace(/^\//, "").replace(/\/$/, "").split("/") : "",
-                query: n[5] ? n[5] : "",
-                params: (t = n[5] ? n[5] : "",
-                i.qsToMap(t.slice(1))),
-                hash: n[6] ? n[6].slice(1) : "",
-                relative: (n[4] ? n[4] : "") + (n[5] ? n[5] : "") + (n[6] ? n[6] : "")
+                source: url,
+                protocol: arr[1],
+                host: arr[2],
+                port: arr[3] ? arr[3].slice(1) : '',
+                path: arr[4] ? arr[4] : '',
+                segments: (() => {
+                    if (arr[4]) {
+                        return arr[4].replace(/^\//,'').replace(/\/$/, '').split('/');
+                    }
+                    return '';
+                })(),
+                query: arr[5] ? arr[5] : '',
+                params: (() => {
+                    var seg = arr[5] ? arr[5] : '';
+                    return this.qsToMap(seg.slice(1));
+                })(),
+                hash: arr[6] ? arr[6].slice(1) : '',
+                relative: (arr[4] ? arr[4] : '') + (arr[5] ? arr[5] : '') + (arr[6] ? arr[6] : ''),
             }
         },
-        urlStringify: function(t) {
-            return [t.protocol, "://", t.host, t.port ? ":" + t.port : "", t.path, function() {
-                var e = this.mapToQs(t.params);
-                return e && "?" + e
+        // url对象 转 url字符串
+        stringify(obj) {
+            return [
+                obj.protocol,
+                '://',
+                obj.host,
+                (function () {
+                    return obj.port ? (':' + obj.port) : '';
+                })(),
+                obj.path,
+                // querystring
+                (function () {
+                    var paramsStr = this.mapToQs(obj.params);
+                    return paramsStr && ('?' + paramsStr);
+                }).bind(this)(),
+                (function () {
+                    return obj.hash ? ('#' + obj.hash) : '';
+                })()
+            ].join('')
+        },
+        // Map 转 querystring
+        mapToQs(map) {
+            return [...map].reduce(function (sum, item) {
+                var el;
+                if (Array.isArray(item[1])) {
+                    el = item[1].reduce((su, ite) => {
+                        su.push(item[0] + '=' + ite);
+                        return su;
+                    }, []).join('&');
+                } else {
+                    el = item[0] + '=' + item[1]
+                }
+                sum.push(el);
+                return sum;
+            }, []).join('&');
+        },
+        // querystring 转 Map
+        qsToMap(str) {
+            var ret = new Map(),
+                seg = str.split('&'),
+                len = seg.length,
+                i = 0,
+                s;
+            for (; i < len; i++) {
+                if (!seg[i]) {
+                    continue;
+                }
+                s = seg[i].split('=');
+                ret.has(s[0]) ? ret.get(s[0]).push(s[1]) : (ret.set(s[0], [s[1]]));
+            };
+            ret.forEach((item, key) => {
+                if (item.length == 1) {
+                    ret.set(key, item[0]);
+                }
+            });
+            return ret;
+        },
+        // querystring 编码
+        qsEncode(qs) {
+            var map = $.util.qsToMap(qs);
+            map.forEach((val, key) => {
+                if (Array.isArray(val)) {
+                    val.forEach((item, index) => {
+                        val[index] = encodeURIComponent(item);
+                    })
+                } else {
+                    map.set(key, encodeURIComponent(val));
+                }
+            });
+            return this.mapToQs(map);
+        },
+        // querystring 解码
+        qsDecode(qs) {
+            var map = $.util.qsToMap(qs);
+            map.forEach((val, key) => {
+                if (Array.isArray(val)) {
+                    val.forEach((item, index) => {
+                        val[index] = decodeURIComponent(val[index]);
+                    })
+                } else {
+                    map.set(key, decodeURIComponent(val));
+                }
+            });
+            return this.mapToQs(map);
+        },
+        // qs 单个替换
+        qsUpdate(url, qsObj) {
+            var urlObj = this.parse(url);
+            Object.keys(qsObj).forEach(item => {
+                urlObj.params.set(item, qsObj[item]);
+            });
+            return this.stringify(urlObj);
+        },
+        // qs 整个替换
+        qsUpdateAll(url, qsStr) {
+            var urlObj = this.parse(url);
+            urlObj.params = this.qsToMap(qsStr);
+            return this.stringify(urlObj);
+        },
+    },
+    json: {
+        // 将非标准的JSON字符串标准化
+        normalize(str) {
+            return str.replace(/[\s\t\r\n]/g, '').replace(/'/g, '"').replace(/([{,])([^"]+?):/g,'$1"$2":').replace(/,\s*([\]}])/g, '$1');
+        }
+    },
+    util: {
+        // setTimeout 模拟 setInterval
+        setInterval(func, ms, ...more) {
+            var id;
+            var stop = false;
+            var exec = async () => {
+                if (!stop) {
+                    var res = func(...more);
+                    if (!res || !/promise/i.test(res.constructor.name)) {
+                        throw new Error('执行函数需返回 Promise');
+                    }
+                    await res;
+                    id = setTimeout(exec, ms);
+                }
             }
-            .bind(this)(), t.hash ? "#" + t.hash : ""].join("")
-        },
-        mapToQs: function(e) {
-            return [].concat(_toConsumableArray(e)).reduce(function(e, i) {
-                var t;
-                return t = Array.isArray(i[1]) ? i[1].reduce(function(e, t) {
-                    return e.push(i[0] + "=" + t),
-                    e
-                }, []).join("&") : i[0] + "=" + i[1],
-                e.push(t),
-                e
-            }, []).join("&")
-        },
-        qsToMap: function(e) {
-            for (var t, i = new Map, n = e.split("&"), a = n.length, o = 0; o < a; o++)
-                n[o] && (t = n[o].split("="),
-                i.has(t[0]) ? i.get(t[0]).push(t[1]) : i.set(t[0], [t[1]]));
-            return i.forEach(function(e, t) {
-                1 == e.length && i.set(t, e[0])
-            }),
-            i
-        },
-        qsEncode: function(e) {
-            var t = $.util.qsToMap(e);
-            return t.forEach(function(i, e) {
-                Array.isArray(i) ? i.forEach(function(e, t) {
-                    i[t] = encodeURIComponent(e)
-                }) : t.set(e, encodeURIComponent(i))
-            }),
-            this.mapToQs(t)
-        },
-        qsDecode: function(e) {
-            var t = $.util.qsToMap(e);
-            return t.forEach(function(i, e) {
-                Array.isArray(i) ? i.forEach(function(e, t) {
-                    i[t] = decodeURIComponent(i[t])
-                }) : t.set(e, decodeURIComponent(i))
-            }),
-            this.mapToQs(t)
-        },
-        arrToQs: function(e) {
-            return e.reduce(function(e, t) {
-                return e.push(t.name + "=" + t.value),
-                e
-            }, []).join("&")
-        },
-        qsUpdate: function(e, t) {
-            var i = this.urlParse(e);
-            return Object.keys(t).forEach(function(e) {
-                i.params.set(e, t[e])
-            }),
-            this.urlStringify(i)
-        },
-        qsUpdateAll: function(e, t) {
-            var i = this.urlParse(e);
-            return i.params = this.qsToMap(t),
-            this.urlStringify(i)
-        },
-        verifyChinaPhone: function(e) {
-            return /^\d{11}$/.test(e)
-        },
-        verifyPwd: function(e) {
-            return 8 <= e.length && e.length <= 20 && (!(!/[a-z]/i.test(e) || !/[0-9]/.test(e)) || (!(!/[a-z]/i.test(e) || !/\W/.test(e)) || !(!/[0-9]/.test(e) || !/\W/.test(e))))
-        },
-        verifyEmail: function(e) {
-            return /^[^@]+@[^@]+$/.test(e)
-        },
-        setInterval: function(i, t) {
-            for (var e = arguments.length, n = Array(2 < e ? e - 2 : 0), a = 2; a < e; a++)
-                n[a - 2] = arguments[a];
-            var o, s, r = this, l = (s = _asyncToGenerator(regeneratorRuntime.mark(function e() {
-                return regeneratorRuntime.wrap(function(e) {
-                    for (; ; )
-                        switch (e.prev = e.next) {
-                        case 0:
-                            return e.next = 2,
-                            new Promise(function(e, t) {
-                                i.bind(window, {
-                                    resolve: e,
-                                    reject: t,
-                                    more: n
-                                })()
-                            }
-                            );
-                        case 2:
-                            o = setTimeout(l, t);
-                        case 3:
-                        case "end":
-                            return e.stop()
-                        }
-                }, e, r)
-            })),
-            function() {
-                return s.apply(this, arguments)
+            id = setTimeout(exec, ms);
+            return {
+                clearInterval () {
+                    stop = true;
+                    clearTimeout(id);
+                }
             }
-            );
-            return o = setTimeout(l, t),
-            function() {
-                return o
-            }
-        },
-        strToObj: function strToObj(str) {
-            return eval("(" + str + ")")
-        },
-        formatMilliseconds: function(e) {
-            var t = new Date(e);
-            return [t.getFullYear(), "-", ("0" + (t.getMonth() + 1)).slice(-2), "-", ("0" + t.getDate()).slice(-2), " ", ("0" + t.getHours()).slice(-2), ":", ("0" + t.getMinutes()).slice(-2), ":", ("0" + t.getSeconds()).slice(-2)].join("")
+        }
+    }
+}
+// 工具函数-扩展
+$.extend(true, window.u, {
+    util: {
+        saveJSON({ json, name = 'download'}) {
+            var blob = new Blob([JSON.stringify(json, null, '\t')], {
+                type: "text/json;charset=utf-8"
+            });
+            var d = new Date();
+            var now = Date.now();
+            var iso = new Date(now - d.getTimezoneOffset()*60*1000).toISOString();
+            saveAs(blob, `${now}-${iso}-${name}.json`);
         }
     }
 })
-
+// 请求拦截
 var ahConfig = {
     //请求发起前进入
     onRequest (config, handler) {
@@ -163,36 +203,10 @@ var ahConfig = {
     //请求成功后进入
     onResponse (response, handler) {
         handler.next(response)
-        if (enableCapture) {
-            if (/\/ebus\/fuwu\/api\/nthl\/api\/fixed\/queryRtalPhacBInfo/.test(response.config.url)) {
-                setTimeout(() => {
-                    main();
-                }, (parseInt(Math.random()*10) % 2 + 2) * 1000)
-            }
-        }
     }
 };
 ah.proxy(ahConfig);
-
-function saveJSON({ json, name = 'download'}) {
-    var blob = new Blob([JSON.stringify(json, null, '\t')], {
-        type: "text/json;charset=utf-8"
-    });
-    var d = new Date();
-    var iso = new Date(Date.now() - d.getTimezoneOffset()*60*1000).toISOString();
-    saveAs(blob, `${iso}-${name}.json`);
-}
-
-// 业务逻辑
-var enableCapture = false;
-window.startCapture = function () {
-    enableCapture = true;
-};
-setTimeout(() => {
-    $('.el-pagination__sizes input').get(0).click();
-    $('.el-scrollbar__view.el-select-dropdown__list li').eq(-1).click();
-}, 3000)
-
+// 业务逻辑---------------------------------------------------------------------------------------------------------------------------
 class Page {
     constructor() {
         this.pageNumber = this.getPageNumber();
@@ -231,44 +245,7 @@ class Page {
         return $('.el-pager .number.active').next().get(0);
     }
 }
+window.main = function () {
 
-
-var data = [];
-function main() {
-
-    // return;
-    var page = $('.el-pager .number.active').text().trim();
-    var $header = jq('.el-table table').eq(0);
-    var $body = jq('.el-table table').eq(1);
-
-    var headerKey = [];
-    $header.find('th').slice(1,-1).each((index, item) => {
-        headerKey.push($(item).text().trim());
-    })
-    $body.find('tr').each((index, item) => {
-        var line = [...$(item).find('td').slice(1)].map(item => {
-            return $(item).text().trim();
-        });
-        var obj = {
-            page
-        };
-        headerKey.forEach((item, index) => {
-            obj[item] = line[index];
-        })
-        data.push(obj);
-    })
-    // 是否有下一页
-    var next = $('.el-pager .number.active').next();
-    if (next.length && (page % 100 != 0)) {
-        next.click();
-    } else {
-        saveJSON({
-            json: data,
-            name: 'bobo'
-        })
-        if (next) {
-            next.click();
-            data = [];
-        }
-    }
 }
+
