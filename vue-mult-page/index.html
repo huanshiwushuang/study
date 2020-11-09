@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 
+        HTML AST 解析库-1
+        https://github.com/blowsie/Pure-JavaScript-HTML5-Parser
+        https://github.com/Jxck/html2json
+      -->
+    <!-- 
+        HTML AST 解析库-2
+        https://github.com/tautologistics/node-htmlparser
+        
+    -->
+    <!-- 
+        HTML AST 解析库-3
+        https://github.com/andrejewski/himalaya
+     -->
+    <style>
+        .dn {
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.14.0/index.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src="./htmlparser.js"></script>
+</head>
+
+<body>
+    <!-- 后端输出数据 -->
+    <div id="data" class="dn">
+        <div id="root">
+            <header>
+                <nav>
+                    <ul id="nav">
+                        <li>首页</li>
+                        <li>药品</li>
+                        <li>器械</li>
+                        <li>实体</li>
+                        <li>工艺</li>
+                        <li>资讯</li>
+                    </ul>
+                </nav>
+            </header>
+        </div>
+    </div>
+
+
+    <script>
+        var parseHTML = function (htmlStr) {
+            var handler = new Tautologistics.NodeHtmlParser.HtmlBuilder(function (error, dom) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    setTimeout(() => {
+                        console.log(Tautologistics.NodeHtmlParser.DomUtils.getElements({id: function(){return true}}, app.root, true));
+                    }, 0)
+                }
+            }, {
+                ignoreWhitespace: true,
+            });
+            var parser = new Tautologistics.NodeHtmlParser.Parser(handler);
+            parser.parseComplete(htmlStr);
+            return handler.dom;
+        }
+        var flatten = function (nodes = [], arr = []) {
+            (function flattens(node = [], array = []) {
+                for (let item of node) {
+                    if (item.attributes && item.attributes.id) {
+                        nodes[item.attributes.id] = item;
+                    }
+                    if (item.children && item.children.length) flattens(item.children, array)
+                }
+            })(nodes, arr)
+            return nodes
+        }
+    </script>
+
+    <div id="wx">
+        <el-button v-for="(item, index) in nav.children" :key="index">
+            {{ item.children[0].data }}
+        </el-button>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#wx',
+            data: {
+                root: parseHTML(data.innerHTML),
+                nav: []
+            },
+            created () {
+                this.nav = flatten(this.root).nav;
+            }
+        })
+    </script>
+</body>
+
+</html>
