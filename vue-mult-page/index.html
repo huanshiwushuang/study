@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
@@ -28,54 +28,239 @@
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.14.0/index.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
     <script src="./htmlparser.js"></script>
+    <!-- <script src="./htmlparser.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fast-xml-parser/3.17.1/parser.min.js"></script> -->
+
+    <script src="https://unpkg.com/html5parser@latest/dist/html5parser.umd.js"></script>
 </head>
 
 <body>
     <!-- 后端输出数据 -->
     <div id="data" class="dn">
-        <div id="root">
+        <div>
             <header>
+                <div>
+                    <img src="http://i2.tiimg.com/523563/bb8ec869e0649453.jpg" id="logoImg" alt="logo">
+                </div>
                 <nav>
                     <ul id="nav">
-                        <li>首页</li>
-                        <li>药品</li>
-                        <li>器械</li>
-                        <li>实体</li>
-                        <li>工艺</li>
-                        <li>资讯</li>
+                        <li>
+                            <a href="/">首页</a>
+                        </li>
+                        <li>
+                            <span>药品</span>
+                            <ul>
+                                <li>
+                                    <a href="/yaopinzc">中国药品注册</a>
+                                </li>
+                                <li>
+                                    <a href="/yaopincn">中国上市药品</a>
+                                </li>
+                                <li>
+                                    <a href="/yizhixing">仿制药一致性评价</a>
+                                </li>
+                                <li>
+                                    <a href="/yaopinus">美国上市药品</a>
+                                </li>
+                                <li>
+                                    <a href="/yaopineu">欧盟上市药品</a>
+                                </li>
+                                <li>
+                                    <a href="/yaopinjp">日本上市药品</a>
+                                </li>
+                                <li>
+                                    <a href="/linchuang">中国临床试验</a>
+                                </li>
+                                <li>
+                                    <a href="/linchuangus">ClinicalTrials</a>
+                                </li>
+                                <li>
+                                    <a href="/yaopinsms">药品说明书</a>
+                                </li>
+                                <li>
+                                    <a href="/yaopinbz">药品标准</a>
+                                </li>
+                                <li>
+                                    <a href="/yibao">中国医保目录</a>
+                                </li>
+                                <li>
+                                    <a href="/yaowu">中国基本药物目录</a>
+                                </li>
+                                <li>
+                                    <a href="/cpsus">美国橙皮书</a>
+                                </li>
+                                <li>
+                                    <a href="/cpsjp">日本橙皮书</a>
+                                </li>
+                                <li>
+                                    <a href="/pqf">中国生物制品批签发</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span>器械</span>
+                            <ul>
+                                <li>
+                                    <a href="/qixiecn">中国上市医疗器械</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span>实体</span>
+                            <ul>
+                                <li>
+                                    <a href="/qiye">中国制药企业</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span>工艺</span>
+                            <ul>
+                                <li>
+                                    <a href="/yaopinzz">药物杂质对照品</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/zixun">资讯</a>
+                        </li>
                     </ul>
                 </nav>
+                <div>
+                    <span id="tps">1</span>
+                </div>
             </header>
+            <main>
+                <div>
+                    <form id="searchForm" action="">
+                        <input id="searchInput" type="text" placeholder="请输入药品名称、企业名称、受理号、批准文号、CTR号、NCT号">
+                    </form>
+                </div>
+                <div>
+                    <ul>
+                        <li>
+                            <a href="/search?wxhotkw=1&amp;kw=盐酸莫西沙星" title="盐酸莫西沙星">盐酸莫西沙星</a>
+                        </li>
+                        <li>
+                            <a href="/search?wxhotkw=1&amp;kw=盐酸莫西沙星" title="盐酸莫西沙星">苯磺酸氨氯地平片</a>
+                        </li>
+                        <li>
+                            <a href="/search?wxhotkw=1&amp;kw=盐酸莫西沙星" title="盐酸莫西沙星">广东东阳光药业有限公司</a>
+                        </li>
+                        <li>
+                            <a href="/search?wxhotkw=1&amp;kw=盐酸莫西沙星" title="盐酸莫西沙星">沙美特罗替卡松吸入粉雾剂</a>
+                        </li>
+                        <li>
+                            <a href="/search?wxhotkw=1&amp;kw=盐酸莫西沙星" title="盐酸莫西沙星">阿奇霉素</a>
+                        </li>
+                    </ul>
+                </div>
+            </main>
+            <footer>
+                <div>
+                    <span>友情链接：</span>
+                    <ul>
+                        <li>
+                            <a href="">
+                                药物杂质
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                对照品血管瘤
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                治疗医药供应
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                整形平台
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                药品说明书
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                血小板减少性紫癜
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                药店加盟
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                柚子精神健康网
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="websiteMsg">
+                    本网站未发布麻醉药品、精神药品、医疗用毒性药品、放射性药品、戒毒药品和医疗机构制剂的产品信息
+                </div>
+                <div id="copyright">
+                    戊戌数据 Copyright © 2019 All Rights Reserved. 
+                </div>
+                <div id="sb">
+                    <a href="">蜀ICP备19033286号-1</a>
+                </div>
+                <div id="cb">
+                    <a href="">川公网安备 51010802000868号</a>
+                </div>
+            </footer>
+
         </div>
     </div>
 
-
     <script>
         var parseHTML = function (htmlStr) {
-            var handler = new Tautologistics.NodeHtmlParser.HtmlBuilder(function (error, dom) {
-                if (error) {
-                    console.log(error);
-                } else {
-                    setTimeout(() => {
-                        console.log(Tautologistics.NodeHtmlParser.DomUtils.getElements({id: function(){return true}}, app.root, true));
-                    }, 0)
-                }
+            var handler = new HTMLParser.Builder(function (error, dom) {
+                // if (error) {
+                //     console.log(error);
+                // } else {
+                //     setTimeout(function () {
+                //         console.log(HTMLParser.Util.by({id: function(){return true}}, app.root, true));
+                //     }, 0)
+                // }
             }, {
-                ignoreWhitespace: true,
+                // ignoreWhitespace: true,
+                // includeLocation: true
             });
-            var parser = new Tautologistics.NodeHtmlParser.Parser(handler);
+            var parser = new HTMLParser.Parser(handler);
             parser.parseComplete(htmlStr);
             return handler.dom;
         }
-        var flatten = function (nodes = [], arr = []) {
-            (function flattens(node = [], array = []) {
-                for (let item of node) {
-                    if (item.attributes && item.attributes.id) {
-                        nodes[item.attributes.id] = item;
+        var dom2json = function dom2Json(domtree) {
+            let obj = {}
+            obj.name = domtree.tagName
+            obj.children = []
+            for (var child in domtree.childNodes) {
+                obj.children.push(dom2Json(domtree.childNodes[child]))
+            }
+            return obj
+        }
+        var flatten = function (nodes, arr) {
+            nodes = nodes || [];
+            arr = arr || [];
+            (function flattens(node, array) {
+                node = node || [];
+                array = array || [];
+                for (var i in node) {
+                    var item = node[i]
+                    if (item.attrs && item.attrs.id) {
+                        nodes[item.attrs.id] = item;
                     }
-                    if (item.children && item.children.length) flattens(item.children, array)
+                    if (item.children && item.children.length) {
+                        flattens(item.children, array)
+                    }
                 }
             })(nodes, arr)
             return nodes
@@ -84,19 +269,38 @@
 
     <div id="wx">
         <el-button v-for="(item, index) in nav.children" :key="index">
-            {{ item.children[0].data }}
+            {{ item.children[0].children[0].data }}
         </el-button>
+        <span v-for="(item, index) in nav.children" :key="index">
+            ---{{ item.children[0].children[0].data }}---
+        </span>
     </div>
 
     <script>
         var app = new Vue({
             el: '#wx',
             data: {
-                root: parseHTML(data.innerHTML),
+                asd: '123',
+                root: [],
+                root2: [],
                 nav: []
             },
-            created () {
-                this.nav = flatten(this.root).nav;
+            computed: {
+                navData () {
+                    return 1;
+                }
+            },
+            created: function () {
+                // Object.assign(this, HTMLParser.Util);
+                console.time();
+                this.parseHTML = parseHTML(data.innerHTML);
+                console.timeEnd();
+                console.time();
+                this.root2 = Html5parser.parse(data.innerHTML);
+                console.timeEnd();
+                // this.nav = flatten(this.root).nav;
+
+                // console.log();
             }
         })
     </script>
