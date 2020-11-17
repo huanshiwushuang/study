@@ -7,6 +7,7 @@ const developmentConfig = require("./config.development");
 const productionConfig = require("./config.production")
 
 module.exports = function (env) {
+    console.log([...arguments]);
     if (env && env.development) {
         return merge(commonConfig, developmentConfig);
     } else if (env && env.production) {

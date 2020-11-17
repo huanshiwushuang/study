@@ -5,8 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack --config ./webpack/index.js --env development",
-    "build": "webpack --config ./webpack/index.js --env production"
+
+    "dev": "webpack --config ./webpack/index.js --env development --platform all",
+    "build": "webpack --config ./webpack/index.js --env production --platform all",
+
+    "dev:h5": "webpack --config ./webpack/index.js --env development --platform h5",
+    "build:h5": "webpack --config ./webpack/index.js --env production --platform h5",
+    
+    "dev:pc": "webpack --config ./webpack/index.js --env development --platform pc",
+    "build:pc": "webpack --config ./webpack/index.js --env production --platform pc"
   },
   "keywords": [],
   "author": "",

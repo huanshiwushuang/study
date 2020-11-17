@@ -1,7 +1,5 @@
 const path = require('path');
 
-
-
 // 项目根目录
 exports.appRoot = path.resolve(__dirname, '..');
 // 资源根目录
