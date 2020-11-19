@@ -41,14 +41,24 @@ EndFunc
 
 ;~ 自定义逻辑
 HotStringSet("sjc{space}",  sendSJC);
-HotStringSet("sjc{enter}",  sendSJC);
 
+Opt('SendKeyDelay', 0);
 Func sendSJC($str)
 	Local $ms = js('Date.now().toString(36)');
-    Send('^z{BS 3}' & $ms);
+	
+    Send('{BS 4}' & $ms);
 EndFunc
 
 
 While 1
     Sleep(10)
 WEnd
+
+
+
+
+
+
+
+
+
