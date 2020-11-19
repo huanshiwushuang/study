@@ -1,3 +1,4 @@
+;~ https://www.autoitclipboardlauncher.com/hotkeyset-vs-hotstringset/
 #include-once
 #include <HotString.au3>
 #include <IE.au3>
