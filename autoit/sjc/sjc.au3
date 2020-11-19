@@ -44,7 +44,7 @@ HotStringSet("sjc{enter}",  sendSJC);
 
 Func sendSJC($str)
 	Local $ms = js('Date.now().toString(36)');
-    Send($ms);
+    Send('{BS 4}' & $ms);
 EndFunc
 
 
