@@ -19,8 +19,8 @@ If DirGetSize($assertsDir) == -1 Then
 EndIf
 
 ;~ 文件安装
-FileInstall('./polyfill.min.js', $assertsDir);
-FileInstall('./sjc.html', $assertsDir);
+FileInstall('./polyfill.min.js', $assertsDir & '\');
+FileInstall('./sjc.html', $assertsDir & '\');
 
 
 ;~ 启动IE
