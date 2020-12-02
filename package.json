@@ -8,7 +8,7 @@
     "koa": "^2.13.0"
   },
   "devDependencies": {
-    "recast": "^0.17.3"
+    "recast": "^0.20.4"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

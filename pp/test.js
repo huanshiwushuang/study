@@ -19,11 +19,14 @@ PuppeteerExtra.launch({
         // '--remote-debugging-port=9222',
         // '-no-sandbox',
         '--start-maximized',
-        '--proxy-server=http://127.0.0.1:9000'
+        // '--proxy-server=http://127.0.0.1:9000'
     ]
 }).then(async browser => {
 
-    // let page = await browser.newPage()
+    let page = await browser.newPage()
+    await page.goto('https://pre.wuxuwang.com/yaopinjp');
+
+    console.log(123);
 
     // await page._client.send("Target.setAutoAttach", {
     //   autoAttach: true,
@@ -165,7 +168,7 @@ PuppeteerExtra.launch({
     //     //     })
     //     // }
     // })
-    var page = await browser.newPage();
+    // var page = await browser.newPage();
 
     // let pages = await browser.pages()
     // // return console.log(pages);
@@ -191,7 +194,7 @@ PuppeteerExtra.launch({
     // // })
     
 
-    await page.goto('http://www.baidu.com/');
+    // await page.goto('http://www.baidu.com/');
     // // await page.waitForSelector('#s-top-left > a:nth-child(5)');
     // // await page.click('#s-top-left > a:nth-child(5)');
     
