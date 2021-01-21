@@ -1,0 +1,68 @@
+// 被 @injectable 装饰的 class ，相当于定义为：可注入的.
+// 在其他 class 的 constructor 中，发现了声明的依赖，那么就会 通过 token 去匹配 被 @injectable 装饰的 class
+
+// 注册成为全局模块
+// @Global 装饰器使模块成为全局作用域。 全局模块应该只注册一次，最好由根或核心模块注册。
+
+// 整个体系，其实可以参考 Vue【类比 全局 和 局部组件的注册】
+// 【不同之处在于vue组件每使用一次，就是new一个实例，而 nest 默认是IOC容器统一维护的单例】
+{
+  // 模块的文件名
+  name: 'app.module.ts',
+  // 节点的类型
+  type: 'module',
+
+  // 控制器，路由使用装饰器实现
+  controllers: ['ControllerClass'],
+  // 服务提供者
+  providers: [
+    {
+      name: 'app.service.ts',
+      type: 'service',
+
+      // 匹配依赖注入的令牌
+      provide: 'ClassName || CustomStringOrSymbol（by @inject）',
+      // 可以根据环境切换 Class
+      useClass: 'ClassConstructor',
+      useValue: 'ClassInstance',
+      // 可以动态返回 provide，可以异步返回，比如等待数据库连接建立
+      useFactory: `async function (optionsProvider: OptionsProvider) {
+        return providerInstance;
+      }`,
+      // 提供给 useFactory 的 provider
+      inject: ['OptionsProvider'],
+      //   使用已经存在的 provider，不再重新实例化一个相同的 provider？
+      useExisting: 'useExistingClassNameOrObject',
+      //   provider 的作用域范围，推荐默认，以保持单例，节约内存
+      scope: 'Scope.TRANSIENT',
+    },
+  ],
+  //   可以导出 service || module
+  //   导出的内容用于，在其他模块查找注入的依赖时，可以被搜索到
+  //   这样依赖于 IOC 容易，可以做到 跨 module 的单一实例复用
+  exports: [`providerToken || providersItem`],
+  // 子模块（节点）
+  imports: [
+    {
+      name: 'childModule1.module.ts',
+      type: 'module',
+      imports: [],
+      controllers: [],
+      providers: [],
+    },
+  ],
+}
+
+// @nestjs/core
+// NestFactory
+// HttpAdapterHost.httpAdapter.getInstance
+// APP_PIPE
+// APP_GUARD
+// APP_
+
+// 动态模块：其实就是在 module 的 class的  forRoot 方法中 扩展了 当前 module 的配置项
+// 允许在导入时，传参定制
+// forRoot or register
+
+
+// provider 或者 module 循环依赖，可以使用 forwardRef 明确声明定义
