@@ -23,10 +23,34 @@ PuppeteerExtra.launch({
     ]
 }).then(async browser => {
 
-    let page = await browser.newPage()
-    await page.goto('https://pre.wuxuwang.com/yaopinjp');
+	let settings = `{"setting_config":{"type":"div","opacity":"0.74","fontfamily":"SimHei, 'Microsoft JhengHei'","fontfamilycustom":"","bold":true,"preventshade":false,"fontborder":"0","speedplus":1,"dmask":true,"speedsync":false,"fontsize":1,"fullscreensync":false,"danmakuArea":25,"fullscreensend":false,"defquality":16,"sameaspanel":false,"upDm":false},"video_status":{"autopart":"","playtype":1,"highquality":true,"widescreensave":false,"iswidescreen":false,"blackside_state":true,"autoplay":false,"autoplay_reddot_status":true,"panoramamode":true,"panoramamode_reddot_status":true,"videospeed":1,"volume":0.66},"block":{"status":true,"aiblock":true,"ailevel":3,"type_scroll":true,"type_top":true,"type_bottom":true,"type_reverse":true,"type_guest":true,"type_color":true,"function_normal":true,"function_subtitle":true,"function_special":true,"cloud_level":2,"cloud_source_video":true,"cloud_source_partition":true,"cloud_source_all":true,"size":0,"regexp":false,"list":[]},"message":{"system":true,"bangumi":true,"news":true},"subtitle":{"fontsize":1,"color":16777215,"backgroundopacity":0.4,"shadow":"0","position":"bc","bilingual":false,"scale":true,"isclosed":false,"fade":false},"player_icon":{"url1_json":"","url2_json":"","hash1":"","hash2":""},"guide":{}}`;
 
-    console.log(123);
+
+	let page = await browser.newPage();
+
+	// page.
+	await page.goto('https://www.bilibili.com/404', {
+		waitUntil: ['domcontentloaded']
+	});
+	await page.setCookie({
+		name: 'CURRENT_QUALITY',
+		value: '16',
+		domain: '.bilibili.com',
+		path: '/',
+		expires: 1645174703,
+		httpOnly: false,
+	});
+	await page.evaluateOnNewDocument(function (settings) {
+		localStorage.setItem('bilibili_player_settings', settings);
+	}, settings);
+    await page.goto('https://www.bilibili.com/video/BV1vo4y197Lc?spm_id_from=333.851.b_7265636f6d6d656e64.2',);
+	
+	let asd = await page.evaluateHandle(function (settings) {
+		return localStorage.getItem('bilibili_player_settings');
+	}, settings);
+
+	console.log(asd.jsonValue());
+
 
     // await page._client.send("Target.setAutoAttach", {
     //   autoAttach: true,

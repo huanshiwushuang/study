@@ -4,6 +4,9 @@
   "description": "",
   "main": "JS奇淫巧技.js",
   "dependencies": {
+    "axios": "^0.21.1",
+    "form-data": "^4.0.0",
+    "fs-extra": "^9.1.0",
     "http-proxy-middleware": "^1.0.5",
     "koa": "^2.13.0"
   },
