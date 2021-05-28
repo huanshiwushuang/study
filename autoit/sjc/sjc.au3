@@ -32,7 +32,7 @@ HotStringSet("sjc{space}",  sendSJC);
 
 Func sendSJC()
 	Local $ms = js( 'Date.now().toString(36)' );
-	Send($ms);
+	Send('{BS 4}' & $ms);
 EndFunc
 
 While 1
