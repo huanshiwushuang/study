@@ -5,7 +5,7 @@ export default async ({ request: req, response: res }: { request: Request, respo
     if (!req.hasBody) {
         response.status = 400;
         return response.body = {
-            msg: 'Invalid todo data';
+            msg: 'Invalid todo data'
         }
     }
 

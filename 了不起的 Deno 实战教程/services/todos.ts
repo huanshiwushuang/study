@@ -2,6 +2,9 @@ import { fetchData, persistData } from "./db.ts";
 import { Todo } from "../models/todo.ts";
 import { createId } from "../services/util.ts";
 
+
+// TodoData 是一个对象，只要其形状满足 Todo 或者 "userId" | "title" | "completed" 其中之一
+// ?????????????????????????
 type TodoData = Pick<Todo, "userId" | "title" | "completed">;
 
 // 获取Todo列表
@@ -14,7 +17,7 @@ export const getTodos = async (): Promise<Todo[]> => {
 export const getTodo = async (todoId: string): Promise<Todo | undefined> => {
     const todos = await fetchData();
 
-    return todos.find(({ id }) => id === todoId);
+    return todos.find(({ id }: TodoData) => id === todoId);
 };
 
 // 新建Todo
