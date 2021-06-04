@@ -17,7 +17,7 @@ export const getTodos = async (): Promise<Todo[]> => {
 export const getTodo = async (todoId: string): Promise<Todo | undefined> => {
     const todos = await fetchData();
 
-    return todos.find(({ id }: TodoData) => id === todoId);
+    return todos.find(({ id }) => id === (todoId));
 };
 
 // 新建Todo

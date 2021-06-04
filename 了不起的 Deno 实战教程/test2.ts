@@ -1,3 +1,3 @@
-import  asd from './test.ts';
+import { fetchData } from './services/db.ts';
 
-console.log(asd);
+console.log(fetchData);

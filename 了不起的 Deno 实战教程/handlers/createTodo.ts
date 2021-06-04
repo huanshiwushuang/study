@@ -1,10 +1,10 @@
-import { Request, Response  } from 'https://deno.land/x/oak/mod.ts';
+import { Request, Response, Body  } from 'https://deno.land/x/oak/mod.ts';
 import { createTodo } from '../services/todos.ts';
 
 export default async ({ request: req, response: res }: { request: Request, response: Response }) => {
     if (!req.hasBody) {
-        response.status = 400;
-        return response.body = {
+        res.status = 400;
+        return res.body = {
             msg: 'Invalid todo data'
         }
     }
@@ -18,8 +18,8 @@ export default async ({ request: req, response: res }: { request: Request, respo
     } = req.body();
 
     if (!userId || !title) {
-        response.status = 422;
-        response.body = {
+        res.status = 422;
+        res.body = {
             msg: 'Incorrect todo data. userId and title are required',
         }
         return;
@@ -31,7 +31,7 @@ export default async ({ request: req, response: res }: { request: Request, respo
         completed,
     })
 
-    response.body = {
+    res.body = {
         msg: `todo created`,
         todoId
     }

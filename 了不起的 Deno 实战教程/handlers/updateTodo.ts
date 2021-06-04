@@ -1,4 +1,4 @@
-import { Request, Response } from "https://deno.land/x/oak/mod.ts";
+import { Request, Response, Body } from "https://deno.land/x/oak/mod.ts";
 import { updateTodo } from "../services/todos.ts";
 
 export default async ({
