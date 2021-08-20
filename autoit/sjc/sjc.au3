@@ -5,14 +5,6 @@
 #include <..\lib\_RunWaitGet.au3>
 
 
-$asd = `
-asd
-`
-
-MsgBox(0, 'title', $asd);
-
-exit;
-
 ;~ 单例模式
 If _Singleton("1605770393107", 1) == 0 Then
     MsgBox(0, "Warning", "already running");
@@ -37,21 +29,9 @@ EndFunc
 
 ;~ 自定义逻辑
 HotStringSet("sjc{space}",  sendSJC);
-HotStringSet("sjcr{space}",  replaceAllSJC);
-
-
 
 Func sendSJC()
 	Local $ms = js( 'Date.now().toString(36)' );
-	Send('{BS 4}' & $ms);
-EndFunc
-
-Func replaceAllSJC()
-	Send("^a");
-	Send("^c");
-	Dim $text = ClipGet()
-
-	Local $ms = js( '(' + $text + ').replace(//)' );
 	Send('{BS 4}' & $ms);
 EndFunc
 
