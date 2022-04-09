@@ -15,7 +15,7 @@
     "koa-connect": "^2.1.0",
     "koa-server-http-proxy": "^0.1.0",
     "koa2-connect": "^1.0.2",
-    "moment": "^2.27.0",
+    "moment": "^2.29.2",
     "puppeteer-core": "^5.2.1",
     "puppeteer-extra": "^3.1.15",
     "puppeteer-extra-plugin-block-resources": "^2.2.7",
