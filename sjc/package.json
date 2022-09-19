@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "node-global-key-listener": "^0.0.13",
-    "robotjs": "git+https://github.com/Kyusung4698/robotjs.git"
+    "@nut-tree/nut-js": "^2.2.1",
+    "node-global-key-listener": "^0.0.13"
   }
 }

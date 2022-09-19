@@ -1,6 +1,9 @@
 const GlobalKeyboardListener =
     require("node-global-key-listener").GlobalKeyboardListener;
-const robotjs = require("robotjs");
+const { KeyboardClass, Key, providerRegistry } = require("@nut-tree/nut-js");
+
+const kb = new KeyboardClass(providerRegistry);
+kb.config.autoDelayMs = 0;
 
 const v = new GlobalKeyboardListener({
     windows: {
@@ -14,7 +17,7 @@ const v = new GlobalKeyboardListener({
 
 let pressQueue = [];
 
-v.addListener((e, down) => {
+v.addListener(async (e, down) => {
     switch (e.state.toLowerCase()) {
         case "down":
             // 记录按下的键，限制总长度
@@ -28,11 +31,11 @@ v.addListener((e, down) => {
     switch (pressQueue.slice(-4).join()) {
         case "s,j,c,space":
             {
-                let stamp = Date.now().toString(36);
+                const stamp = Date.now().toString(36);
                 for (let i = 0; i < 4; i++) {
-                    robotjs.keyTap("backspace");
+                    await kb.pressKey(Key.Backspace);
                 }
-                robotjs.typeString(stamp);
+                kb.type(stamp);
             }
             break;
     }
