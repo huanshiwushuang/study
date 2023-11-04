@@ -38,5 +38,16 @@ v.addListener(async (e, down) => {
                 kb.type(stamp);
             }
             break;
+        // 全选当前-复制当前-替换所有的 自动生成的时间戳id
+        case "s,j,c,a,space":
+            {
+                // const stamp = Date.now().toString(36);
+                // for (let i = 0; i < 5; i++) {
+                //     await kb.pressKey(Key.Backspace);
+                // }
+
+                // kb.type(stamp);
+            }
+            break;
     }
 });
